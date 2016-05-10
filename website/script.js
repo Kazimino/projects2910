@@ -5,9 +5,17 @@ $(document).ready(function() {
         $("main").css("margin-left", $(window).width() / 2 - $("main").height() / 2);
     }
     resizeMain();
-    
+    var seconds = 0;
     var enlarged = false;
-    var hexInuse = 0;    
+    var hexInuse = 0;
+    
+    setInterval(function(){
+        $('.timerBox').html(parseInt(seconds / 60) + " : " + seconds % 60);
+        seconds += 1;
+    }, 1000);
+
+    var gaugeArray = [0, 0, 0, 0, 0, 0, 0];
+    var heatConstant = 20;
     
     $('.module').click(function() {
         if(enlarged == false) {
@@ -19,6 +27,8 @@ $(document).ready(function() {
             
         }
     });
+
+
     
     
     $(window).resize(function(e) {
