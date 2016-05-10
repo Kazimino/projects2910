@@ -16,9 +16,7 @@ $(document).ready(function() {
             $(this).animate({top:'5%', left:'13%'}, 500);
             $(this).animate({height:'75%', width:'75%'}, 750);
             
-            $('body').click(function() {
-                
-            });
+            
         }
     });
     
