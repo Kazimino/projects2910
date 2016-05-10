@@ -52,6 +52,7 @@ main {
     max-height: 100vw;
     height: 65%;
 	position: absolute;
+    overflow: hidden;
 }
 
 /* Footer */
@@ -193,4 +194,13 @@ footer {
     position: relative;
     border-radius: 5%;
     margin-top: 5%;
+}
+
+.menu {
+    width: 100%;
+    max-width: 1024px;
+    max-height: 100vw;
+    height: 65%;
+    display: block;
+    margin: 0 auto;
 }

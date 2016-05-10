@@ -6,9 +6,16 @@ $(document).ready(function() {
     }
     resizeMain();
     
+    function resizeMenu() {
+        $(".menu").width($(".menu").height());
+        $(".menu").css("margin-top", $(window).height() / 2 - $(".menu").height() / 2);
+        $(".menu").css("margin-left", $(window).width() / 2 - $(".menu").height() / 2);
+    }
+    resizeMenu();
     
     $(window).resize(function(e) {
         resizeMain();
+        resizeMenu();
     });
     
     /* To make sure everything works fine for clicking modules. */
@@ -28,9 +35,7 @@ $(document).ready(function() {
 /* At this current moment, all this does is fade from Menu to Game.
    used for onclick on PlayButton.*/
 function playGame() {
-    $(".menu").fadeOut(300, function() {
-        $(this).css("display", "none");
-    });
+    $(".menu").hide();
     
     $("footer").fadeIn(500, function() {
         $(this).css("display", "inline-block");
