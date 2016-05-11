@@ -18,11 +18,6 @@ $(document).ready(function() {
         resizeMenu();
     });
     
-    /* To make sure everything works fine for clicking modules. */
-    $("#module1").click(function() {
-        window.alert("Module 1 clicked");
-    });
-    
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var $this = $(this);

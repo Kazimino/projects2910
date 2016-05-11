@@ -12,8 +12,9 @@ html {
 
 body {
 	width: 100%;
+    height: 100%;
 	position: relative;
-    background-image: url("images/carbon_bg.gif");
+    background-image: url("../images/carbon_bg.gif");
     background-size: 4px;
 }
 
@@ -82,12 +83,19 @@ footer {
 	height: 100%;
     left: -50%;
 
-	-webkit-transform: rotate(60deg);
-	-moz-transform: rotate(60deg);
-	-o-transform: rotate(60deg);
-	-ms-transform: rotate(60deg);
-	transform: rotate(60deg);
+	-webkit-transform: rotate(120deg);
+	-moz-transform: rotate(120deg);
+	-o-transform: rotate(120deg);
+	-ms-transform: rotate(120deg);
+	transform: rotate(120deg);
 	cursor: pointer;
+}
+
+.hexagon.inner {
+    width: 100%;
+    height: 84%;
+    left: 0;
+    top: 8%;
 }
 
 .hexagon-in1 {
@@ -116,33 +124,53 @@ footer {
 	transform: rotate(-60deg);
 }
 
+.inner .hexagon-in2 {
+    background-color: #1e1e1e;
+}
+
 .module:nth-child(1) {
     left: 33.33%;
 }
 .module:nth-child(2) {
-    left: 4.7%;
-    top: 16.5%;
+    left: 4.4%;
+    top: 16.7%;
 }
 
 .module:nth-child(3) {
-    right: 4.7%;
-    top: 16.5%;
+    right: 4.4%;
+    top: 16.7%;
 }
 .module:nth-child(4) {
     left: 33.3%;
     top: 33.3%;
 }
 .module:nth-child(5) {
-    left: 4.7%;
-    bottom: 16.5%;
+    left: 4.4%;
+    bottom: 16.7%;
 }
 .module:nth-child(6) {
-    right: 4.7%;
-    bottom: 16.5%;
+    right: 4.4%;
+    bottom: 16.7%;
 }
 .module:nth-child(7) {
     left: 33.33%;
-    bottom: 0.3%;
+    bottom: 0;
+}
+
+.gauge-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+#backbutton {
+    height: 150%;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    top:-40%;
+    left:35%;
+    visibility: hidden;
 }
 
 #oHexNW{
