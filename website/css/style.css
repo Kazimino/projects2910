@@ -171,6 +171,7 @@ footer {
     visibility: hidden;
 }
 
+<<<<<<< HEAD
 /*minigauges shit*/
 .miniModule {
 	width: 33.33%;
@@ -257,6 +258,26 @@ footer {
    width: 50%;
 }
 
+.timerBox{
+    margin: auto;
+    color: white;
+    font-size: 250%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+}
+.heatBar{
+    margin: auto;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+}
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     
