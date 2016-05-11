@@ -99,16 +99,14 @@ $(document).ready(function() {
 	
     	/*animates the clicked minigauge to the front*/
     $('.miniModule').click(function() {
-        var hexNum;
-        $('.module').hide();
-    
-        
-        $(this).siblings().hide();
-        
-        
-        $('.hexagon-in2').animate({top:'30%', left:'5%'}, 500);
-        $('.hexagon-in2').animate({height:'90%', width:'75%'}, 750);
 
+        /*hides enlarged*/
+        $('.module').hide();
+        
+        /*hides minigauges*/
+        $('.miniModule').hide();
+        
+    
       
     });
     
