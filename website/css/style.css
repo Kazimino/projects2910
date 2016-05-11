@@ -54,6 +54,7 @@ main {
     height: 65%;
 	position: absolute;
     overflow: hidden;
+    display: none;
 }
 
 /* Footer */
@@ -94,8 +95,19 @@ footer {
 	width: 33.33%;
 	height: 33.33%;
 	position: absolute;
-    display: none;
+	display: inline-block;
+    visibility: hidden;
 }
+/*styles in game hex start here*/
+.inGame{
+    width: 75.33%;
+	height: 75.33%;
+	position: absolute;
+    left: 12%;
+    display: inline-block;
+    visibility: hidden;
+}
+/*in game hex styles end here */
 
 .hexagon {
 	overflow: hidden;
@@ -200,9 +212,10 @@ footer {
 #mini {
     display: none;
 }
+
 #mini .hexagon-in2 {
     background-color: #ffffff;
-}
+}    
 
 #mini .module:nth-child(1) {
     left: -5%;
@@ -229,17 +242,22 @@ footer {
     bottom: -19%;
 }
 
-
-/* tablet / mobile */
-@media only screen and (max-width: 1024px) {
-    
+.gauge-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
-/* mobile only */
-@media only screen and (max-width: 480px) {
-    
+#backbutton {
+    height: 150%;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    top:-40%;
+    left:35%;
+    visibility: hidden;
 }
-
+    
 /* Menu CSS */
 .menulogo {
     height: 40%;
@@ -264,4 +282,14 @@ footer {
     height: 65%;
     display: block;
     margin: 0 auto;
+}
+    
+/* tablet / mobile */
+@media only screen and (max-width: 1024px) {
+    
+}
+
+/* mobile only */
+@media only screen and (max-width: 480px) {
+
 }

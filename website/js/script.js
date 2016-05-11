@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    
+    $('.inGame').hide();
+    
     function resizeMain() {
         $("main").width($("main").height());
         $("main").css("margin-top", $(window).height() / 2 - $("main").height() / 2);
@@ -21,10 +24,9 @@ $(document).ready(function() {
         $this.attr('src', newSource);
     });
     
+     /* booleans and vars for module focus and state memorization*/
     var backbutton = false;
     var enlarged = false;
-    var stateMem = 0;
-    var mod = 0;
 
     // heat gauge and timer variables
     var seconds = 0;
@@ -60,45 +62,33 @@ $(document).ready(function() {
         }
     }, 200);
 
+    /*this function is for enlarging a module for in game play */
     $('.module').click(function() {
-        mod = $(this).attr('id');
+
+        
         
         if(enlarged == false) {
             enlarged = true; 
             backbutton = true;
             
+            /* back button is shown when a module is clicked and enlarged */
             $('#backbutton').css({
                     opacity: 0.0, 
                     visibility: "visible"}).animate({
                     opacity: 1.0});
-            
-            stateMem = {
-                top:    $(mod).css('top'),
-                bottom: $(mod).css('bottom'),
-                right:  $(mod).css('right'),
-                left:   $(mod).css('left')
-            };
-            
-            $(this).siblings().hide();
-            $(this).animate({
-                        height:'75%', 
-                        width:'75%',   
-                        top:'0%',  
-                        left:'13%'}
-                        , 500);
+            /*end of code to make back button show */
 						
 			/*fades the minigauge in when module is expanded*/
             $('#mini').fadeIn(2000);
         }
     });
     
+/*backwards functionality function */    
     $('#backbutton').click(function() {
+                        
         if(backbutton == true) {
-            $('.module').siblings().show();  
-            $(mod).animate({
-                stateMem, 
-                height:'10%',
-                width:'10%'}, 250);
+            $('.module').siblings().show(250);  
+            $('.inGame').hide(250);
             
             enlarged = false;
             backbutton = false;
@@ -137,13 +127,13 @@ function playGame() {
     $(".menu").hide();
     
     $("footer").fadeIn(500, function() {
-        $(this).css("display", "inline-block");
+        $(this).css("display", "block");
     });
     $("header").fadeIn(500, function() {
         $(this).css("display", "block");
     });
-    $(".module").fadeIn(500, function() {
-        $(this).css("display", "inline-block");
+    $("main").fadeIn(500, function() {
+        $(this).css("display", "block");
     });
 }
 
