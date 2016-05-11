@@ -173,30 +173,6 @@ footer {
     visibility: hidden;
 }
 
-#oHexNW{
-    background-color: #fff;
-}
-
-#oHexNE{
-    background-color: #f00;
-}
-
-#oHexC {
-    background-color: #0f0;
-}
-
-#oHexSW {
-    background-color: #00f;
-}
-
-#oHexSE {
-    background-color: #ff0;
-}
-
-#oHexS {
-    background-color: #0ff;
-}
-
 /*minigauges shit*/
 .miniModule {
 	width: 33.33%;
