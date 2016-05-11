@@ -152,6 +152,15 @@ footer {
     border-radius: 25px;
     width: 50%;
 }
+.heatBar{
+    margin: auto;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+}
 #oHexNW{
     background-color: #fff;
 }
