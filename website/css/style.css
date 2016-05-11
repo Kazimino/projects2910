@@ -54,6 +54,7 @@ main {
     height: 65%;
 	position: absolute;
     overflow: hidden;
+    display: none;
 }
 
 /* Footer */
@@ -67,13 +68,46 @@ footer {
     display: none;
 }
 
+.timerBox{
+    margin: auto;
+    color: white;
+    font-size: 250%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+}
+.heatBar{
+    margin: auto;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+}
+
+
 /* Hexagon shit */
 .module {
 	width: 33.33%;
 	height: 33.33%;
 	position: absolute;
-    display: none;
+	display: inline-block;
+    visibility: hidden;
 }
+/*styles in game hex start here*/
+.inGame{
+    width: 75.33%;
+	height: 75.33%;
+	position: absolute;
+    left: 12%;
+    display: inline-block;
+    visibility: hidden;
+}
+/*in game hex styles end here */
 
 .hexagon {
 	overflow: hidden;
@@ -174,120 +208,56 @@ footer {
 }
 
 /*minigauges shit*/
-.miniModule {
-	width: 33.33%;
-	height: 33.33%;
-	position: absolute;
-	display: inline-block;
-   /*make overflow/visibility hidden by default*/
-}
-.minigauge {
+
+#mini {
     display: none;
 }
-.minihexagon {
-	overflow: hidden;
-	position: absolute;
-	width:200%;
-	height: 45%;
-    left: -40%;
- 
 
-	-webkit-transform: rotate(60deg);
-	-moz-transform: rotate(60deg);
-	-o-transform: rotate(60deg);
-	-ms-transform: rotate(60deg);
-	transform: rotate(60deg);
-	cursor: pointer;
-}
-
-.minihexagon-in1 {
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-
-	-webkit-transform: rotate(-60deg);
-	-moz-transform: rotate(-60deg);
-	-o-transform: rotate(-60deg);
-	-ms-transform: rotate(-60deg);
-	transform: rotate(-60deg);
-}
-
-.minihexagon-in2 {
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-
-    /*keep it hidden as default? show when enlarged?*/
-	
+#mini .hexagon-in2 {
     background-color: #ffffff;
+}    
 
-	-webkit-transform: rotate(-60deg);
-	-moz-transform: rotate(-60deg);
-	-o-transform: rotate(-60deg);
-	-ms-transform: rotate(-60deg);
-	transform: rotate(-60deg);
-}
-
-.miniModule:nth-child(1) {
+#mini .module:nth-child(1) {
     left: -5%;
     bottom:-10%;
 }
-.miniModule:nth-child(2) {
+#mini .module:nth-child(2) {
     left: 10%;
     bottom: -19%;
 }
-.miniModule:nth-child(3) {
+#mini .module:nth-child(3) {
     left: 25%;
     bottom: -10%;
 }
-.miniModule:nth-child(4) {
+#mini .module:nth-child(4) {
     left: 39.5%;
     bottom: -19%;
 }
-.miniModule:nth-child(5) {
+#mini .module:nth-child(5) {
     left: 54.3%;
     bottom: -10%;
 }
-.miniModule:nth-child(6) {
+#mini .module:nth-child(6) {
     left: 69%;
     bottom: -19%;
 }
 
-.minihexagon.inner{
-   width: 50%;
+.gauge-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
-.timerBox{
-    margin: auto;
-    color: white;
-    font-size: 250%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
+#backbutton {
+    height: 150%;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    top:-40%;
+    left:35%;
+    visibility: hidden;
 }
-.heatBar{
-    margin: auto;
-    color: white;
-    font-size: 150%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-
-/* tablet / mobile */
-@media only screen and (max-width: 1024px) {
     
-}
-
-/* mobile only */
-@media only screen and (max-width: 480px) {
-    
-}
-
 /* Menu CSS */
 .menulogo {
     height: 40%;
@@ -321,4 +291,14 @@ footer {
     overflow:hidden;
     width:auto%;
     height:100%;
+
+    
+/* tablet / mobile */
+@media only screen and (max-width: 1024px) {
+    
+}
+
+/* mobile only */
+@media only screen and (max-width: 480px) {
+
 }
