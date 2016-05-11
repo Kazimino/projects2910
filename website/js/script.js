@@ -86,7 +86,9 @@ $(document).ready(function() {
                         top:'0%',  
                         left:'13%'}
                         , 500);
-						
+            
+            /*hides easter if enabled*/
+            $('.easter').hide();
 			/*fades the minigauge in when module is expanded*/
             $('.minigauge').fadeIn(2000);
         }
@@ -148,6 +150,18 @@ function playGame() {
 }
 
 var logoCount = 0;
+/*easter egg*/
 function logoClick() {
     logoCount++;
+    if(logoCount == 5){
+        
+        var $this = $('.easter');
+        var newSource = $this.data('alt-src');
+        $('.easter').show();
+        $this.data('alt-src', $this.attr('src'));
+        $this.attr('src', newSource);
+        alert("test");
+        
+    };
 }
+   
