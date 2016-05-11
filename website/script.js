@@ -30,6 +30,7 @@ $(document).ready(function() {
         $this.data('alt-src', $this.attr('src'));
         $this.attr('src', newSource);
     });
+    
 });
 
 /* At this current moment, all this does is fade from Menu to Game.
@@ -46,4 +47,9 @@ function playGame() {
     $(".module").fadeIn(500, function() {
         $(this).css("display", "inline-block");
     });
+}
+
+var logoCount = 0;
+function logoClick() {
+    logoCount++;
 }
