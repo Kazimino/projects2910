@@ -38,6 +38,9 @@ $(document).ready(function() {
                         top:'0%',  
                         left:'13%'}
                         , 500);
+						
+			/*fades the minigauge in when module is expanded*/
+            $('.minigauge').fadeIn(2000);
         }
     });
     
@@ -59,6 +62,21 @@ $(document).ready(function() {
         } else {
             return;
         }
+    });
+	
+    	/*animates the clicked minigauge to the front*/
+    $('.miniModule').click(function() {
+        var hexNum;
+        $('.module').hide();
+    
+        
+        $(this).siblings().hide();
+        
+        
+        $('.hexagon-in2').animate({top:'30%', left:'5%'}, 500);
+        $('.hexagon-in2').animate({height:'90%', width:'75%'}, 750);
+
+      
     });
     
     

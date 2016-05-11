@@ -171,6 +171,92 @@ footer {
     visibility: hidden;
 }
 
+/*minigauges shit*/
+.miniModule {
+	width: 33.33%;
+	height: 33.33%;
+	position: absolute;
+	display: inline-block;
+   /*make overflow/visibility hidden by default*/
+}
+.minigauge {
+    display: none;
+}
+.minihexagon {
+	overflow: hidden;
+	position: absolute;
+	width:200%;
+	height: 45%;
+    left: -40%;
+ 
+
+	-webkit-transform: rotate(60deg);
+	-moz-transform: rotate(60deg);
+	-o-transform: rotate(60deg);
+	-ms-transform: rotate(60deg);
+	transform: rotate(60deg);
+	cursor: pointer;
+}
+
+.minihexagon-in1 {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+
+	-webkit-transform: rotate(-60deg);
+	-moz-transform: rotate(-60deg);
+	-o-transform: rotate(-60deg);
+	-ms-transform: rotate(-60deg);
+	transform: rotate(-60deg);
+}
+
+.minihexagon-in2 {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+
+    /*keep it hidden as default? show when enlarged?*/
+	
+    background-color: #ffffff;
+
+	-webkit-transform: rotate(-60deg);
+	-moz-transform: rotate(-60deg);
+	-o-transform: rotate(-60deg);
+	-ms-transform: rotate(-60deg);
+	transform: rotate(-60deg);
+}
+
+.miniModule:nth-child(1) {
+    left: -5%;
+    bottom:-10%;
+}
+.miniModule:nth-child(2) {
+    left: 10%;
+    bottom: -19%;
+    
+}
+
+.miniModule:nth-child(3) {
+    left: 25%;
+    bottom: -10%;
+}
+.miniModule:nth-child(4) {
+    left: 39.5%;
+    bottom: -19%;
+}
+.miniModule:nth-child(5) {
+    left: 54.3%;
+    bottom: -10%;
+}
+.miniModule:nth-child(6) {
+    left: 69%;
+    bottom: -19%;
+}
+
+.minihexagon.inner{
+   width: 50%;
+}
+
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     
