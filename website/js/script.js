@@ -8,7 +8,7 @@ $(document).ready(function() {
         $("main").css("margin-left", $(window).width() / 2 - $("main").height() / 2);
     }
     resizeMain();
-    
+
     function resizeMenu() {
         $(".menu").width($(".menu").height());
         $(".menu").css("margin-top", $(window).height() / 2 - $(".menu").height() / 2);
@@ -77,9 +77,15 @@ $(document).ready(function() {
                     visibility: "visible"}).animate({
                     opacity: 1.0});
             /*end of code to make back button show */
-						
+
 			/*fades the minigauge in when module is expanded*/
             $('#mini').fadeIn(2000);
+
+            /* hides main game board and enlarges and animates 
+            focus module - also shows the ingame board. */
+            $(this).siblings().hide(250);
+            $(this).hide(250);
+            $('.inGame').show(300);
         }
     });
     
