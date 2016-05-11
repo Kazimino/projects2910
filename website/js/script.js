@@ -88,7 +88,7 @@ $(document).ready(function() {
                         , 500);
 						
 			/*fades the minigauge in when module is expanded*/
-            $('.minigauge').fadeIn(2000);
+            $('#mini').fadeIn(2000);
         }
     });
     
