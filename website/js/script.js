@@ -24,12 +24,6 @@ $(document).ready(function() {
         $this.attr('src', newSource);
     });
     
-
-
-
-
-
-
     /*this function is for enlarging a module for in game play */
     $('.module').click(function() {
         if(enlarged == false) {
@@ -109,7 +103,7 @@ $(document).ready(function() {
             $(this).css("display", "block");
         }), 300);
     });
-    
+
     /* JavaScript/jQuery for dummy games */
     /* Box Game */
     $('.box').mouseenter(function() {
