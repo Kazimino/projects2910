@@ -276,6 +276,7 @@ main > .module:nth-child(7) {
     position: relative;
     border-radius: 5%;
     margin-top: 5%;
+    cursor: pointer;
 }
 
 .menu {
