@@ -8,6 +8,7 @@
 
 html {
     height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -34,6 +35,7 @@ header {
     position: absolute;
     top: 0;
     box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
+    display: none;
 }
 
 .logo {
@@ -53,6 +55,7 @@ main {
     height: 65%;
 	position: absolute;
     overflow: hidden;
+    display: none;
 }
 
 /* Footer */
@@ -63,7 +66,31 @@ footer {
     background-color: #1e1e1e;
     position: absolute;
     bottom: 0;
+    display: none;
+    overflow: hidden;
 }
+
+.timerBox{
+    margin: auto;
+    color: white;
+    font-size: 250%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+}
+.heatBar{
+    margin: auto;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 50%;
+    height: 50%;
+}
+
 
 /* Hexagon shit */
 .module {
@@ -133,61 +160,6 @@ footer {
 	transform: rotate(-60deg);
 }
 
-.miniModule {
-	width: 33.33%;
-	height: 33.33%;
-	position: absolute;
-	display: inline-block;
-   /*make overflow/visibility hidden by default*/
-}
-    
-.minigauge {
-    display: none;
-}
-.minihexagon {
-	overflow: hidden;
-	position: absolute;
-	width:200%;
-	height: 45%;
-    left: -40%;
- 
-
-	-webkit-transform: rotate(60deg);
-	-moz-transform: rotate(60deg);
-	-o-transform: rotate(60deg);
-	-ms-transform: rotate(60deg);
-	transform: rotate(60deg);
-	cursor: pointer;
-}
-    
-.minihexagon-in1 {
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-
-	-webkit-transform: rotate(-60deg);
-	-moz-transform: rotate(-60deg);
-	-o-transform: rotate(-60deg);
-	-ms-transform: rotate(-60deg);
-	transform: rotate(-60deg);
-}
-
-.minihexagon-in2 {
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-
-    /*keep it hidden as default? show when enlarged?*/
-	
-    background-color: #ffffff;
-
-	-webkit-transform: rotate(-60deg);
-	-moz-transform: rotate(-60deg);
-	-o-transform: rotate(-60deg);
-	-ms-transform: rotate(-60deg);
-	transform: rotate(-60deg);
-}    
-
 .inner .hexagon-in2 {
     background-color: #1e1e1e;
 }
@@ -221,35 +193,6 @@ footer {
     bottom: 0;
 }
 
-.miniModule:nth-child(1) {
-    left: -5%;
-    bottom:-10%;
-}
-.miniModule:nth-child(2) {
-    left: 10%;
-    bottom: -19%;
-}
-.miniModule:nth-child(3) {
-    left: 25%;
-    bottom: -10%;
-}
-.miniModule:nth-child(4) {
-    left: 39.5%;
-    bottom: -19%;
-}
-.miniModule:nth-child(5) {
-    left: 54.3%;
-    bottom: -10%;
-}
-.miniModule:nth-child(6) {
-    left: 69%;
-    bottom: -19%;
-}
-
-.minihexagon.inner{
-   width: 50%;
-}
-    
 .gauge-fill {
     width: 100%;
     position: absolute;
@@ -264,6 +207,41 @@ footer {
     top:-40%;
     left:35%;
     visibility: hidden;
+}
+
+/*minigauges shit*/
+
+#mini {
+    display: none;
+}
+
+#mini .hexagon-in2 {
+    background-color: #ffffff;
+}    
+
+#mini .module:nth-child(1) {
+    left: -5%;
+    bottom:-10%;
+}
+#mini .module:nth-child(2) {
+    left: 10%;
+    bottom: -19%;
+}
+#mini .module:nth-child(3) {
+    left: 25%;
+    bottom: -10%;
+}
+#mini .module:nth-child(4) {
+    left: 39.5%;
+    bottom: -19%;
+}
+#mini .module:nth-child(5) {
+    left: 54.3%;
+    bottom: -10%;
+}
+#mini .module:nth-child(6) {
+    left: 69%;
+    bottom: -19%;
 }
 
 .dataBox {
@@ -304,6 +282,7 @@ footer {
     height: 46%;
     width: 50%;
     border: 2px solid white;
+    border-radius: 0px;
     margin-top: 0.5%;
 }
 .heatMeter{
@@ -336,6 +315,87 @@ footer {
     height: 65%;
     display: block;
     margin: 0 auto;
+    margin-top: 1%;
+}
+
+.easter {
+    position: absolute;
+    display: none;
+    overflow:hidden;
+    left: 30%;
+    height:100%;
+}
+
+/* Dummy box game CSS */
+.boxGame {
+    text-align: center;
+    height: 60%;
+    width: 30%;
+    position: absolute;
+    display: none;
+    left: 35%;
+    top: 20%;
+    color: white;
+    overflow: hidden;
+}
+.box {
+    background-color: red;
+    height: 100%;
+    width: 30%;
+    display: inline-block;
+    margin-right: 2%;
+}
+.box:nth-child(3) {
+    background-color: blue;
+}
+.box:nth-child(4) {
+    background-color: green;
+}
+
+/* Dummy number game CSS */
+.mathGame {
+    text-align: center;
+    width: 35%;
+    height: 30%;
+    position: absolute;
+    display: none;
+    left: 31%;
+    top: 20%;
+    color: white;
+}
+
+.mathOption {
+    height: 90%;
+    width: 30%;
+    margin-left: 3%;
+    margin-top: 5%;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    background-color: gray;
+    color: white;
+}
+
+.mathOption h1 {
+    margin-top: 35%;
+}
+
+/* Screen size handling */
+@media only screen and (max-width: 900px) {
+    .mathOption {
+        margin-left: 5%;
+        width: 15%;
+    }
+    .mathOption h1 {
+        margin-top: 15%;
+    }
+    .box {
+        width: 20%;
+    }
+    .boxGame {
+        height: 70%;
+        font-size: 75%
+    }
 }
     
 /* tablet / mobile */
