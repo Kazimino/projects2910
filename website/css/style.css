@@ -8,6 +8,7 @@
 
 html {
     height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -66,6 +67,7 @@ footer {
     position: absolute;
     bottom: 0;
     display: none;
+    overflow: hidden;
 }
 
 .timerBox{
@@ -241,22 +243,6 @@ footer {
     left: 69%;
     bottom: -19%;
 }
-
-.gauge-fill {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
-
-#backbutton {
-    height: 150%;
-    margin: 0 auto;
-    display: block;
-    position: relative;
-    top:-40%;
-    left:35%;
-    visibility: hidden;
-}
     
 /* Menu CSS */
 .menulogo {
@@ -282,6 +268,7 @@ footer {
     height: 65%;
     display: block;
     margin: 0 auto;
+    margin-top: 1%;
 }
 
 .easter {
@@ -290,7 +277,79 @@ footer {
     overflow:hidden;
     left: 30%;
     height:100%;
+}
 
+/* Dummy box game CSS */
+.boxGame {
+    text-align: center;
+    height: 60%;
+    width: 30%;
+    position: absolute;
+    display: none;
+    left: 35%;
+    top: 20%;
+    color: white;
+    overflow: hidden;
+}
+.box {
+    background-color: red;
+    height: 100%;
+    width: 30%;
+    display: inline-block;
+    margin-right: 2%;
+}
+.box:nth-child(3) {
+    background-color: blue;
+}
+.box:nth-child(4) {
+    background-color: green;
+}
+
+/* Dummy number game CSS */
+.mathGame {
+    text-align: center;
+    width: 35%;
+    height: 30%;
+    position: absolute;
+    display: none;
+    left: 31%;
+    top: 20%;
+    color: white;
+}
+
+.mathOption {
+    height: 90%;
+    width: 30%;
+    margin-left: 3%;
+    margin-top: 5%;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    background-color: gray;
+    color: white;
+}
+
+.mathOption h1 {
+    margin-top: 35%;
+}
+
+/* Screen size handling */
+@media only screen and (max-width: 900px) {
+    .mathOption {
+        margin-left: 5%;
+        width: 15%;
+    }
+    .mathOption h1 {
+        margin-top: 15%;
+    }
+    .box {
+        width: 20%;
+    }
+    .boxGame {
+        height: 70%;
+        font-size: 75%
+    }
+}
     
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
