@@ -265,35 +265,46 @@ footer {
     left:35%;
     visibility: hidden;
 }
-    
+
+.dataBox {
+    margin: auto;
+    width: 70%;
+    height: 46%;
+}
+
 .timerBox{
+    vertical-align: top;
+    display: inline-block;
     margin: auto;
     color: white;
     font-size: 250%;
     text-align: center;
     border: 2px solid white;
     border-radius: 25px;
-    width: 50%;
-    height: 33%;
+    width: 46%;
+    height: 100%;
 }
 .heatMainBar{
+    vertical-align: top;
+    display: inline-block;
     margin: auto;
     color: white;
-    font-size: 150%;
+    font-size: 70%;
     text-align: center;
     border: 2px solid white;
     border-radius: 25px;
-    width: 50%;
-    height: 33%;
+    width: 46%;
+    height: 100%;
 }
 
 .heatBar {
     margin: auto;
     color: white;
     font-size: 100%;
-    height: 33%;
+    height: 46%;
     width: 50%;
     border: 2px solid white;
+    margin-top: 0.5%;
 }
 .heatMeter{
     height: 100%;

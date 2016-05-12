@@ -44,7 +44,7 @@ $(document).ready(function() {
     }
 
     // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
-    var clock = setInterval(function(){
+    function timerStart(){
         $('.timerBox').html(parseInt(baseTime / 600) + " : " + pad(parseInt((baseTime / 10) % 60)) + " : " + baseTime % 10);
 
         if(baseTime % 100 == 0 && maxActivated < 7) {
@@ -57,11 +57,12 @@ $(document).ready(function() {
             clearInterval(clock);
             clearInterval(heatCalc);
         }
-    }, 100);
+    }
 
     // heat gauge heat increase function.  increases heat by 5 every second and adds heat
     // from gauges to main heat bar.
-    var heatCalc = setInterval(function(){
+
+    function heatGenerate(){
         var heatForInterval = 0;
         for(var i = 0; i < maxActivated; i++){
             if(gaugeArray[i] < 100){
@@ -83,8 +84,10 @@ $(document).ready(function() {
         } else {
             $('.heatMeter').css('background-color', 'red');
         }
-    }, 200);
-    
+    }
+
+    var clock = setInterval(timerStart, 100);
+    var heatCalc = setInterval(heatGenerate, 200);
 
     /*this function is for enlarging a module for in game play */
     $('.module').click(function() {
@@ -165,6 +168,7 @@ function playGame() {
     $(".module").fadeIn(500, function() {
         $(this).css("display", "inline-block");
     });
+
 }
 
 var logoCount = 0;
