@@ -70,27 +70,6 @@ footer {
     overflow: hidden;
 }
 
-.timerBox{
-    margin: auto;
-    color: white;
-    font-size: 250%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-.heatBar{
-    margin: auto;
-    color: white;
-    font-size: 150%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-
 
 /* Hexagon shit */
 .module {
@@ -252,6 +231,53 @@ main > .module:nth-child(7) {
     right: 0;
     bottom: 0;
 }
+
+.dataBox {
+    margin: auto;
+    width: 70%;
+    height: 46%;
+}
+
+.timerBox{
+    vertical-align: top;
+    display: inline-block;
+    margin: auto;
+    color: white;
+    font-size: 250%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 46%;
+    height: 100%;
+}
+.heatMainBar{
+    vertical-align: top;
+    display: inline-block;
+    margin: auto;
+    color: white;
+    font-size: 70%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 46%;
+    height: 100%;
+}
+
+.heatBar {
+    margin: auto;
+    color: white;
+    font-size: 100%;
+    height: 46%;
+    width: 50%;
+    border: 2px solid white;
+    border-radius: 0px;
+    margin-top: 0.5%;
+}
+.heatMeter{
+    height: 100%;
+    background-color: red;
+    width: 50%;
+}
     
 /* Menu CSS */
 .menulogo {
@@ -280,11 +306,12 @@ main > .module:nth-child(7) {
     margin-top: 1%;
 }
 
-.easter {
+/* Icons for hexagons */
+.icon {
     position: absolute;
-    display: none;
+    display: inline-block;
     overflow:hidden;
-    left: 30%;
+    left:29%;
     height:100%;
 }
 
@@ -343,22 +370,25 @@ main > .module:nth-child(7) {
 }
 
 /* Screen size handling */
-@media only screen and (max-width: 900px) {
-    .mathOption {
-        margin-left: 5%;
-        width: 15%;
-    }
-    .mathOption h1 {
-        margin-top: 15%;
-    }
-    .box {
-        width: 20%;
-    }
-    .boxGame {
-        height: 70%;
-        font-size: 75%
-    }
+
+.mathOption {
+    margin-left: 5%;
+    width: 15%;
 }
+
+.mathOption h1 {
+    margin-top: 15%;
+}
+
+.box {
+    width: 20%;
+}
+
+.boxGame {
+    height: 70%;
+    font-size: 75%
+}
+
     
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
