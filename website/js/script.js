@@ -159,7 +159,7 @@ function logoClick() {
         $('.easter').show();
         $this.data('alt-src', $this.attr('src'));
         $this.attr('src', newSource);
-        alert("test");
+        alert("REESES' PEANUT BUTTER CUPS?!");
         
     };
 }
