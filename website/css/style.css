@@ -361,22 +361,25 @@ footer {
 }
 
 /* Screen size handling */
-@media only screen and (max-width: 900px) {
-    .mathOption {
-        margin-left: 5%;
-        width: 15%;
-    }
-    .mathOption h1 {
-        margin-top: 15%;
-    }
-    .box {
-        width: 20%;
-    }
-    .boxGame {
-        height: 70%;
-        font-size: 75%
-    }
+
+.mathOption {
+    margin-left: 5%;
+    width: 15%;
 }
+
+.mathOption h1 {
+    margin-top: 15%;
+}
+
+.box {
+    width: 20%;
+}
+
+.boxGame {
+    height: 70%;
+    font-size: 75%
+}
+
     
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
