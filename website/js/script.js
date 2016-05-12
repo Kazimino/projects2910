@@ -58,8 +58,6 @@ $(document).ready(function() {
             /*hides easter if enabled*/
             $('.easter').hide();
 
-           
-
 			/*fades the minigauge in when module is expanded*/
             $('#mini').fadeIn(250);
 
@@ -92,10 +90,10 @@ $(document).ready(function() {
     /* JavaScript/jQuery for dummy games */
     /* Box Game */
     $('.box').mouseenter(function() {
-        $(this).animate({ height: '+=10px'});
+        $(this).css("border", "1px solid white");
     });
     $('.box').mouseleave(function() {
-        $(this).animate({height :'-=10px'});
+        $(this).css("border", "none");
     });
     $('#greenBox').click(function() {
         window.alert("You won!");
