@@ -64,8 +64,6 @@ $(document).ready(function() {
             /*hides easter if enabled*/
             $('.easter').hide();
 
-           
-
 			/*fades the minigauge in when module is expanded*/
             $('#mini').fadeIn(250);
 
