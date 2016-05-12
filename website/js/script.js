@@ -97,7 +97,7 @@ $(document).ready(function() {
         $('.miniModule').hide();
         
     });
-    
+
     /* Make box game appear(if you press top module). */
     $("#top").click(function() {
         setTimeout( $(".boxGame").fadeIn(300, function() {

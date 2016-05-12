@@ -70,27 +70,6 @@ footer {
     overflow: hidden;
 }
 
-.timerBox{
-    margin: auto;
-    color: white;
-    font-size: 250%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-.heatBar{
-    margin: auto;
-    color: white;
-    font-size: 150%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-
 
 /* Hexagon shit */
 .module {
