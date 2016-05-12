@@ -18,16 +18,13 @@ $(document).ready(function() {
     
     function hideCurrGame() {
         $('main > .module').show(250);
-        $("#mini").hide();
+        $("#mini").hide(250);
         $('.inGame').hide(250);
 
         enlarged = false;
         backbutton = false;
 
-        $('#backbutton').animate({
-            visibility: "hidden", 
-            opacity: 0.0
-        });
+        $('#backbutton').hide(250);
 
         /* Make games disappear, later it can be for a currentGame class
         but for now it is hardcoded for the 2 dummy games.*/
@@ -54,17 +51,12 @@ $(document).ready(function() {
             backbutton = true;
             
             /* back button is shown when a module is clicked and enlarged */
-            $('#backbutton').css({
-                    opacity: 0.0, 
-                    visibility: "visible"}).animate({
-                    opacity: 1.0});
+            $('#backbutton').show(250);
             
             /*end of code to make back button show */
 
             /*hides easter if enabled*/
             $('.easter').hide();
-
-           
 
 			/*fades the minigauge in when module is expanded*/
             $('#mini').fadeIn(250);
@@ -98,10 +90,10 @@ $(document).ready(function() {
     /* JavaScript/jQuery for dummy games */
     /* Box Game */
     $('.box').mouseenter(function() {
-        $(this).animate({ height: '+=10px'});
+        $(this).css("border", "1px solid white");
     });
     $('.box').mouseleave(function() {
-        $(this).animate({height :'-=10px'});
+        $(this).css("border", "none");
     });
     $('#greenBox').click(function() {
         window.alert("You won!");
@@ -196,13 +188,7 @@ function heatGenerate(){
 function playGame() {
     $(".menu").hide();
     
-    $("footer").fadeIn(500, function() {
-        $(this).css("display", "block");
-    });
-    $("header").fadeIn(500, function() {
-        $(this).css("display", "block");
-    });
-    $("main").fadeIn(500, function() {
+    $("footer, header, main").fadeIn(500, function() {
         $(this).css("display", "block");
     });
     clock = setInterval(timerStart, 100);
