@@ -16,6 +16,29 @@ $(document).ready(function() {
     }
     resizeMenu();
     
+    function hideCurrGame() {
+        $('main > .module').show(250);
+        $("#mini").hide();
+        $('.inGame').hide(250);
+
+        enlarged = false;
+        backbutton = false;
+
+        $('#backbutton').animate({
+            visibility: "hidden", 
+            opacity: 0.0
+        });
+
+        /* Make games disappear, later it can be for a currentGame class
+        but for now it is hardcoded for the 2 dummy games.*/
+        $(".boxGame").fadeOut(200, function() {
+            $(this).css("display", "none");
+        });
+        $(".mathGame").fadeOut(200, function() {
+            $(this).css("display", "none");
+        });
+    }
+    
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var $this = $(this);
@@ -63,7 +86,7 @@ $(document).ready(function() {
     }, 200);
 
     /*this function is for enlarging a module for in game play */
-    $('.module').click(function() {
+    $('main > .module').click(function() {
         if(enlarged == false) {
             enlarged = true; 
             backbutton = true;
@@ -73,6 +96,7 @@ $(document).ready(function() {
                     opacity: 0.0, 
                     visibility: "visible"}).animate({
                     opacity: 1.0});
+            
             /*end of code to make back button show */
 
             /*hides easter if enabled*/
@@ -81,55 +105,22 @@ $(document).ready(function() {
            
 
 			/*fades the minigauge in when module is expanded*/
-            $('#mini').fadeIn(2000);
+            $('#mini').fadeIn(250);
 
             /* hides main game board and enlarges and animates 
             focus module - also shows the ingame board. */
-            $(this).siblings().hide(250);
-            $(this).hide(250);
+            $('main > .module').hide(250);
             $('.inGame').show(300);
         }
     });
     
-/*backwards functionality function */    
+    /*backwards functionality function */    
     $('#backbutton').click(function() {
-                        
-        if(backbutton == true) {
-            $('.module').siblings().show(250);  
-            $('.inGame').hide(250);
-            
-            enlarged = false;
-            backbutton = false;
-            
-            $('#backbutton').animate({
-                visibility: "hidden", 
-                opacity: 0.0});
-            
-            /* Make games disappear, later it can be for a currentGame class
-            but for now it is hardcoded for the 2 dummy games.*/
-            $(".boxGame").fadeOut(200, function() {
-                $(this).css("display", "none");
-            });
-            $(".mathGame").fadeOut(200, function() {
-                $(this).css("display", "none");
-            });
-            
-        } else {
-            return;
+        if(backbutton) {
+            hideCurrGame();
         }
     });
 	
-    	/*animates the clicked minigauge to the front*/
-    $('.miniModule').click(function() {
-
-        /*hides enlarged*/
-        $('.module').hide();
-        
-        /*hides minigauges*/
-        $('.miniModule').hide();
-        
-    });
-    
     /* Make box game appear(if you press top module). */
     $("#top").click(function() {
         setTimeout( $(".boxGame").fadeIn(300, function() {
@@ -154,32 +145,7 @@ $(document).ready(function() {
         window.alert("You won!");
         $(".boxGame").fadeOut(500, function() {
             $(this).hide();
-            
-            /* CODE DUPLICATION, SHOULD REMOVE AND FIND BETTER SOLUTION. JUST TESTING*/
-            
-            $('.module').siblings().show(250);  
-            $('.inGame').hide(250);
-
-            enlarged = false;
-            backbutton = false;
-
-            $('#backbutton').animate({
-                visibility: "hidden", 
-                opacity: 0.0});
-
-            /* Make games disappear., later it can be for a currentGame class
-            but for now it is hardcoded for the 2 dummy games.*/
-            $(".boxGame").fadeOut(200, function() {
-                $(this).css("display", "none");
-            });
-            $(".mathGame").fadeOut(200, function() {
-                $(this).css("display", "none");
-            });
-            
-            
-            
-            /* END TEST */
-            
+            hideCurrGame();
         });
     });
     /* Number Game */
@@ -193,32 +159,7 @@ $(document).ready(function() {
         window.alert("You won!");
         $(".mathGame").fadeOut(500, function() {
             $(this).hide();
-            
-            /* CODE DUPLICATION, SHOULD REMOVE AND FIND BETTER SOLUTION. JUST TESTING*/
-            
-            $('.module').siblings().show(250);  
-            $('.inGame').hide(250);
-
-            enlarged = false;
-            backbutton = false;
-
-            $('#backbutton').animate({
-                visibility: "hidden", 
-                opacity: 0.0});
-
-            /* Make games disappear., later it can be for a currentGame class
-            but for now it is hardcoded for the 2 dummy games.*/
-            $(".boxGame").fadeOut(200, function() {
-                $(this).css("display", "none");
-            });
-            $(".mathGame").fadeOut(200, function() {
-                $(this).css("display", "none");
-            });
-            
-            
-            
-            /* END TEST */
-            
+            hideCurrGame();
         });
     });
     
