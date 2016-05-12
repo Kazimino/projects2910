@@ -271,7 +271,8 @@ footer {
     margin-top: 1%;
 }
 
-.easter {
+/* Icons for hexagons */
+.icon {
     position: absolute;
     display: none;
     overflow:hidden;

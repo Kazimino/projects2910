@@ -249,13 +249,9 @@ var logoCount = 0;
 function logoClick() {
     logoCount++;
     if(logoCount == 5) {
-        
-        var $this = $('.easter');
-        var newSource = $this.data('alt-src');
-        $('.easter').show();
-        $this.data('alt-src', $this.attr('src'));
-        $this.attr('src', newSource);
+        $('.icon').show();
+        $('.icon').attr("src", "images/Easter/reeses.png");
+        $('#center .icon').attr("src", "images/Easter/chris.png");
         alert("REESES' PEANUT BUTTER CUPS?!");
-        
     }
 }
