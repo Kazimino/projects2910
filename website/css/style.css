@@ -308,11 +308,10 @@ main > .module:nth-child(7) {
 
 /* Icons for hexagons */
 .icon {
-    position: absolute;
-    display: inline-block;
-    overflow:hidden;
-    left:29%;
+    position: relative;
     height:100%;
+    margin: 0 auto;
+    display: block;
 }
 
 /* Dummy box game CSS */
