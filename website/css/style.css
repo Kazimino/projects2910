@@ -70,27 +70,6 @@ footer {
     overflow: hidden;
 }
 
-.timerBox{
-    margin: auto;
-    color: white;
-    font-size: 250%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-.heatBar{
-    margin: auto;
-    color: white;
-    font-size: 150%;
-    text-align: center;
-    border: 2px solid white;
-    border-radius: 25px;
-    width: 50%;
-    height: 50%;
-}
-
 
 /* Hexagon shit */
 .module {
@@ -242,6 +221,53 @@ footer {
 #mini .module:nth-child(6) {
     left: 69%;
     bottom: -19%;
+}
+
+.dataBox {
+    margin: auto;
+    width: 70%;
+    height: 46%;
+}
+
+.timerBox{
+    vertical-align: top;
+    display: inline-block;
+    margin: auto;
+    color: white;
+    font-size: 250%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 46%;
+    height: 100%;
+}
+.heatMainBar{
+    vertical-align: top;
+    display: inline-block;
+    margin: auto;
+    color: white;
+    font-size: 70%;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    width: 46%;
+    height: 100%;
+}
+
+.heatBar {
+    margin: auto;
+    color: white;
+    font-size: 100%;
+    height: 46%;
+    width: 50%;
+    border: 2px solid white;
+    border-radius: 0px;
+    margin-top: 0.5%;
+}
+.heatMeter{
+    height: 100%;
+    background-color: red;
+    width: 50%;
 }
     
 /* Menu CSS */
