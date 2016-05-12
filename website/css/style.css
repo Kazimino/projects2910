@@ -300,9 +300,9 @@ footer {
 /* Icons for hexagons */
 .icon {
     position: absolute;
-    display: none;
+    display: inline-block;
     overflow:hidden;
-    left: 30%;
+    left:29%;
     height:100%;
 }
 
