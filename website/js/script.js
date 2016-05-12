@@ -64,9 +64,6 @@ $(document).ready(function() {
 
     /*this function is for enlarging a module for in game play */
     $('.module').click(function() {
-
-        
-        
         if(enlarged == false) {
             enlarged = true; 
             backbutton = true;
@@ -108,6 +105,15 @@ $(document).ready(function() {
                 visibility: "hidden", 
                 opacity: 0.0});
             
+            /* Make games disappear., later it can be for a currentGame class
+            but for now it is hardcoded for the 2 dummy games.*/
+            $(".boxGame").fadeOut(200, function() {
+                $(this).css("display", "none");
+            });
+            $(".mathGame").fadeOut(200, function() {
+                $(this).css("display", "none");
+            });
+            
         } else {
             return;
         }
@@ -122,8 +128,98 @@ $(document).ready(function() {
         /*hides minigauges*/
         $('.miniModule').hide();
         
+    });
     
-      
+    /* Make box game appear(if you press top module). */
+    $("#top").click(function() {
+        setTimeout( $(".boxGame").fadeIn(300, function() {
+            $(this).css("display", "block");
+        }), 300);
+    });
+    $("#topRight").click(function() {
+        setTimeout( $(".mathGame").fadeIn(300, function() {
+            $(this).css("display", "block");
+        }), 300);
+    });
+    
+    /* JavaScript/jQuery for dummy games */
+    /* Box Game */
+    $('.box').mouseenter(function() {
+        $(this).animate({ height: '+=10px'});
+    });
+    $('.box').mouseleave(function() {
+        $(this).animate({height :'-=10px'});
+    });
+    $('#greenBox').click(function() {
+        window.alert("You won!");
+        $(".boxGame").fadeOut(500, function() {
+            $(this).hide();
+            
+            /* CODE DUPLICATION, SHOULD REMOVE AND FIND BETTER SOLUTION. JUST TESTING*/
+            
+            $('.module').siblings().show(250);  
+            $('.inGame').hide(250);
+
+            enlarged = false;
+            backbutton = false;
+
+            $('#backbutton').animate({
+                visibility: "hidden", 
+                opacity: 0.0});
+
+            /* Make games disappear., later it can be for a currentGame class
+            but for now it is hardcoded for the 2 dummy games.*/
+            $(".boxGame").fadeOut(200, function() {
+                $(this).css("display", "none");
+            });
+            $(".mathGame").fadeOut(200, function() {
+                $(this).css("display", "none");
+            });
+            
+            
+            
+            /* END TEST */
+            
+        });
+    });
+    /* Number Game */
+    $('.mathOption').mouseenter(function() {
+        $(this).css("background-color", "black");
+     });
+    $('.mathOption').mouseleave(function() {
+        $(this).css("background-color", "gray");
+    });
+    $('#plus').click(function() {
+        window.alert("You won!");
+        $(".mathGame").fadeOut(500, function() {
+            $(this).hide();
+            
+            /* CODE DUPLICATION, SHOULD REMOVE AND FIND BETTER SOLUTION. JUST TESTING*/
+            
+            $('.module').siblings().show(250);  
+            $('.inGame').hide(250);
+
+            enlarged = false;
+            backbutton = false;
+
+            $('#backbutton').animate({
+                visibility: "hidden", 
+                opacity: 0.0});
+
+            /* Make games disappear., later it can be for a currentGame class
+            but for now it is hardcoded for the 2 dummy games.*/
+            $(".boxGame").fadeOut(200, function() {
+                $(this).css("display", "none");
+            });
+            $(".mathGame").fadeOut(200, function() {
+                $(this).css("display", "none");
+            });
+            
+            
+            
+            /* END TEST */
+            
+        });
     });
     
     $(window).resize(function(e) {
@@ -152,7 +248,7 @@ var logoCount = 0;
 /*easter egg*/
 function logoClick() {
     logoCount++;
-    if(logoCount == 5){
+    if(logoCount == 5) {
         
         var $this = $('.easter');
         var newSource = $this.data('alt-src');
@@ -161,6 +257,5 @@ function logoClick() {
         $this.attr('src', newSource);
         alert("test");
         
-    };
+    }
 }
-   
