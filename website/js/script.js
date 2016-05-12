@@ -153,8 +153,9 @@ function timerStart(){
     if(baseTime % 100 == 0 && maxActivated < 7) {
         maxActivated += 1;
     }
-
+    /*  For testing the values of the heat gauges only
     $('.heatMainBar').html("Gauge 0 heat: " + gaugeArray[0] + "\nGauge 1 heat: " + gaugeArray[1] + "\nTotal Heat: " + parseInt(totalHeat));
+    */
     baseTime += 1;
     if(totalHeat >= maxHeat){
         clearInterval(clock);
@@ -180,13 +181,8 @@ function heatGenerate(){
         totalHeat = maxHeat;
     }
     $('.heatMeter').width(parseInt(totalHeat/maxHeat * 100) + "%");
-    if(totalHeat / maxHeat * 100 < 33){
-        $('.heatMeter').css('background-color', 'green');
-    } else if(totalHeat / maxHeat * 100 < 66){
-        $('.heatMeter').css('background-color', 'yellow');
-    } else {
-        $('.heatMeter').css('background-color', 'red');
-    }
+    $('.heatMeter').css('background-color', 'hsl(' + (120 - ((totalHeat/maxHeat) * 120)) + ', 100%, 50%)');
+
 }
 
 /* At this current moment, all this does is fade from Menu to Game.
