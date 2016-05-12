@@ -237,7 +237,7 @@ main > .module:nth-child(7) {
     vertical-align: top;
     margin: auto;
     color: white;
-    font-size: 6vmin;
+    font-size: 6vh;
     text-align: center;
     width: 50%;
     height: 46%;
@@ -250,15 +250,13 @@ main > .module:nth-child(7) {
     margin: auto;
     color: white;
     font-size: 100%;
-    height: 46%;
+    height: 42%;
     width: 50%;
     border: 2px solid white;
-    margin-top: 0.5%;
+    margin-top: 1px;
 }
 .heatMeter{
     height: 100%;
-    background-color: red;
-    width: 50%;
 }
     
 /* Menu CSS */
