@@ -283,10 +283,11 @@ footer {
 /* Dummy box game CSS */
 .boxGame {
     text-align: center;
+    height: 60%;
     width: 30%;
     position: absolute;
     display: none;
-    left: 36%;
+    left: 35%;
     top: 20%;
     color: white;
     overflow: hidden;
@@ -296,7 +297,7 @@ footer {
     height: 100%;
     width: 30%;
     display: inline-block;
-    margin-right: 10%;
+    margin-right: 2%;
 }
 .box:nth-child(3) {
     background-color: blue;

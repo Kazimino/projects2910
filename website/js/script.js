@@ -105,7 +105,7 @@ $(document).ready(function() {
                 visibility: "hidden", 
                 opacity: 0.0});
             
-            /* Make games disappear., later it can be for a currentGame class
+            /* Make games disappear, later it can be for a currentGame class
             but for now it is hardcoded for the 2 dummy games.*/
             $(".boxGame").fadeOut(200, function() {
                 $(this).css("display", "none");
