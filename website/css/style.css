@@ -73,20 +73,19 @@ footer {
 
 /* Hexagon shit */
 .module {
-	width: 33.33%;
+	width: 38.66%;
 	height: 33.33%;
 	position: absolute;
-	display: inline-block;
+	display: block;
     visibility: hidden;
 }
 /*styles in game hex start here*/
 .inGame{
-    width: 75.33%;
-	height: 75.33%;
-	position: absolute;
-    left: 12%;
-    display: inline-block;
-    visibility: hidden;
+    width: 88%;
+	height: 75%;
+	position: relative;
+    display: none;
+    margin: 0 auto;
 }
 /*in game hex styles end here */
 
@@ -143,32 +142,37 @@ footer {
     background-color: #1e1e1e;
 }
 
-.module:nth-child(1) {
-    left: 33.33%;
+main > .module:nth-child(1) {
+    left: 30.9%;
 }
-.module:nth-child(2) {
-    left: 4.4%;
+
+main > .module:nth-child(2) {
+    left: 2%;
     top: 16.7%;
 }
 
-.module:nth-child(3) {
-    right: 4.4%;
+main > .module:nth-child(3) {
+    right: 2%;
     top: 16.7%;
 }
-.module:nth-child(4) {
-    left: 33.3%;
+
+main > .module:nth-child(4) {
+    left: 30.9%;
     top: 33.3%;
 }
-.module:nth-child(5) {
-    left: 4.4%;
+
+main > .module:nth-child(5) {
+    left: 2%;
     bottom: 16.7%;
 }
-.module:nth-child(6) {
-    right: 4.4%;
+
+main > .module:nth-child(6) {
+    right: 2%;
     bottom: 16.7%;
 }
-.module:nth-child(7) {
-    left: 33.33%;
+
+main > .module:nth-child(7) {
+    left: 30.9%;
     bottom: 0;
 }
 
@@ -179,48 +183,53 @@ footer {
 }
 
 #backbutton {
-    height: 150%;
-    margin: 0 auto;
-    display: block;
-    position: relative;
-    top:-40%;
-    left:35%;
+    width: 17.5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
     visibility: hidden;
+    z-index: 900;
 }
 
 /*minigauges shit*/
 
 #mini {
     display: none;
+    position: absolute;
+    bottom: 0;
+    height: 20%;
+    width: 100%;
 }
 
-#mini .hexagon-in2 {
-    background-color: #ffffff;
-}    
+#mini .module {
+    width: 16.5%;
+    height: 70%;
+}
 
 #mini .module:nth-child(1) {
-    left: -5%;
-    bottom:-10%;
+    left: 0;
+    top: 0;
 }
 #mini .module:nth-child(2) {
-    left: 10%;
-    bottom: -19%;
+    left: 16.6%;
+    bottom: 0;
 }
 #mini .module:nth-child(3) {
-    left: 25%;
-    bottom: -10%;
+    left: 33.3%;
+    top: 0;
 }
 #mini .module:nth-child(4) {
-    left: 39.5%;
-    bottom: -19%;
+    right: 33.3%;
+    bottom: 0;
 }
 #mini .module:nth-child(5) {
-    left: 54.3%;
-    bottom: -10%;
+    right: 16.6%;
+    top: 0;
 }
 #mini .module:nth-child(6) {
-    left: 69%;
-    bottom: -19%;
+    right: 0;
+    bottom: 0;
 }
 
 .dataBox {
@@ -299,11 +308,10 @@ footer {
 
 /* Icons for hexagons */
 .icon {
-    position: absolute;
-    display: inline-block;
-    overflow:hidden;
-    left:29%;
+    position: relative;
     height:100%;
+    margin: 0 auto;
+    display: block;
 }
 
 /* Dummy box game CSS */
