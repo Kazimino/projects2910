@@ -254,6 +254,8 @@ main > .module:nth-child(7) {
     width: 50%;
     border: 2px solid white;
     margin-top: 1px;
+    border-radius: 25px;
+    overflow: hidden;
 }
 .heatMeter{
     height: 100%;

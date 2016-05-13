@@ -145,6 +145,7 @@ var totalHeat = 0;
 var maxHeat = 100;
 var clock;
 var heatCalc;
+var toggle = -1;
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -156,8 +157,11 @@ function pad(time){
 
 // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
 function timerStart(){
+    toggle *= -1;
+    if(toggle == 1) {
+        heatGenerate();
+    }
     $('.timerBox').html(parseInt(baseTime / 600) + " : " + pad(parseInt((baseTime / 10) % 60)) + " : " + baseTime % 10);
-
     if(baseTime % 100 == 0 && maxActivated < 7) {
         maxActivated += 1;
     }
@@ -182,6 +186,7 @@ function heatGenerate(){
         }
         heatForInterval += gaugeArray [i];
     }
+    
     if(totalHeat < maxHeat){
         totalHeat += heatForInterval / 100;
     }
@@ -202,7 +207,7 @@ function playGame() {
         $(this).css("display", "block");
     });
     clock = setInterval(timerStart, 100);
-    heatCalc = setInterval(heatGenerate, 200);
+   //heatCalc = setInterval(heatGenerate, 200);
 }
 
 var logoCount = 0;
