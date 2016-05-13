@@ -2,6 +2,7 @@ $(document).ready(function() {
     
     $('.inGame').hide();
     
+    /* Resizes the main */
     function resizeMain() {
         $("main").width($("main").height());
         $("main").css("margin-top", $(window).height() / 2 - $("main").height() / 2);
@@ -9,6 +10,7 @@ $(document).ready(function() {
     }
     resizeMain();
 
+    /* Resizes the main menu */
     function resizeMenu() {
         $(".menu").width($(".menu").height());
         $(".menu").css("margin-top", $(window).height() / 2 - $(".menu").height() / 2);
@@ -16,6 +18,7 @@ $(document).ready(function() {
     }
     resizeMenu();
     
+    /* This function hides the current game (enlarged hexagon) shown */
     function hideCurrGame() {
         $('main > .module').show(250);
         $("#mini").hide(250);
@@ -81,6 +84,8 @@ $(document).ready(function() {
             $(this).css("display", "block");
         }), 300);
     });
+    
+    /* Make math game appear(if you press the top right module). */
     $("#topRight").click(function() {
         setTimeout( $(".mathGame").fadeIn(300, function() {
             $(this).css("display", "block");
@@ -95,6 +100,8 @@ $(document).ready(function() {
     $('.box').mouseleave(function() {
         $(this).css("border", "none");
     });
+    
+    /* Notifies user they selected correct color and hides the current game*/
     $('#greenBox').click(function() {
         window.alert("You won!");
         $(".boxGame").fadeOut(500, function() {
@@ -109,6 +116,8 @@ $(document).ready(function() {
     $('.mathOption').mouseleave(function() {
         $(this).css("background-color", "gray");
     });
+    
+    /* Notifies user they selected correct operator and hides the current game*/
     $('#plus').click(function() {
         window.alert("You won!");
         $(".mathGame").fadeOut(500, function() {
@@ -117,6 +126,7 @@ $(document).ready(function() {
         });
     });
     
+    /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
         resizeMain();
         resizeMenu();
@@ -201,6 +211,8 @@ function logoClick() {
     logoCount++;
     if(logoCount == 5) {
         $('.icon').show();
+        
+        /*Replaces icons with Easter egg images*/
         $('.icon').attr("src", "images/Easter/reeses.png");
         $('#center .icon').attr("src", "images/Easter/chris.png");
         alert("REESES' PEANUT BUTTER CUPS?!");
