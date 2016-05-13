@@ -77,6 +77,8 @@ footer {
 	width: 38.66%;
 	height: 33.33%;
 	position: absolute;
+    
+    -webkit-transform: translate3d(0,0,0);
 }
 /*styles in game hex start here*/
 .inGame{
@@ -85,6 +87,8 @@ footer {
 	position: relative;
     display: none;
     margin: 0 auto;
+    
+    -webkit-transform: translate3d(0,0,0);
 }
 /*in game hex styles end here */
 
