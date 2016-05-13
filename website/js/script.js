@@ -121,6 +121,8 @@ $(document).ready(function() {
         resizeMain();
         resizeMenu();
     });
+    timer = document.getElementById('timerBox');
+    heatMeter = document.getElementById('heatMeter');
 });
 
 /* booleans and vars for module focus and state memorization*/
@@ -128,14 +130,19 @@ var backbutton = false;
 var enlarged = false;
 
 // heat gauge and timer variables
+var min = 0;
+var sec = 0;
+var dsec = 0;
 var baseTime = 0;
 var gaugeArray = [0, 0, 0, 0, 0, 0, 0];
-var maxActivated = 0;
+var maxActivated = 1;
 var totalHeat = 0;
 var maxHeat = 100;
 var clock;
 var heatCalc;
 var toggle = -1;
+var timer;
+var heatMeter;
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -151,17 +158,25 @@ function timerStart(){
     if(toggle == 1) {
         heatGenerate();
     }
-    $('.timerBox').html(parseInt(baseTime / 600) + " : " + pad(parseInt((baseTime / 10) % 60)) + " : " + baseTime % 10);
-    if(baseTime % 100 == 0 && maxActivated < 7) {
-        maxActivated += 1;
+    if(dsec == 10) {
+        if(sec % 10 == 0 && maxActivated < 7) {
+            maxActivated += 1;
+        }
+        dsec = 0;
+        sec++;
     }
+    if(sec == 60) {
+        min++;
+        sec = 0;
+    }
+    timer.innerHTML = min + " : " + sec + " : " + dsec;
+    
     /*  For testing the values of the heat gauges only
     $('.heatMainBar').html("Gauge 0 heat: " + gaugeArray[0] + "\nGauge 1 heat: " + gaugeArray[1] + "\nTotal Heat: " + parseInt(totalHeat));
     */
-    baseTime += 1;
+    dsec += 1;
     if(totalHeat >= maxHeat){
         clearInterval(clock);
-        clearInterval(heatCalc);
     }
 }
 
@@ -172,9 +187,9 @@ function heatGenerate(){
     var heatForInterval = 0;
     for(var i = 0; i < maxActivated; i++){
         if(gaugeArray[i] < 100){
-            gaugeArray[i] += 1;
+            gaugeArray[i]++;
         }
-        heatForInterval += gaugeArray [i];
+        heatForInterval += gaugeArray[i];
     }
     
     if(totalHeat < maxHeat){
@@ -183,9 +198,8 @@ function heatGenerate(){
     if(totalHeat > maxHeat){
         totalHeat = maxHeat;
     }
-    $('.heatMeter').width(parseInt(totalHeat/maxHeat * 100) + "%");
-    $('.heatMeter').css('background-color', 'hsl(' + (120 - ((totalHeat/maxHeat) * 120)) + ', 100%, 50%)');
-
+    heatMeter.setAttribute("style", "background-position: " + totalHeat/maxHeat * -100 + "% 0; " +
+                           "background-image: linear-gradient(to right, transparent, transparent 50%, green 50%, hsl(" + (120 -                                             ((totalHeat/maxHeat) * 120)) + ", 100%, 50%) 100%)");
 }
 
 /* At this current moment, all this does is fade from Menu to Game.
@@ -205,7 +219,6 @@ var logoCount = 0;
 function logoClick() {
     logoCount++;
     if(logoCount == 5) {
-        $('.icon').show();
         $('.icon').attr("src", "images/Easter/reeses.png");
         $('#center .icon').attr("src", "images/Easter/chris.png");
         alert("REESES' PEANUT BUTTER CUPS?!");

@@ -237,7 +237,7 @@ main > .module:nth-child(7) {
 }
 
 
-.timerBox{
+#timerBox{
     vertical-align: top;
     margin: auto;
     color: white;
@@ -250,7 +250,7 @@ main > .module:nth-child(7) {
 }
 
 
-.heatBar {
+#heatMeter {
     margin: auto;
     color: white;
     font-size: 100%;
@@ -260,11 +260,12 @@ main > .module:nth-child(7) {
     margin-top: 1px;
     border-radius: 25px;
     overflow: hidden;
+    background-image: linear-gradient(to right, transparent, transparent 50%, green 50%, green 100%);
+    background-size: 200% 100%;
+    background-position: 0 0;
+    transition: background-position 100ms linear;
 }
-.heatMeter{
-    height: 100%;
-}
-    
+
 /* Menu CSS */
 .menulogo {
     height: 40%;
