@@ -1,41 +1,6 @@
 $(document).ready(function() {
-    
-    $('.inGame').hide();
-    
-    function resizeMain() {
-        $("main").width($("main").height());
-        $("main").css("margin-top", $(window).height() / 2 - $("main").height() / 2);
-        $("main").css("margin-left", $(window).width() / 2 - $("main").height() / 2);
-    }
     resizeMain();
-
-    function resizeMenu() {
-        $(".menu").width($(".menu").height());
-        $(".menu").css("margin-top", $(window).height() / 2 - $(".menu").height() / 2);
-        $(".menu").css("margin-left", $(window).width() / 2 - $(".menu").height() / 2);
-    }
-    resizeMenu();
-    
-    function hideCurrGame() {
-        $('main > .module').show(250);
-        $("#mini").hide(250);
-        $('.inGame').hide(250);
-
-        enlarged = false;
-        backbutton = false;
-
-        $('#backbutton').hide(250);
-
-        /* Make games disappear, later it can be for a currentGame class
-        but for now it is hardcoded for the 2 dummy games.*/
-        $(".boxGame").fadeOut(200, function() {
-            $(this).css("display", "none");
-        });
-        $(".mathGame").fadeOut(200, function() {
-            $(this).css("display", "none");
-        });
-    }
-    
+        
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var $this = $(this);
@@ -45,48 +10,23 @@ $(document).ready(function() {
     });
     
     /*this function is for enlarging a module for in game play */
-    $('main > .module').click(function() {
-        if(enlarged == false) {
-            enlarged = true; 
-            backbutton = true;
-            
-            /* back button is shown when a module is clicked and enlarged */
-            $('#backbutton').show(250);
-            
-            /*end of code to make back button show */
-
-            /*hides easter if enabled*/
-            $('.easter').hide();
-
-			/*fades the minigauge in when module is expanded*/
-            $('#mini').fadeIn(250);
-
-            /* hides main game board and enlarges and animates 
-            focus module - also shows the ingame board. */
-            $('main > .module').hide(250);
-            $('.inGame').show(300);
+    $('.icon').click(function() {
+        enlargeGame($(this).data("pos"));
+    });
+    
+    $('#mini .module').click(function() {
+        var pos = $(this).data("pos")
+        if(pos != 0) {
+            hideCurrGame();
+            enlargeGame(pos);
         }
     });
     
-    /*backwards functionality function */    
+    /*backwards functionality function */
     $('#backbutton').click(function() {
-        if(backbutton) {
-            hideCurrGame();
-        }
+        hideCurrGame();
     });
 	
-    /* Make box game appear(if you press top module). */
-    $("#top").click(function() {
-        setTimeout( $(".boxGame").fadeIn(300, function() {
-            $(this).css("display", "block");
-        }), 300);
-    });
-    $("#topRight").click(function() {
-        setTimeout( $(".mathGame").fadeIn(300, function() {
-            $(this).css("display", "block");
-        }), 300);
-    });
-
     /* JavaScript/jQuery for dummy games */
     /* Box Game */
     $('.box').mouseenter(function() {
@@ -96,11 +36,7 @@ $(document).ready(function() {
         $(this).css("border", "none");
     });
     $('#greenBox').click(function() {
-        window.alert("You won!");
-        $(".boxGame").fadeOut(500, function() {
-            $(this).hide();
-            hideCurrGame();
-        });
+        endGame(enlarged);
     });
     /* Number Game */
     $('.mathOption').mouseenter(function() {
@@ -110,39 +46,42 @@ $(document).ready(function() {
         $(this).css("background-color", "gray");
     });
     $('#plus').click(function() {
-        window.alert("You won!");
-        $(".mathGame").fadeOut(500, function() {
-            $(this).hide();
-            hideCurrGame();
-        });
+        endGame(enlarged);
     });
     
     $(window).resize(function(e) {
         resizeMain();
-        resizeMenu();
     });
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
 });
 
-/* booleans and vars for module focus and state memorization*/
-var backbutton = false;
-var enlarged = false;
+var enlarged = "";
 
 // heat gauge and timer variables
 var min = 0;
 var sec = 0;
 var dsec = 0;
-var baseTime = 0;
-var gaugeArray = [0, 0, 0, 0, 0, 0, 0];
-var maxActivated = 1;
 var totalHeat = 0;
-var maxHeat = 100;
+var activeArray = [];
+var activeMini = 0;
+var posList = ['top', 'topLeft', 'topRight', 'center', 'bottomLeft', 'bottomRight', 'bottom'];
+
+var MAX_HEAT = 50000;
+var HEAT_PER_TICK  = 0.5;
+var GAME_SPAWN_TIME = 10;
+var COOLANT_LEVEL = 10;
+
 var clock;
-var heatCalc;
-var toggle = -1;
 var timer;
 var heatMeter;
+
+function module(type, answer) {
+    this.heat = 0;
+    this.type = type;
+    this.input = "";
+    this.answer = answer;
+}
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -152,54 +91,161 @@ function pad(time){
     return time;
 }
 
+function resizeMain() {
+    var $main = $('main');
+    $main.width($main.height());
+    $main.css("top", $(window).height() / 2 - $main.height() / 2);
+    $main.css("left", $(window).width() / 2 - $main.height() / 2);
+}
+
+function hideCurrGame() {
+    var currGameType = activeArray[enlarged].type;
+    enlarged = "";
+    $('main > .module').show(250);
+    $("#mini").fadeOut(250, function() {
+        $(this).css("display", "none");
+    });
+    $('#inGame').hide(250);
+    $('#backbutton').fadeOut(250);
+    $('#' + currGameType).css("display", "none");
+    $('#mini .gauge-fill').attr("class", "gauge-fill");
+    $('#mini .gauge-fill').height(0);
+    $('#mini .module').data("pos", 0);
+}
+
+function enlargeGame(pos) {
+    enlarged = pos;
+    
+    /* back button is shown when a module is clicked and enlarged */
+    $('#backbutton').fadeIn(250);
+
+    /*fades the minigauge in when module is expanded*/
+    $('#mini').fadeIn(250);
+    loadGame(enlarged);
+    
+    /* hides main game board and enlarges and animates 
+    focus module - also shows the ingame board. */
+    $('main > .module').hide(250);
+    $('#inGame').show(250);
+    activeMini = 0;
+    for(var key in activeArray) {
+        if(key != enlarged) {
+            $("#mini-" + activeMini).data("pos", key);
+            $("#mini-" + activeMini++ + " .gauge-fill").addClass('mini-' + key);
+        }
+    }
+}
+
 // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
 function timerStart(){
-    toggle *= -1;
-    if(toggle == 1) {
-        heatGenerate();
-    }
+    heatGenerate();
+    
     if(dsec == 10) {
-        if(sec % 10 == 0 && maxActivated < 7) {
-            maxActivated += 1;
-        }
         dsec = 0;
         sec++;
+        if(sec == 60) {
+            sec = 0;
+            min++;
+        }
+        if(sec % GAME_SPAWN_TIME == 0) {
+            spawnRandomGame();
+        }
     }
-    if(sec == 60) {
-        min++;
-        sec = 0;
-    }
-    timer.innerHTML = min + " : " + sec + " : " + dsec;
     
-    /*  For testing the values of the heat gauges only
-    $('.heatMainBar').html("Gauge 0 heat: " + gaugeArray[0] + "\nGauge 1 heat: " + gaugeArray[1] + "\nTotal Heat: " + parseInt(totalHeat));
-    */
+    timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
+    
     dsec += 1;
-    if(totalHeat >= maxHeat){
+    if(totalHeat >= MAX_HEAT){
         clearInterval(clock);
     }
+}
+
+function spawnRandomGame() {
+    if(activeArray.length < 7) {
+        var gameLocation;
+        do {
+            gameLocation = posList[Math.floor((Math.random() * 7))];
+        } while(activeArray[gameLocation] != null);
+        spawnModule(gameLocation);
+    }
+}
+
+/* put game generation code in here */
+function spawnModule(pos) {
+    var gameType;
+    switch (pos) {
+        case "top":
+        case "bottom":
+            gameType = "boxGame";
+            break;
+        case "topLeft":
+        case "bottomRight":
+            gameType = "mathGame";
+            break;
+        case "topRight":
+        case "bottomLeft":
+            gameType = "mathGame";
+            break;
+        default:
+            gameType = "boxGame";
+    }
+    activeArray[pos] = new module(gameType, "");
+    $('#' + pos + " .icon").fadeIn(250);
+    if(enlarged != "") {
+        $("#mini-" + activeMini).data("pos", pos);
+        $("#mini-" + activeMini++ + " .gauge-fill").addClass('mini-' + pos);
+    }
+}
+
+function loadGame(pos) {
+    var gameType = activeArray[pos].type;
+    $("#" + gameType).fadeIn(250);
+}
+
+function endGame(pos) {
+    $('#' + pos + " .gauge-fill").height(0);
+    $('#' + pos + ' .icon').css("display", "none");
+    hideCurrGame();
+    delete activeArray[pos];
 }
 
 // heat gauge heat increase function.  increases heat by 5 every second and adds heat
 // from gauges to main heat bar.
 
 function heatGenerate(){
-    var heatForInterval = 0;
-    for(var i = 0; i < maxActivated; i++){
-        if(gaugeArray[i] < 100){
-            gaugeArray[i]++;
+    for(var key in activeArray) {
+        if(activeArray[key].heat < 100) {
+            activeArray[key].heat += HEAT_PER_TICK;
         }
-        heatForInterval += gaugeArray[i];
+        var $fill;
+        switch (enlarged) {
+            case "":
+                $fill = $("#" + key + " .gauge-fill");
+                break;
+            case key:
+                $fill = $("#inGame .gauge-fill");
+                break;
+            default:
+                $fill = $(".mini-" + key);
+        }
+        $fill.height(activeArray[key].heat + "%");
+        $fill.css("background-color", 'hsl(' + (120 - (activeArray[key].heat / 5 * 6)) + ', 100%, 50%)');
+        totalHeat += activeArray[key].heat;
     }
     
-    if(totalHeat < maxHeat){
-        totalHeat += heatForInterval / 100;
+    if(totalHeat > 0) {
+        totalHeat -= COOLANT_LEVEL;
     }
-    if(totalHeat > maxHeat){
-        totalHeat = maxHeat;
+    
+    if(totalHeat >= MAX_HEAT){
+        // lose
+        totalHeat = MAX_HEAT;
     }
-    heatMeter.setAttribute("style", "background-position: " + totalHeat/maxHeat * -100 + "% 0; " +
-                           "background-image: linear-gradient(to right, transparent, transparent 50%, green 50%, hsl(" + (120 -                                             ((totalHeat/maxHeat) * 120)) + ", 100%, 50%) 100%)");
+    var meterColour;
+    meterColour = 'hsl(' + (120 - ((totalHeat/MAX_HEAT) * 120)) + ', 100%, 50%)';
+    heatMeter.setAttribute("style", "background-position: " + totalHeat/MAX_HEAT * -100 + "% 0; " +
+                           "background-image: linear-gradient(to right, transparent, transparent 50%, " + meterColour + 
+                           " 50%, " + meterColour + " 100%)");    
 }
 
 /* At this current moment, all this does is fade from Menu to Game.
@@ -207,18 +253,17 @@ function heatGenerate(){
 function playGame() {
     $(".menu").hide();
     
-    $("footer, header, main").fadeIn(500, function() {
+    $("footer, header, main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
+    spawnModule("top");
     clock = setInterval(timerStart, 100);
-   //heatCalc = setInterval(heatGenerate, 200);
 }
 
 var logoCount = 0;
 /*easter egg*/
 function logoClick() {
-    logoCount++;
-    if(logoCount == 5) {
+    if(++logoCount == 5) {
         $('.icon').attr("src", "images/Easter/reeses.png");
         $('#center .icon').attr("src", "images/Easter/chris.png");
         alert("REESES' PEANUT BUTTER CUPS?!");

@@ -47,7 +47,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/simon-says.png" data-alt-src="images/Easter/chris.png" class="icon">
+                                        <img src="images/simon-says.png" data-pos="top" class="icon">
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/ascending-icon.png" data-alt-src="images/Easter/chris.png" class="icon">
+                                        <img src="images/ascending-icon.png" data-pos="topLeft" class="icon">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/math-icon.png" data-alt-src="images/Easter/chris.png" class="icon">
+                                        <img src="images/math-icon.png" data-pos="topRight" class="icon">
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/word-icon.png" data-alt-src="images/Easter/chris.png" class="icon">
+                                        <img src="images/word-icon.png" data-pos="center" class="icon">
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/math-icon.png" data-alt-src="images/Easter/chris.png" class="icon"> 
+                                        <img src="images/math-icon.png" data-pos="bottomLeft" class="icon"> 
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/ascending-icon.png" data-alt-src="images/Easter/chris.png" class="icon">
+                                        <img src="images/ascending-icon.png" data-pos="bottomRight" class="icon">
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <img src="images/simon-says.png" data-alt-src="images/Easter/chris.png" class="icon">
+                                        <img src="images/simon-says.png" data-pos="bottom" class="icon">
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
             
           <!---------minigauges--------->
             <div id="mini">
-                <div class="module" id="miniTopLeft">		
+                <div class="module" id="mini-0" data-pos="0">		
                     <div class="hexagon">
                         <div class="hexagon-in1">
                             <div class="hexagon-in2"> 
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="module" id="miniBottomLeft">
+                <div class="module" id="mini-1" data-pos="0">
                     <div class="hexagon">
                         <div class="hexagon-in1">
                             <div class="hexagon-in2">
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="module" id="miniTopCenter">
+                <div class="module" id="mini-2" data-pos="0">
                     <div class="hexagon">
                         <div class="hexagon-in1">
                             <div class="hexagon-in2"> 
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="module" id="miniBottomCenter">
+                <div class="module" id="mini-3" data-pos="0">
                     <div class="hexagon">
                         <div class="hexagon-in1">
                             <div class="hexagon-in2">
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="module" id="miniTopRight">
+                <div class="module" id="mini-4" data-pos="0">
                     <div class="hexagon">
                         <div class="hexagon-in1">
                             <div class="hexagon-in2"> 
@@ -213,7 +213,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="module" id="miniBottomRight">
+                <div class="module" id="mini-5" data-pos="0">
                     <div class="hexagon">
                         <div class="hexagon-in1">
                             <div class="hexagon-in2"> 
@@ -225,7 +225,7 @@
                 </div>
             </div>
     <!-----In game hexagon, starts off hidden on page ------>
-            <div class="inGame" id="top">		
+            <div id="inGame">		
                 <div class="hexagon">
                     <div class="hexagon-in1">
                         <div class="hexagon-in2">
@@ -234,7 +234,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
-                                        <div class="boxGame">
+                                        <div id="boxGame">
                                             <h1>Click the green box</h1>
                                             <div class="box">
                                             </div>
@@ -243,7 +243,7 @@
                                             <div class="box" id="greenBox">
                                             </div>
                                         </div>
-                                        <div class="mathGame">
+                                        <div id="mathGame">
                                             <h1 id="prob" data-text-swap="1 + 1 = 2">1 _ 1 = 2</h1>
                                             <div class="mathOption" id="plus" ><h1>+</h1></div>
                                             <div class="mathOption"><h1>-</h1></div>
@@ -259,15 +259,13 @@
             </div>
 
     <!-------------In game hexagon ends here -------------->
-
+            <div class="menu">
+                <img src="images/reactor_logo.png" class="menulogo" onclick="logoClick()">
+                <img src="images/PlayButton2.png" data-alt-src ="images/PlayButtonPressed.png" class="menuItem" onclick="playGame()">
+                <img src="images/TutorialButton2.png" data-alt-src="images/TutorialButtonPressed.png" class="menuItem">
+                <img src="images/CompanyLogo.png" class="menuItem">
+            </div>
         </main>
-        
-        <div class="menu">
-            <img src="images/reactor_logo.png" class="menulogo" onclick="logoClick()">
-            <img src="images/PlayButton2.png" data-alt-src ="images/PlayButtonPressed.png" class="menuItem" onclick="playGame()">
-            <img src="images/TutorialButton2.png" data-alt-src="images/TutorialButtonPressed.png" class="menuItem">
-            <img src="images/CompanyLogo.png" class="menuItem">
-        </div>
         
         <footer>
             <div class="content">

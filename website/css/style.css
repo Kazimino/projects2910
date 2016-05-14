@@ -10,6 +10,7 @@ html {
     height: 100%;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
+    color: #ffffff;
 }
 
 body {
@@ -55,8 +56,6 @@ main {
     max-height: 100vw;
     height: 65%;
 	position: absolute;
-    overflow: hidden;
-    display: none;
 }
 
 /* Footer */
@@ -77,18 +76,19 @@ footer {
 	width: 38.66%;
 	height: 33.33%;
 	position: absolute;
-    
-    -webkit-transform: translate3d(0,0,0);
 }
-/*styles in game hex start here*/
-.inGame{
-    width: 88%;
-	height: 75%;
-	position: relative;
+
+main > .module {
     display: none;
-    margin: 0 auto;
-    
-    -webkit-transform: translate3d(0,0,0);
+}
+
+/*styles in game hex start here*/
+#inGame{
+  width: 88%;
+    height: 75%;
+    position: relative;
+  display: none;
+  margin: 0 auto;
 }
 /*in game hex styles end here */
 
@@ -105,7 +105,6 @@ footer {
 	-o-transform: rotate(120deg);
 	-ms-transform: rotate(120deg);
 	transform: rotate(120deg);
-	cursor: pointer;
 }
 
 .hexagon.inner {
@@ -284,26 +283,17 @@ main > .module:nth-child(7) {
     cursor: pointer;
 }
 
-.menu {
-    width: 100%;
-    max-width: 1024px;
-    max-height: 100vw;
-    height: 65%;
-    display: block;
-    margin: 0 auto;
-    margin-top: 1%;
-}
-
 /* Icons for hexagons */
 .icon {
-    position: relative;
-    height:100%;
-    margin: 0 auto;
-    display: block;
+    position: absolute;
+    height: 100%;
+    left: 32%;
+    display: none;
+    cursor: pointer;
 }
 
 /* Dummy box game CSS */
-.boxGame {
+#boxGame {
     text-align: center;
     height: 60%;
     width: 30%;
@@ -311,8 +301,6 @@ main > .module:nth-child(7) {
     display: none;
     left: 35%;
     top: 20%;
-    color: white;
-    overflow: hidden;
 }
 .box {
     background-color: red;
@@ -329,7 +317,7 @@ main > .module:nth-child(7) {
 }
 
 /* Dummy number game CSS */
-.mathGame {
+#mathGame {
     text-align: center;
     width: 35%;
     height: 30%;
@@ -337,7 +325,6 @@ main > .module:nth-child(7) {
     display: none;
     left: 31%;
     top: 20%;
-    color: white;
 }
 
 .mathOption {
