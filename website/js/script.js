@@ -3,6 +3,7 @@ var MAX_HEAT = 50000;
 var HEAT_PER_TICK  = 0.5;
 var GAME_SPAWN_TIME = 10;
 var COOLANT_LEVEL = 10;
+var HEAT_PENALTY = 25;
 
 $(document).ready(function() {
     resizeMain();
@@ -81,11 +82,12 @@ var clock;
 var timer;
 var heatMeter;
 
-function module(type, answer) {
+function module(type, answer, data) {
     this.heat = 0;
     this.type = type;
     this.input = "";
     this.answer = answer;
+    this.data = data;
 }
 
 // padding function for leading zeroes on timer
@@ -212,6 +214,12 @@ function endGame(pos) {
     $('#' + pos + ' .icon').css("display", "none");
     hideCurrGame();
     delete activeArray[pos];
+}
+
+function wrongAnswer() {
+    activeArray[enlarged].heat += HEAT_PENALTY;
+    
+    /* whatever sound / images for later */
 }
 
 // heat gauge heat increase function.  increases heat by 5 every second and adds heat
