@@ -179,7 +179,7 @@ function spawnRandomGame() {
 
 /* put game generation code in here */
 function spawnModule(pos) {
-    var gameType;
+    var gameType, gameAnswer;
     switch (pos) {
         case "top":
         case "bottom":
@@ -196,7 +196,7 @@ function spawnModule(pos) {
         default:
             gameType = "boxGame";
     }
-    activeArray[pos] = new module(gameType, "");
+    activeArray[pos] = new module(gameType, gameAnswer, "");
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
         $("#mini-" + activeMini).data("pos", pos);
