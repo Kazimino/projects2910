@@ -283,6 +283,12 @@ main > .module:nth-child(7) {
     cursor: pointer;
 }
 
+/* LeaderBoard */
+
+.leaderBoard {
+    display: none;
+}
+
 /* Icons for hexagons */
 .icon {
     position: absolute;

@@ -264,13 +264,25 @@ function heatGenerate(){
 /* At this current moment, all this does is fade from Menu to Game.
    used for onclick on PlayButton.*/
 function playGame() {
-    $(".menu").hide();
-    
-    $("footer, header, main > .module").fadeIn(500, function() {
+    showFrame();
+    $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
-    });
+    })
     spawnModule("top");
     clock = setInterval(timerStart, 100);
+}
+
+function loadLeaderBoard() {
+    showFrame();
+    $(".leaderBoard").fadeIn(500);
+    
+}
+
+function showFrame() {
+    $(".menu").hide();
+    $("footer, header").fadeIn(500, function() {
+        $(this).css("display", "block");
+    });
 }
 
 var logoCount = 0;
