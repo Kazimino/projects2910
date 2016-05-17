@@ -337,6 +337,7 @@ main > .module:nth-child(7) {
     text-align: center;
     background-color: gray;
     color: white;
+    border-radius: 10%;
 }
 
 .mathOption h1 {
