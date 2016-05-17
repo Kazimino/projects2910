@@ -1,9 +1,5 @@
 <?php
-$db_con = mysqli_connect("my-db-identifier.cyo63eekgut2.us-west-2.rds.amazonaws.com:3306","db_user","reactor8878","reactor_db");
-
-if(mysqli_connect_errno()) {
-    echo "Error: " . mysqli_connect_errno();
-}
+include("db_connect.php");
 
 $offset = array_key_exists("offset", $_GET) ? $_GET["offset"] : "0";
 

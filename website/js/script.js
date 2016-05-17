@@ -65,6 +65,11 @@ $(document).ready(function() {
     });
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
+    
+    /* score submission */
+    $('#scoreSubmit').click(function() {
+        
+    });
 });
 
 var enlarged = "";
@@ -363,6 +368,11 @@ function showFrame() {
     });
 }
 
+function loseGame() {
+    $("#timeLasted").html(min + ":" + sec + ":" + dsec);
+    $(".overlay").fadeIn(500);
+}
+
 function ajaxGetScores() {
     $.ajax({
         type: 'GET',
@@ -373,6 +383,20 @@ function ajaxGetScores() {
         success: function (response) {
             $('#leaderList').html($('#leaderList').html() + response);
             scoresLoaded += 10;
+        }
+    });
+}
+
+function ajaxSubmitScore(playerName) {
+    $.ajax({
+        type: 'POST',
+        url: '/leaderboard/submit_score.php',
+        data: {
+            score: min * 600 + sec * 10 + dsec,
+            name: playerName,
+        },
+        success: function(response) {
+            //stuff to show your score ranking
         }
     });
 }
