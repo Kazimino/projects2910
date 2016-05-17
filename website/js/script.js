@@ -219,6 +219,7 @@ function endGame(pos) {
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
     
+    
     /* whatever sound / images for later */
 }
 
@@ -275,14 +276,14 @@ function playGame() {
 var scoresLoaded = 0;
 function loadLeaderBoard() {
     scoresLoaded = 0;
-    showFrame();
-    $(".leaderBoard").fadeIn(500);
+    $(".menu").hide();
+    $('header, .leaderBoard').fadeIn(500);
     ajaxGetScores(scoresLoaded);
 }
 
 function showFrame() {
     $(".menu").hide();
-    $("header").fadeIn(500, function() {
+    $("header, footer").fadeIn(500, function() {
         $(this).css("display", "block");
     });
 }
