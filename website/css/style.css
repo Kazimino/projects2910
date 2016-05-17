@@ -28,6 +28,14 @@ body {
     margin: 0 auto;
 }
 
+.overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 9001;
+    background-color: rgba(0,0,0,0.6);
+    position: relative;
+}
+
 /* Header */
 
 header {
@@ -70,6 +78,20 @@ footer {
     overflow: hidden;
 }
 
+/* End Game Screen */
+
+.endGame {
+    width: 100%;
+    max-width: 1024px;
+    padding-top: 25%;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.namePrompt {
+    display: block;
+}
 
 /* Hexagon */
 .module {
