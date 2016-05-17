@@ -8,7 +8,6 @@ var HEAT_PENALTY = 25;
 $(document).ready(function() {
     resizeMain();
      
-
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var menu = $(this);
@@ -373,7 +372,7 @@ function playGame() {
     showFrame();
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
-    })
+    });
     spawnModule("top");
     clock = setInterval(timerStart, 100);
 }
