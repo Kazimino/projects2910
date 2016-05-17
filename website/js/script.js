@@ -6,7 +6,7 @@ var COOLANT_LEVEL = 10;
 
 $(document).ready(function() {
     resizeMain();
-      // alert(getRandomNumber()); 
+     
 
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
@@ -47,6 +47,7 @@ $(document).ready(function() {
     $('#greenBox').click(function() {
         endGame(enlarged);
     });
+    
     /* Number Game */
     $('.mathOption').mouseenter(function() {
         $(this).css("background-color", "black");
@@ -58,12 +59,9 @@ $(document).ready(function() {
     /* Notifies user they selected correct operator and hides the current game */
     $('.mathOption').click(function() {
         $clicked = $(this).text().trim();
-        checkMathAnswer(mathAnswer, curPos, $clicked);
+        checkMathAnswer(enlarged, $clicked);
     });
-    
-/*    $('.mathOption').click(function(){
-        if()
-    });*/
+
     
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
@@ -83,8 +81,8 @@ var totalHeat = 0;
 var activeArray = [];
 var activeMini = 0;
 var posList = ['top', 'topLeft', 'topRight', 'center', 'bottomLeft', 'bottomRight', 'bottom'];
-var curPos = "";
-var mathAnswer = "";
+var mathEquations = [];
+var numMathGames = 0;
 
 var clock;
 var timer;
@@ -95,7 +93,9 @@ function module(type, answer) {
     this.type = type;
     this.input = "";
     this.answer = answer;
+    
 }
+
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -212,8 +212,6 @@ function spawnModule(pos) {
             break;
     }
     activeArray[pos] = new module(gameType, answer);
-    curPos = pos;
-    mathAnswer = answer;
 
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
@@ -222,10 +220,14 @@ function spawnModule(pos) {
     }
 }
 
-/* checks the answer to the math equation */
-function checkMathAnswer(mathAnswer, pos, $clicked) {
-    if($clicked == mathAnswer) {
+/* checks the answer to the math equation 
+mathAnswer is the answer to the question 
+pos is the position of the hex 
+$clicked is the text from the clicked button*/
+function checkMathAnswer(pos, $clicked) {
+    if($clicked == activeArray[pos].answer) {
         endGame(pos);
+        numMathGames--;
         
     } else {
         //need a function to show that answer was
@@ -237,7 +239,7 @@ function checkMathAnswer(mathAnswer, pos, $clicked) {
 /* logic for the math equation game */
 function mathGame() {
     /*controls the difficulty of the numbers and oerators */
-    var diffMultiplier = 3;
+    var diffMultiplier = 1;
 
     /*this function grabs a random number */
     function getRandomNumber(max) {
@@ -287,8 +289,8 @@ function mathGame() {
     equation = numOne + " _ " + numTwo  + " = " 
                    + (Math.round(answer * 100) / 100);
     
-    $('#prob').text(equation);
-    
+    //$('#prob').text(equation);
+    mathEquations[numMathGames] = equation;
     
     return operator;
 }
