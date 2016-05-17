@@ -1,6 +1,6 @@
 <?php
-$db_con = mysqli_connect("my-db-identifier.cyo63eekgut2.us-west-2.rds.amazonaws.com:3306","db_user","reactor8878", "Leaderboard")
-    or die("Error " . mysqli_error($db_con));
+$db_con = mysqli_connect("my-db-identifier.cyo63eekgut2.us-west-2.rds.amazonaws.com:3306","db_user","reactor8878","Leaderboard");
+    //or die("Error " . mysqli_error($db_con));
 
 $offset = array_key_exists("offset", $_GET) ? $_GET["offset"] : "0";
 
