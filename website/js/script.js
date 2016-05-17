@@ -7,6 +7,8 @@ var HEAT_PENALTY = 25;
 
 $(document).ready(function() {
     resizeMain();
+     
+
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var $this = $(this);
@@ -46,6 +48,7 @@ $(document).ready(function() {
     $('#greenBox').click(function() {
         endGame(enlarged);
     });
+    
     /* Number Game */
     $('.mathOption').mouseenter(function() {
         $(this).css("background-color", "black");
@@ -54,10 +57,12 @@ $(document).ready(function() {
         $(this).css("background-color", "gray");
     });
     
-    /* Notifies user they selected correct operator and hides the current game*/
-    $('#plus').click(function() {
-        endGame(enlarged);
+    /* Notifies user they selected correct operator and hides the current game */
+    $('.mathOption').click(function() {
+        $clicked = $(this).text().trim();
+        checkMathAnswer(enlarged, $clicked);
     });
+
     
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
@@ -89,6 +94,7 @@ function module(type, answer, data) {
     this.answer = answer;
     this.data = data;
 }
+
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -179,7 +185,9 @@ function spawnRandomGame() {
 
 /* put game generation code in here */
 function spawnModule(pos) {
-    var gameType, gameAnswer;
+    var gameType, gameAnswer, data;
+    var mathArr = [];
+    
     switch (pos) {
         case "top":
         case "bottom":
@@ -187,16 +195,22 @@ function spawnModule(pos) {
             break;
         case "topLeft":
         case "bottomRight":
-            gameType = "mathGame";
+            gameType = "boxGame";
             break;
         case "topRight":
-        case "bottomLeft":
+        case "bottomLeft":    
             gameType = "mathGame";
+            mathArr = mathGame();
+            data = mathArr[0];
+            gameAnswer = mathArr[1];
             break;
         default:
             gameType = "boxGame";
+            break;
     }
-    activeArray[pos] = new module(gameType, gameAnswer, "");
+
+    activeArray[pos] = new module(gameType, gameAnswer, data);
+
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
         $("#mini-" + activeMini).data("pos", pos);
@@ -204,9 +218,91 @@ function spawnModule(pos) {
     }
 }
 
+/* checks the answer to the math equation 
+mathAnswer is the answer to the question 
+pos is the position of the hex 
+$clicked is the text from the clicked button*/
+function checkMathAnswer(pos, $clicked) {
+    if($clicked == activeArray[pos].answer) {
+        endGame(pos);
+        
+        
+    } else {
+        //need a function to show that answer was
+        wrongAnswer();
+        //wrong and they need to keep trying 
+    }
+    
+}
+
+/* logic for the math equation game */
+function mathGame() {
+    /*controls the difficulty of the numbers and oerators */
+    var diffMultiplier = 2;
+    var gameArr = [];
+
+    /*this function grabs a random number */
+    function getRandomNumber(max) {
+        return Math.floor(Math.random() * max) + 1;
+    } 
+
+    /*this function supplies a random number for 
+    operator selection */
+    function getRandomOperator(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    /*variables for the equation and holding answers*/
+    var numOne = getRandomNumber(10 * diffMultiplier);
+    var numTwo = getRandomNumber(10 * diffMultiplier);
+    var operator = null;
+    var answer = null;
+    var equation = null;
+
+    /*check needed to stop operator increment*/
+    if(diffMultiplier < 4) {
+        operator = getRandomOperator(diffMultiplier++);
+    }
+
+    /*switch to get the answer for the RHS of the equation*/
+    switch(operator) {
+        case 0:
+            answer = numOne + numTwo;
+            operator = "+";
+            break;
+        case 1:
+            answer = numOne - numTwo;
+            operator = "-";
+            break;
+        case 2:
+            answer = numOne * numTwo;
+            operator = "*";
+            break;
+        case 3: 
+            answer = numOne / numTwo;
+            operator = "/";
+            break;
+        default:
+            break;
+    }
+
+    equation = numOne + " _ " + numTwo  + " = " 
+                   + (Math.round(answer * 100) / 100);
+    gameArr[0] = equation;
+    //$('#prob').text(equation);
+    gameArr[1] = operator;
+    
+    return gameArr;
+}
+
+
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
+    
+    if(gameType == "mathGame") {
+        $('#prob').text(activeArray[pos].data);
+    }
 }
 
 function endGame(pos) {
@@ -218,7 +314,9 @@ function endGame(pos) {
 
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
-    
+    if(activeArray[enlarged].heat > 100) {
+        activeArray[enlarged].heat = 100;
+    } 
     
     /* whatever sound / images for later */
 }
