@@ -11,10 +11,10 @@ $(document).ready(function() {
 
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
-        var $this = $(this);
-        var newSource = $this.data('alt-src');
-        $this.data('alt-src', $this.attr('src'));
-        $this.attr('src', newSource);
+        var menu = $(this);
+        var newSource = menu.data('alt-src');
+        menu.data('alt-src', menu.attr('src'));
+        menu.attr('src', newSource);
     });
     
     /*this function is for enlarging a module for in game play */
@@ -131,6 +131,9 @@ function enlargeGame(pos) {
     
     /* back button is shown when a module is clicked and enlarged */
     $('#backbutton').fadeIn(250);
+    if (enlarged.type = "simonGame") {
+        $("#replay").fadeIn(250);
+    }
 
     /*fades the minigauge in when module is expanded*/
     $('#mini').fadeIn(250);
@@ -191,7 +194,7 @@ function spawnModule(pos) {
     switch (pos) {
         case "top":
         case "bottom":
-            gameType = "boxGame";
+            gameType = "simonGame";
             break;
         case "topLeft":
         case "bottomRight":
@@ -302,6 +305,9 @@ function loadGame(pos) {
     
     if(gameType == "mathGame") {
         $('#prob').text(activeArray[pos].data);
+        
+    if (gameType == "simonGame") {
+        startSimonSays(3, 500);
     }
 }
 
@@ -314,6 +320,7 @@ function endGame(pos) {
 
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
+    
     if(activeArray[enlarged].heat > 100) {
         activeArray[enlarged].heat = 100;
     } 
