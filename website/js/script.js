@@ -59,10 +59,12 @@ $(document).ready(function() {
     
     /* Notifies user they selected correct operator and hides the current game */
     $('.mathOption').click(function() {
+        var correct = false;
         $clicked = $(this).text().trim();
-        checkMathAnswer(enlarged, $clicked);
+        
+        checkMathAnswer(enlarged, $clicked)
+        
     });
-
     
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
@@ -226,7 +228,6 @@ function checkMathAnswer(pos, $clicked) {
     if($clicked == activeArray[pos].answer) {
         endGame(pos);
         
-        
     } else {
         //need a function to show that answer was
         wrongAnswer();
@@ -317,9 +318,11 @@ function wrongAnswer() {
     if(activeArray[enlarged].heat > 100) {
         activeArray[enlarged].heat = 100;
     } 
-    
+   $('#inGame').effect("shake", {times:4, distance:5}, 250);
     /* whatever sound / images for later */
 }
+
+
 
 // heat gauge heat increase function.  increases heat by 5 every second and adds heat
 // from gauges to main heat bar.

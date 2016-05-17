@@ -23,8 +23,9 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
         <script src="js/jquery-2.2.3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
+        <script src ="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js" ></script>
         <script src="js/script.js"></script>
         <title>Reactor</title>
     </head>
@@ -157,8 +158,10 @@
                     </div>
                 </div>
             </div>
+
             <img src="images/arrow.png" id="backbutton"/>
-            <!---------minigauges--------->
+            
+          <!---------minigauges--------->
             <div id="mini">
                 <div class="module" id="mini-0" data-pos="0">		
                     <div class="hexagon">
@@ -260,14 +263,7 @@
                 <img src="images/reactor_logo.png" class="menulogo" onclick="logoClick()">
                 <img src="images/PlayButton2.png" data-alt-src ="images/PlayButtonPressed.png" class="menuItem" onclick="playGame()">
                 <img src="images/TutorialButton2.png" data-alt-src="images/TutorialButtonPressed.png" class="menuItem">
-                <img src="images/CompanyLogo.png" class="menuItem" onclick="loadLeaderBoard()">
-            </div>
-            
-            <div class="leaderBoard">
-                <h1>Leaderboard</h1>
-                <ul id="leaderList">
-                </ul>
-                <div id="loadMore"></div>
+                <img src="images/CompanyLogo.png" class="menuItem">
             </div>
         </main>
         
