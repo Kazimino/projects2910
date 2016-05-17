@@ -8,7 +8,7 @@ $select = "SELECT *
             FROM Leaderboard
             ORDER BY time DESC
             LIMIT 10
-            OFFSET " . $offset;
+            OFFSET " . $offset . ";";
 
 $result = mysqli_query($db_con, $select)
     or die("Error " . mysqli_error($db_con));
