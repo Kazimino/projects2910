@@ -298,7 +298,7 @@ main > .module:nth-child(7) {
     list-style: none;
     width: 100%;
     font-size: 200%;
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 #leaderList span {
@@ -316,7 +316,7 @@ main > .module:nth-child(7) {
 
 .lbTime {
     text-align: right;
-    width: 38%;
+    width: 35%;
 }
 
 /* Icons for hexagons */
