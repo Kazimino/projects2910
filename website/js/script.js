@@ -272,16 +272,32 @@ function playGame() {
     clock = setInterval(timerStart, 100);
 }
 
+var scoresLoaded = 0;
 function loadLeaderBoard() {
+    scoresLoaded = 0;
     showFrame();
     $(".leaderBoard").fadeIn(500);
-    
+    ajaxGetScores(scoresLoaded);
 }
 
 function showFrame() {
     $(".menu").hide();
-    $("footer, header").fadeIn(500, function() {
+    $("header").fadeIn(500, function() {
         $(this).css("display", "block");
+    });
+}
+
+function ajaxGetScores(loaded) {
+    $.ajax({
+        type: 'GET',
+        url: '/leaderboard/get_records.php',
+        data: {
+            offset: loaded,
+        },
+        success: function (response) {
+            $('#leaderList').html($('#leaderList').html() + response);
+            scoresLoaded += 10;
+        }
     });
 }
 
