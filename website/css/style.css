@@ -361,7 +361,33 @@ main > .module:nth-child(7) {
     font-size: 75%
 }
 
-    
+/* Simon says game CSS */
+#simonGame {
+    display: none;
+}
+.section {
+    display: inline-block;
+    width: 49.2%;
+    height: 100%;
+}
+.simonSection {
+    width: 100%;
+    height: 50%;
+    border-bottom: 4px solid black;
+}
+#simonSection1 {
+    background-color: yellow;
+}
+#simonSection2 {
+    background-color: green;
+}
+#simonSection3 {
+    background-color: red;
+}
+#simonSection4 {
+    background-color: blue;
+}
+
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     

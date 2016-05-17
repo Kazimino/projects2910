@@ -9,10 +9,10 @@ $(document).ready(function() {
     resizeMain();
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
-        var $this = $(this);
-        var newSource = $this.data('alt-src');
-        $this.data('alt-src', $this.attr('src'));
-        $this.attr('src', newSource);
+        var menu = $(this);
+        var newSource = menu.data('alt-src');
+        menu.data('alt-src', menu.attr('src'));
+        menu.attr('src', newSource);
     });
     
     /*this function is for enlarging a module for in game play */
@@ -66,6 +66,79 @@ $(document).ready(function() {
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
 });
+
+/* SIMON SAYS INTEGRATION ATTEMPT NUMBER ONE */
+
+var n = 0;
+
+function getNum() {
+    var num = Math.floor((Math.random() * 4) + 1);
+    return num;
+}
+function chooseBox(choice) {
+    $("#simonSection" + choice).css("opacity", "0.2");
+    setTimeout(function() {
+        $(".simonSection").css("opacity", "1");
+    }, 300);
+}
+function resetSimon() {
+    $("#simonSection1").unbind("click");
+    $("#simonSection2").unbind("click");
+    $("#simonSection3").unbind("click");
+    $("#simonSection4").unbind("click");
+}
+function simonClick(chosenArray, inputArray, index, steps) {
+    if (!(chosenArray[index] == inputArray[index])) {
+        // Call penalty and clear arrays.
+        wrongAnswer();
+    } else {
+        if (steps == (index + 1)) {
+            endGame(enlarged);
+            n = 0;
+            resetSimon();
+        }
+    }
+}
+function takeInput(chosenSteps, steps) {
+    var inputSteps = new Array();
+    var i = 0;
+    $("#simonSection1").click(function() {
+        inputSteps[i] = 1;
+        simonClick(chosenSteps, inputSteps, i, steps);
+        i++;
+    });
+    $("#simonSection2").click(function() {
+        inputSteps[i] = 2;
+        simonClick(chosenSteps, inputSteps, i, steps);
+        i++;
+    });
+    $("#simonSection3").click(function() {
+        inputSteps[i] = 3;
+        simonClick(chosenSteps, inputSteps, i, steps);
+        i++;
+    });
+    $("#simonSection4").click(function() {
+        inputSteps[i] = 4;
+        simonClick(chosenSteps, inputSteps, i, steps);
+        i++;
+    });
+}
+function startSimonSays(steps, delay) {
+    var chosenSteps = new Array();
+    for (var i = 0; i < steps; i++) {
+        chosenSteps[i] = getNum();
+    }
+    var interval = setInterval(function() {
+        chooseBox(chosenSteps[n]);
+        n++;
+        if (n > steps) {
+            clearInterval(interval);
+        }
+    }, delay);
+    takeInput(chosenSteps, steps);
+}
+
+/* END SIMON SAYS INTEGRATION */
 
 var enlarged = "";
 
@@ -183,7 +256,7 @@ function spawnModule(pos) {
     switch (pos) {
         case "top":
         case "bottom":
-            gameType = "boxGame";
+            gameType = "simonGame";
             break;
         case "topLeft":
         case "bottomRight":
@@ -207,6 +280,9 @@ function spawnModule(pos) {
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
+    if (gameType == "simonGame") {
+        startSimonSays(3, 500);
+    }
 }
 
 function endGame(pos) {
