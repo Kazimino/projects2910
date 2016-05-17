@@ -304,7 +304,7 @@ function loadGame(pos) {
     
     if(gameType == "mathGame") {
         $('#prob').text(activeArray[pos].data);
-        
+    }
     if (gameType == "simonGame") {
         startSimonSays(3, 500);
     }
@@ -395,7 +395,7 @@ function showFrame() {
 function ajaxGetScores(loaded) {
     $.ajax({
         type: 'GET',
-        url: '/leaderboard/get_records.php',
+        url: '../leaderboard/get_records.php',
         data: {
             offset: loaded,
         },
@@ -416,3 +416,4 @@ function logoClick() {
         alert("REESES' PEANUT BUTTER CUPS?!");
     }
 }
+
