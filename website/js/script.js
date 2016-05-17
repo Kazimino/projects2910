@@ -67,79 +67,6 @@ $(document).ready(function() {
     heatMeter = document.getElementById('heatMeter');
 });
 
-/* SIMON SAYS INTEGRATION ATTEMPT NUMBER ONE */
-
-var n = 0;
-
-function getNum() {
-    var num = Math.floor((Math.random() * 4) + 1);
-    return num;
-}
-function chooseBox(choice) {
-    $("#simonSection" + choice).css("opacity", "0.2");
-    setTimeout(function() {
-        $(".simonSection").css("opacity", "1");
-    }, 300);
-}
-function resetSimon() {
-    $("#simonSection1").unbind("click");
-    $("#simonSection2").unbind("click");
-    $("#simonSection3").unbind("click");
-    $("#simonSection4").unbind("click");
-}
-function simonClick(chosenArray, inputArray, index, steps) {
-    if (!(chosenArray[index] == inputArray[index])) {
-        // Call penalty and clear arrays.
-        wrongAnswer();
-    } else {
-        if (steps == (index + 1)) {
-            endGame(enlarged);
-            n = 0;
-            resetSimon();
-        }
-    }
-}
-function takeInput(chosenSteps, steps) {
-    var inputSteps = new Array();
-    var i = 0;
-    $("#simonSection1").click(function() {
-        inputSteps[i] = 1;
-        simonClick(chosenSteps, inputSteps, i, steps);
-        i++;
-    });
-    $("#simonSection2").click(function() {
-        inputSteps[i] = 2;
-        simonClick(chosenSteps, inputSteps, i, steps);
-        i++;
-    });
-    $("#simonSection3").click(function() {
-        inputSteps[i] = 3;
-        simonClick(chosenSteps, inputSteps, i, steps);
-        i++;
-    });
-    $("#simonSection4").click(function() {
-        inputSteps[i] = 4;
-        simonClick(chosenSteps, inputSteps, i, steps);
-        i++;
-    });
-}
-function startSimonSays(steps, delay) {
-    var chosenSteps = new Array();
-    for (var i = 0; i < steps; i++) {
-        chosenSteps[i] = getNum();
-    }
-    var interval = setInterval(function() {
-        chooseBox(chosenSteps[n]);
-        n++;
-        if (n > steps) {
-            clearInterval(interval);
-        }
-    }, delay);
-    takeInput(chosenSteps, steps);
-}
-
-/* END SIMON SAYS INTEGRATION */
-
 var enlarged = "";
 
 // heat gauge and timer variables
@@ -198,6 +125,9 @@ function enlargeGame(pos) {
     
     /* back button is shown when a module is clicked and enlarged */
     $('#backbutton').fadeIn(250);
+    if (enlarged.type = "simonGame") {
+        $("#replay").fadeIn(250);
+    }
 
     /*fades the minigauge in when module is expanded*/
     $('#mini').fadeIn(250);
@@ -294,7 +224,7 @@ function endGame(pos) {
 
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
-    
+    /* Probably need to put in some code to check for if the heat is at max */
     /* whatever sound / images for later */
 }
 
