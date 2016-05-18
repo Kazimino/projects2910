@@ -6,19 +6,24 @@ $name = array_key_exists("name", $_POST) ? $_POST["name"] : "Anonymous";
 $time = date("Y-m-d H:i:s");
 
 $query = "INSERT INTO Leaderboard (playerName, time, entered)
-            VALUES($name, $score, $time);";
-mysqli_query($db_con, $query)
+            VALUES('$name', $score, '$time');";
+$db_con->query($query)
     or die("Error: " . mysqli_error($db_con));
 
-$last_inserted = mysqli_insert_id($db_con);
-$result = mysqli_query("SELECT recordID FROM Leaderboard;")
+$inserted = $db_con->insert_id;
+
+$query = "SELECT recordID
+          FROM Leaderboard
+          ORDER BY time DESC, entered DESC;";
+
+$result = $db_con->query($query);
 
 $rank = 1;
-while($row = mysqli_fetch_array($result)) {
-    if($row["recordID"] == $last_inserted) {
+while($row = $result->fetch_assoc()) {
+    if($row["recordID"] == $inserted) {
         break;
     }
-    rank++;
+    $rank++;
 }
 echo $rank;
 ?>

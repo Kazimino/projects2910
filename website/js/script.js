@@ -403,7 +403,7 @@ function ajaxSubmitScore(playerName) {
             name: playerName,
         },
         success: function(response) {
-            //stuff to show your score ranking
+            $('#nameError').html(response);
         }
     });
 }

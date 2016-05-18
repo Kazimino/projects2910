@@ -9,11 +9,11 @@ $select = "SELECT *
             LIMIT 10
             OFFSET " . $offset;
 
-$result = mysqli_query($db_con, $select)
+$result = $db_con->query($select)
     or die("Error " . mysqli_error($db_con));
 
 $count = 1;
-while($row = mysqli_fetch_array($result)) {
+while($row = $result->fetch_assoc()) {
     $min = floor($row['time'] / 600);
     $sec = floor($row['time'] % 600 / 10);
     $dsec = $row['time'] % 10;
