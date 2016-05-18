@@ -405,7 +405,7 @@ main > .module:nth-child(7) {
     width: 40%;
     position: absolute;
     margin-left: 30%;
-
+    display: none;
 }
 
 .letterRow {
