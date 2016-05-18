@@ -16,6 +16,7 @@ $(document).ready(function() {
                 $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
                 endGame(enlarged);
             } else {
+                wrongAnswer();
                 $('#anagramAnswer').html("<h1>" + "You fucked up" + "</h1>");
                 activeArray[enlarged].input = [];
                 activeArray[enlarged].data = [];
