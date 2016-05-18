@@ -415,6 +415,7 @@ main > .module:nth-child(7) {
     background-color: gray;
     color: white;
     border-radius: 10%;
+    cursor: pointer;
 }
 
 .mathOption h1 {
@@ -467,6 +468,8 @@ main > .module:nth-child(7) {
     background-color: gray;
     color: white;
     vertical-align: top;
+    cursor: pointer;
+    border-radius: 10%;
 }
 
 /* Simon says game CSS */
@@ -482,6 +485,7 @@ main > .module:nth-child(7) {
     width: 100%;
     height: 50%;
     border-bottom: 4px solid black;
+    cursor:pointer;
 }
 #simonSection1 {
     background-color: yellow;
