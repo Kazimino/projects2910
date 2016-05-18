@@ -1,10 +1,10 @@
 /* Constants */
-var MAX_HEAT = 50000;
+var MAX_HEAT = 1000;
 var HEAT_PER_TICK  = 0.5;
 var GAME_SPAWN_TIME = 10;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
-var NAME_VALIDATION = /^[a-z0-9_]{3,10}$/i;
+var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
 
 $(document).ready(function() {
     resizeMain();
@@ -69,11 +69,12 @@ $(document).ready(function() {
     
     /* score submission */
     $('#scoreSubmit').click(function() {
-        var name = $("#scoreName").value();
-        if(NAME_VALIDATION.test(name)) {
-            ajaxSubmitScore(name);
-        } else {
-            //validation failure
+        validateSubmit();
+    });
+    
+    $('#scoreName').keydown(function(e) {
+        if(e.keyCode == 13) {
+            validateSubmit();
         }
     });
 });
@@ -338,8 +339,8 @@ function heatGenerate(){
     }
     
     if(totalHeat >= MAX_HEAT){
-        // lose
         totalHeat = MAX_HEAT;
+        loseGame();
     }
     var meterColour;
     meterColour = 'hsl(' + (120 - ((totalHeat/MAX_HEAT) * 120)) + ', 100%, 50%)';
@@ -405,6 +406,28 @@ function ajaxSubmitScore(playerName) {
             //stuff to show your score ranking
         }
     });
+}
+
+function validateSubmit() {
+    var name = $('#scoreName').val();
+    var errMsg = nameValidate(name);
+    if(errMsg == "") {
+        ajaxSubmitScore(name);
+    } else {
+        $('#scoreName').css("background-color","#ff4141");
+        $('#nameError').html(errMsg);
+    }
+}
+
+function nameValidate(name) {
+    var errMsg = "";
+    if(!RegExp(/^.{3,15}$/).test(name)) {
+        errMsg += "Name must be between 3 - 15 characters<br>";
+    }
+    if(!RegExp(/^[a-z0-9_]*$/i).test(name)) {
+        errMsg += "Name can only contain alphanumeric characters or '_'";
+    }
+    return errMsg;
 }
 
 var logoCount = 0;
