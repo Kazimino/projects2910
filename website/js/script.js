@@ -57,7 +57,8 @@ $(document).ready(function() {
     $('#plus').click(function() {
         endGame(enlarged);
     });
-    
+
+
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
         resizeMain();
@@ -86,6 +87,7 @@ function module(type, answer) {
     this.type = type;
     this.input = "";
     this.answer = answer;
+    this.data = [];
 }
 
 // padding function for leading zeroes on timer
@@ -177,24 +179,43 @@ function spawnRandomGame() {
 
 /* put game generation code in here */
 function spawnModule(pos) {
-    var gameType;
+    var gameType, gameAnswer, gameData;
     switch (pos) {
         case "top":
+        case "center":
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            gameData = [];
+            break;
         case "bottom":
-            gameType = "boxGame";
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            gameData = [];
             break;
         case "topLeft":
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            gameData = [];
+            break;
         case "bottomRight":
-            gameType = "mathGame";
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            gameData = [];
             break;
         case "topRight":
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            gameData = [];
+            break;
         case "bottomLeft":
-            gameType = "mathGame";
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            gameData = [];
             break;
         default:
             gameType = "boxGame";
     }
-    activeArray[pos] = new module(gameType, "");
+    activeArray[pos] = new module(gameType, gameAnswer, gameData);
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
         $("#mini-" + activeMini).data("pos", pos);
@@ -205,6 +226,10 @@ function spawnModule(pos) {
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
+    if(gameType == "anagramGame"){
+        loadAnagram();
+    }
+    
 }
 
 function endGame(pos) {
@@ -275,3 +300,4 @@ function logoClick() {
         alert("REESES' PEANUT BUTTER CUPS?!");
     }
 }
+

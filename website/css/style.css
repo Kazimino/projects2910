@@ -361,7 +361,34 @@ main > .module:nth-child(7) {
     font-size: 75%
 }
 
-    
+/* anagram game styles */
+#anagramGame {
+    height: 100%;
+    width: 40%;
+    position: absolute;
+    margin-left: 30%;
+
+}
+
+.letterRow {
+    position: relative;
+    width: 60%;
+    height: 33%;
+    margin: auto;
+}
+.letterChoice {
+    height: 80%;
+    width: 25%;
+    margin-left: 5%;
+    margin-top: 5%;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    vertical-align: top;
+}
+
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     
