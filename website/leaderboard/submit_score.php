@@ -11,8 +11,12 @@ mysqli_query($db_con, $query)
     or die("Error: " . mysqli_error($db_con));
 
 $last_inserted = mysqli_insert_id($db_con);
-mysqli_query("SELECT * FROM Leaderboard;")
+$result = mysqli_query("SELECT recordID FROM Leaderboard;")
 
-$rank = 0;
-
+$rank;
+for($rank = 1; $row = mysqli_fetch_array($result); $rank++)
+    if($row["recordID"] == $last_inserted)
+        break;
+    
+echo $rank;
 ?>

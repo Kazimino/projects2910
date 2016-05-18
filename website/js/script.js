@@ -4,6 +4,7 @@ var HEAT_PER_TICK  = 0.5;
 var GAME_SPAWN_TIME = 10;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
+var NAME_VALIDATION = /^[a-z0-9_]{3,10}$/i;
 
 $(document).ready(function() {
     resizeMain();
@@ -68,7 +69,12 @@ $(document).ready(function() {
     
     /* score submission */
     $('#scoreSubmit').click(function() {
-        
+        var name = $("#scoreName").value();
+        if(NAME_VALIDATION.test(name)) {
+            ajaxSubmitScore(name);
+        } else {
+            //validation failure
+        }
     });
 });
 
