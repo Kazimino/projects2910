@@ -3,15 +3,17 @@ var MAX_HEAT = 50000;
 var HEAT_PER_TICK  = 0.5;
 var GAME_SPAWN_TIME = 10;
 var COOLANT_LEVEL = 10;
+var HEAT_PENALTY = 25;
 
 $(document).ready(function() {
     resizeMain();
+     
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
-        var $this = $(this);
-        var newSource = $this.data('alt-src');
-        $this.data('alt-src', $this.attr('src'));
-        $this.attr('src', newSource);
+        var menu = $(this);
+        var newSource = menu.data('alt-src');
+        menu.data('alt-src', menu.attr('src'));
+        menu.attr('src', newSource);
     });
     
     /*this function is for enlarging a module for in game play */
@@ -45,6 +47,7 @@ $(document).ready(function() {
     $('#greenBox').click(function() {
         endGame(enlarged);
     });
+    
     /* Number Game */
     $('.mathOption').mouseenter(function() {
         $(this).css("background-color", "black");
@@ -53,9 +56,13 @@ $(document).ready(function() {
         $(this).css("background-color", "gray");
     });
     
-    /* Notifies user they selected correct operator and hides the current game*/
-    $('#plus').click(function() {
-        endGame(enlarged);
+    /* Notifies user they selected correct operator and hides the current game */
+    $('.mathOption').click(function() {
+        var correct = false;
+        $clicked = $(this).text().trim();
+        
+        checkMathAnswer(enlarged, $clicked);
+        
     });
 
 
@@ -82,13 +89,15 @@ var clock;
 var timer;
 var heatMeter;
 
-function module(type, answer) {
+function module(type, answer, data) {
     this.heat = 0;
     this.type = type;
     this.input = "";
     this.answer = answer;
-    this.data = [];
+    this.data = data;
+
 }
+
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -125,6 +134,9 @@ function enlargeGame(pos) {
     
     /* back button is shown when a module is clicked and enlarged */
     $('#backbutton').fadeIn(250);
+    if (enlarged.type = "simonGame") {
+        $("#replay").fadeIn(250);
+    }
 
     /*fades the minigauge in when module is expanded*/
     $('#mini').fadeIn(250);
@@ -179,43 +191,44 @@ function spawnRandomGame() {
 
 /* put game generation code in here */
 function spawnModule(pos) {
-    var gameType, gameAnswer, gameData;
+
+    var gameType, gameAnswer, data;
+    var mathArr = [];
+
     switch (pos) {
         case "top":
         case "center":
             gameType = "anagramGame";
             gameAnswer = generateAnagram();
-            gameData = [];
+            data = [];
             break;
         case "bottom":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            gameData = [];
+
+            gameType = "simonGame";
             break;
         case "topLeft":
             gameType = "anagramGame";
             gameAnswer = generateAnagram();
-            gameData = [];
+            data = [];
             break;
         case "bottomRight":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            gameData = [];
+            gameType = "boxGame";
             break;
         case "topRight":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            gameData = [];
-            break;
-        case "bottomLeft":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            gameData = [];
+        case "bottomLeft":    
+            gameType = "mathGame";
+            mathArr = mathGame();
+            data = mathArr[0];
+            gameAnswer = mathArr[1];
             break;
         default:
             gameType = "boxGame";
+            break;
     }
-    activeArray[pos] = new module(gameType, gameAnswer, gameData);
+
+    activeArray[pos] = new module(gameType, gameAnswer, data);
+
+
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
         $("#mini-" + activeMini).data("pos", pos);
@@ -223,13 +236,21 @@ function spawnModule(pos) {
     }
 }
 
+
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
-    if(gameType == "anagramGame"){
+
+    if(gameType == "anagramGame") {
         loadAnagram();
     }
     
+    if(gameType == "mathGame") {
+        $('#prob').text(activeArray[pos].data);
+    }
+    if (gameType == "simonGame") {
+        startSimonSays(3, 500);
+    }
 }
 
 function endGame(pos) {
@@ -238,6 +259,18 @@ function endGame(pos) {
     hideCurrGame();
     delete activeArray[pos];
 }
+
+function wrongAnswer() {
+    activeArray[enlarged].heat += HEAT_PENALTY;
+    
+    if(activeArray[enlarged].heat > 100) {
+        activeArray[enlarged].heat = 100;
+    } 
+   $('#inGame').effect("shake", {times:4, distance:5}, 250);
+    /* whatever sound / images for later */
+}
+
+
 
 // heat gauge heat increase function.  increases heat by 5 every second and adds heat
 // from gauges to main heat bar.
@@ -281,13 +314,41 @@ function heatGenerate(){
 /* At this current moment, all this does is fade from Menu to Game.
    used for onclick on PlayButton.*/
 function playGame() {
-    $(".menu").hide();
-    
-    $("footer, header, main > .module").fadeIn(500, function() {
+    showFrame();
+    $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
     spawnModule("top");
     clock = setInterval(timerStart, 100);
+}
+
+var scoresLoaded = 0;
+function loadLeaderBoard() {
+    scoresLoaded = 0;
+    $(".menu").hide();
+    $('header, .leaderBoard').fadeIn(500);
+    ajaxGetScores(scoresLoaded);
+}
+
+function showFrame() {
+    $(".menu").hide();
+    $("header, footer").fadeIn(500, function() {
+        $(this).css("display", "block");
+    });
+}
+
+function ajaxGetScores(loaded) {
+    $.ajax({
+        type: 'GET',
+        url: '../leaderboard/get_records.php',
+        data: {
+            offset: loaded,
+        },
+        success: function (response) {
+            $('#leaderList').html($('#leaderList').html() + response);
+            scoresLoaded += 10;
+        }
+    });
 }
 
 var logoCount = 0;
