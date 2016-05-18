@@ -197,14 +197,13 @@ function spawnModule(pos) {
 
     switch (pos) {
         case "top":
+        case "bottom":
+            gameType = "simonGame";
+            break;
         case "center":
             gameType = "anagramGame";
             gameAnswer = generateAnagram();
             data = [];
-            break;
-        case "bottom":
-
-            gameType = "simonGame";
             break;
         case "topLeft":
             gameType = "anagramGame";
