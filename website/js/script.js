@@ -403,7 +403,7 @@ function ajaxSubmitScore(playerName) {
             name: playerName,
         },
         success: function(response) {
-            $('#nameError').html(response);
+            $('.scoreSubmission').hide();
         }
     });
 }
