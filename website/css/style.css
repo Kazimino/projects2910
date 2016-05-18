@@ -414,6 +414,7 @@ main > .module:nth-child(7) {
     text-align: center;
     background-color: gray;
     color: white;
+    border-radius: 10%;
 }
 
 .mathOption h1 {
@@ -438,7 +439,64 @@ main > .module:nth-child(7) {
     font-size: 75%
 }
 
-    
+
+/* anagram game styles */
+#anagramGame {
+    height: 100%;
+    width: 40%;
+    position: absolute;
+    margin-left: 30%;
+    display: none;
+}
+
+.letterRow {
+    position: relative;
+    width: 60%;
+    height: 33%;
+    margin: auto;
+}
+
+.letterChoice {
+    height: 80%;
+    width: 25%;
+    margin-left: 5%;
+    margin-top: 5%;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    vertical-align: top;
+}
+
+/* Simon says game CSS */
+#simonGame {
+    display: none;
+}
+.section {
+    display: inline-block;
+    width: 49.2%;
+    height: 100%;
+}
+.simonSection {
+    width: 100%;
+    height: 50%;
+    border-bottom: 4px solid black;
+}
+#simonSection1 {
+    background-color: yellow;
+}
+#simonSection2 {
+    background-color: green;
+}
+#simonSection3 {
+    background-color: red;
+}
+#simonSection4 {
+    background-color: blue;
+>>>>>>> af259d13702ad05d6338e3a07118957b2a0cf4ec
+}
+
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     
