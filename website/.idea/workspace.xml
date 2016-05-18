@@ -31,13 +31,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3991">
-              <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
+            <state relative-caret-position="625">
+              <caret line="200" column="18" selection-start-line="200" selection-start-column="18" selection-end-line="200" selection-end-column="18" />
               <folding>
-                <marker date="1463591601254" expanded="false" signature="0:15" placeholder="/*...*/" />
+                <marker date="1463593748647" expanded="false" signature="0:15" placeholder="/*...*/" />
               </folding>
             </state>
           </provider>
@@ -55,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="anagram.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="anagram.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/anagram.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="594">
@@ -83,9 +83,9 @@
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/script.js" />
         <option value="$PROJECT_DIR$/css/style.css" />
-        <option value="$PROJECT_DIR$/js/script.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/anagram.js" />
+        <option value="$PROJECT_DIR$/js/script.js" />
       </list>
     </option>
   </component>
@@ -245,12 +245,12 @@
       <workItem from="1463060486041" duration="16344000" />
       <workItem from="1463378897952" duration="5739000" />
       <workItem from="1463420671347" duration="25477000" />
-      <workItem from="1463584319149" duration="3831000" />
+      <workItem from="1463584319149" duration="4250000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63691000" />
+    <option name="totallyTimeSpent" value="64110000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="-14" width="3868" height="2098" extended-state="6" />
@@ -308,7 +308,7 @@
         <state relative-caret-position="6732">
           <caret line="204" column="16" selection-start-line="204" selection-start-column="16" selection-end-line="204" selection-end-column="16" />
           <folding>
-            <marker date="1463591601254" expanded="false" signature="0:15" placeholder="/*...*/" />
+            <marker date="1463593748647" expanded="false" signature="0:15" placeholder="/*...*/" />
           </folding>
         </state>
       </provider>
@@ -326,7 +326,7 @@
         <state relative-caret-position="2475">
           <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding>
-            <marker date="1463591601254" expanded="false" signature="0:15" placeholder="/*...*/" />
+            <marker date="1463593748647" expanded="false" signature="0:15" placeholder="/*...*/" />
           </folding>
         </state>
       </provider>
@@ -352,7 +352,7 @@
         <state relative-caret-position="5082">
           <caret line="154" column="19" selection-start-line="154" selection-start-column="19" selection-end-line="154" selection-end-column="19" />
           <folding>
-            <marker date="1463591601254" expanded="false" signature="0:15" placeholder="/*...*/" />
+            <marker date="1463593748647" expanded="false" signature="0:15" placeholder="/*...*/" />
           </folding>
         </state>
       </provider>
@@ -378,7 +378,7 @@
         <state relative-caret-position="1485">
           <caret line="45" column="80" selection-start-line="45" selection-start-column="80" selection-end-line="45" selection-end-column="80" />
           <folding>
-            <marker date="1463591601254" expanded="false" signature="0:15" placeholder="/*...*/" />
+            <marker date="1463593748647" expanded="false" signature="0:15" placeholder="/*...*/" />
           </folding>
         </state>
       </provider>
@@ -452,16 +452,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3991">
-          <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
-          <folding>
-            <marker date="1463591601254" expanded="false" signature="0:15" placeholder="/*...*/" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/equation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-893">
@@ -477,6 +467,16 @@
         <state relative-caret-position="594">
           <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="200" column="18" selection-start-line="200" selection-start-column="18" selection-end-line="200" selection-end-column="18" />
+          <folding>
+            <marker date="1463593748647" expanded="false" signature="0:15" placeholder="/*...*/" />
+          </folding>
         </state>
       </provider>
     </entry>
