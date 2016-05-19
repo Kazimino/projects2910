@@ -1693,7 +1693,6 @@ father
 electric
 saw
 instruments
-quotes
 officer
 driver
 businesses
@@ -3126,7 +3125,6 @@ spread
 coach
 kevin
 agricultural
-expand
 supporting
 audience
 assigned
@@ -10007,7 +10005,6 @@ distraction
 havoc
 lunatic
 soldiery
-tablet
 unwise
 assassin
 awkwardly
@@ -10018,8 +10015,6 @@ suspension
 throb
 relaxation
 ardently
-cove
-tan
 unhappiness
 expand
 stronghold
@@ -10027,7 +10022,6 @@ laughingly
 corinth
 tumble
 colder
-forge
 covert
 twenty-seven
 imprudent
@@ -10047,7 +10041,6 @@ darts
 indolence
 seneca
 affront
-fossil
 adhered
 atom
 constraint
@@ -10998,7 +10991,6 @@ blasphemy
 pall
 weal
 rampart
-Word
 hazy
 loath
 pp
@@ -11999,7 +11991,6 @@ residue
 staunch
 irrelevant
 noisily
-Word
 urgently
 greenish
 nickname
@@ -13000,7 +12991,6 @@ contrition
 centered
 cognizance
 dismount
-Word
 dating
 nearby
 poplar
@@ -14001,7 +13991,6 @@ pi
 exhort
 trifled
 bus
-Word
 bale
 turnpike
 anomalous
@@ -15002,7 +14991,6 @@ possessive
 canonical
 cognition
 culmination
-Word
 egoism
 garrulous
 rueful
@@ -16003,7 +15991,6 @@ nonchalance
 advocacy
 abed
 middling
-Word
 mucous
 outdone
 rebound
@@ -17004,7 +16991,6 @@ pristine
 superannuated
 telegraphy
 thousandth
-Word
 expeditious
 superstructure
 indoor
@@ -18005,7 +17991,6 @@ abler
 correlative
 irruption
 melee
-Word
 weeding
 whaler
 alfalfa
@@ -19006,7 +18991,6 @@ bakery
 clairvoyant
 ep
 heirloom
-Word
 herbaceous
 homily
 nostrum
