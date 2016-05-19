@@ -1,5 +1,5 @@
 <?php
-include("db_connect.php");
+include("../leaderboard/db_connect.php");
 
 $length = array_key_exists("length", $_GET) ? $_GET["length"] : "1";
 $rank = array_key_exists("rank", $_GET) ? $_GET["rank"] : "1";
