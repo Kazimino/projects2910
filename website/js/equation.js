@@ -1,7 +1,7 @@
 /* logic for the math equation game */
 function mathGame() {
     /*controls the difficulty of the numbers and oerators */
-    var diffMultiplier = 2;
+    var diffMultiplier = 1;
     var gameArr = [];
 
     /*this function grabs a random number */
