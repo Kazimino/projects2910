@@ -1,9 +1,15 @@
 /* Constants */
 var MAX_HEAT = 50000;
 var HEAT_PER_TICK  = 0.5;
-var GAME_SPAWN_TIME = 10;
+var GAME_SPAWN_TIME = 5;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
+
+/* Variables used for difficulty. */
+var level = 0;
+var simonSteps = 3;
+var simonInterval = 500;
+var mathMultiplier = 2;
 
 $(document).ready(function() {
     resizeMain();
@@ -95,9 +101,7 @@ function module(type, answer, data) {
     this.input = "";
     this.answer = answer;
     this.data = data;
-
 }
-
 
 // padding function for leading zeroes on timer
 function pad(time){
@@ -158,7 +162,6 @@ function enlargeGame(pos) {
 // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
 function timerStart(){
     heatGenerate();
-    
     if(dsec == 10) {
         dsec = 0;
         sec++;
@@ -168,6 +171,17 @@ function timerStart(){
         }
         if(sec % GAME_SPAWN_TIME == 0) {
             spawnRandomGame();
+        }
+        /* Conditions to change difficulty */
+        if ((sec % 30 == 0) && (level <= 4)) {
+            if (mathMultiplier < 4) {
+                mathMultiplier++;
+            }
+            simonSteps++;
+            level++;
+        }
+        if ((sec % 30 == 0) && (level <= 4)) {
+            GAME_SPAWN_TIME--;
         }
     }
     
@@ -216,7 +230,7 @@ function spawnModule(pos) {
         case "topRight":
         case "bottomLeft":    
             gameType = "mathGame";
-            mathArr = mathGame();
+            mathArr = mathGame(mathMultiplier);
             data = mathArr[0];
             gameAnswer = mathArr[1];
             break;
@@ -243,12 +257,11 @@ function loadGame(pos) {
     if(gameType == "anagramGame") {
         loadAnagram();
     }
-    
     if(gameType == "mathGame") {
         $('#prob').text(activeArray[pos].data);
     }
     if (gameType == "simonGame") {
-        startSimonSays(3, 500);
+        startSimonSays(simonSteps, simonInterval);
     }
 }
 

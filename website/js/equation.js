@@ -1,7 +1,7 @@
 /* logic for the math equation game */
-function mathGame() {
+function mathGame(multiplier) {
     /*controls the difficulty of the numbers and oerators */
-    var diffMultiplier = 2;
+    var diffMultiplier = multiplier;
     var gameArr = [];
 
     /*this function grabs a random number */
@@ -24,7 +24,7 @@ function mathGame() {
 
     /*check needed to stop operator increment*/
     if(diffMultiplier < 4) {
-        operator = getRandomOperator(diffMultiplier++);
+        operator = getRandomOperator(diffMultiplier);
     }
 
     /*switch to get the answer for the RHS of the equation*/
