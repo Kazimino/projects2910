@@ -34,7 +34,7 @@ body {
     z-index: 9001;
     background-color: rgba(0,0,0,0.9);
     position: relative;
-    display:;
+    display:none;
 }
 
 /* Header */
