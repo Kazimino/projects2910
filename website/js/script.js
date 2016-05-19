@@ -209,27 +209,14 @@ function spawnModule(pos) {
 
     switch (pos) {
         case "top":
-            gameType = "ascendingNumber";
-            break;
-        case "center":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            data = [];
-            break;
         case "bottom":
-            gameType = "ascendingNumber";
+            gameType = "simonGame";
             break;
         case "topLeft":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            data = [];
-            break;
         case "bottomRight":
             gameType = "ascendingNumber";
             break;
         case "topRight":
-            gameType = "ascendingNumber";
-            break;
         case "bottomLeft":    
             gameType = "mathGame";
             mathArr = mathGame();
@@ -237,7 +224,9 @@ function spawnModule(pos) {
             gameAnswer = mathArr[1];
             break;
         default:
-            gameType = "ascendingNumber";
+            gameType = "anagramGame";
+            gameAnswer = generateAnagram();
+            data = [];
             break;
     }
 
