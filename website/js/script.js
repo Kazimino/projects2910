@@ -300,7 +300,6 @@ function wrongAnswer() {
 
 // heat gauge heat increase function.  increases heat by 5 every second and adds heat
 // from gauges to main heat bar.
-
 function heatGenerate(){
     for(var key in activeArray) {
         if(activeArray[key].heat < 100) {
@@ -340,14 +339,25 @@ function heatGenerate(){
 /* At this current moment, all this does is fade from Menu to Game.
    used for onclick on PlayButton.*/
 function playGame() {
+
     showFrame();
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
     spawnModule("bottomRight");
     clock = setInterval(timerStart, 100);
-    $('.overlay').fadeOut(250);
+    
 }
+
+/*function retry() {
+    $('.overlay').fadeOut(250);
+    activeArray = null;
+    totalHeat = 0;
+    activeMini = 0;
+    min = 0;
+    sec = 0;
+    dsec = 0;
+}*/
 
 /*loads scores for leaderboard */
 var scoresLoaded = 0;
