@@ -1,34 +1,36 @@
 
 $(document).ready(function() {
     $('.letterChoice').click(function() {
+        $(this).css("pointer-events", "none");
         var choiceID = $(this).attr('id');
         activeArray[enlarged].data.push(parseInt(choiceID[choiceID.length -1]));
         $('#anagramInput').html("<h1>" + $('#anagramInput').text() + $(this).text() + "</h1>");
-        $('#anagramAnswer').html("<h1>" + activeArray[enlarged].answer[0] + "</h1>");
         $(this).fadeTo("fast", 0.2);
         activeArray[enlarged].input = $('#anagramInput').text();
 
-        var a = activeArray[enlarged].answer[0];
+        var a = activeArray[enlarged].answer[0][0].length;
         var b = $('#anagramInput').text();
 
         if(a.length == b.length){
-            if(a == b){
-                $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
-                endGame(enlarged);
-            } else {
-                wrongAnswer();
-                $('#anagramAnswer').html("<h1>" + "You fucked up" + "</h1>");
-                activeArray[enlarged].input = [];
-                activeArray[enlarged].data = [];
-                $('#anagramInput').html("<h1></h1>");
-                setTimeout(function(){
-                    $('.letterChoice').each(function(){
-                        $(this).fadeTo("fast", 1);
-                    });
-                }, 600);
-            }
-
-
+            $.each(activeArray[enlarged].answer[0], function(index, value){
+                if(value == b){
+                    $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
+                    endGame(enlarged);
+                    
+                } else {
+                    wrongAnswer();
+                    $('#anagramAnswer').html("<h1>" + "You fucked up" + "</h1>");
+                    activeArray[enlarged].input = [];
+                    activeArray[enlarged].data = [];
+                    $('#anagramInput').html("<h1></h1>");
+                    setTimeout(function(){
+                        $('.letterChoice').each(function(){
+                            $(this).fadeTo("fast", 1);
+                            $(this).css("pointer-events", "auto");
+                        });
+                    }, 600);
+                }
+            });
         }
 
     });
@@ -61,10 +63,20 @@ function loadAnagram(){
 
 /* Creates a new Anagram game */
 function generateAnagram(){
+    var difficulty = 4;
+    var wordsArray = ["can", "bar", "cat", "dog", "cane", "tart", "dart", "bare", "trees", "shame", "drawl", "shore", "puzzle", "fizzle", "hijack", "jumble"];
 
-    var wordsArray = ["can", "bar", "cat", "dog"];
-    var wordSolution = wordsArray[Math.floor(Math.random() * wordsArray.length)];
-    var lettersArray = wordSolution.split("");
+    var selectionArray = [];
+    $.each(wordsArray, function(index, value){
+        if(value.length == difficulty){
+            selectionArray.push(value);
+        }
+    });
+
+    var selectedWord = selectionArray[Math.floor(Math.random() * wordsArray.length)];
+    var lettersArray = selectedWord.split("");
+
+    
 
     for(var i = lettersArray.length - 1; i > 0; i--){
         var j = Math.floor(Math.random() * lettersArray.length);
@@ -74,6 +86,6 @@ function generateAnagram(){
     }
 
     var scrambled = lettersArray.join("");
-    return [wordSolution, scrambled];
+    return [selectionArray, scrambled];
 }
 

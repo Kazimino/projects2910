@@ -190,6 +190,10 @@ function spawnRandomGame() {
 }
 
 /* put game generation code in here */
+/* for gameAnswer, what is returned is an array with the first index
+being an array of words of the same length in the dictionary, and the second
+index being the scrambled letters to use.
+ */
 function spawnModule(pos) {
 
     var gameType, gameAnswer, data;
@@ -319,7 +323,7 @@ function playGame() {
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
-    spawnModule("top");
+    spawnModule("center");
     clock = setInterval(timerStart, 100);
 }
 
