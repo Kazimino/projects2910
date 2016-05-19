@@ -462,42 +462,52 @@ main > .module:nth-child(7) {
 }
 .numberRow {
     display: block;
-    width: 30%;
-    height: 22%;
-    margin: auto;
-}
-.numberOption {
-    width: 25%;
-    height: 85%;
-    border-radius:50%;
-    font-size:50px;
-    color:#fff;
-    text-align:center;
-    position: relative;
-    display: inline-block;
-    left: 24%;
-    top: 120%;
-    
+    width: 40%;
+    height: 30%;
+    margin: auto;    
+    margin-top: 2%;
     
     
 }
 
-#ascendingNumber div{
-    
-    color: black;
+.numberOption {
+    width: 30%;
+    height: 100%;
+    border-radius:50%;
+    font-size:4vh;    
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 16%;
+    top: 45%;
+    border-style:solid;
+    margin-left: 2%;
+    cursor: pointer;
 }
+
+.numberOption span {
+    color: ;
+    display: inline-block;
+    margin-top: 25%;
+}
+
 #numberSection1 {
-    background-color: yellow;
+    background-color: blueviolet;
 }
+
 #numberSection2 {
     background-color: green;
 }
+
 #numberSection3 {
     background-color: red;
 }
+
 #numberSection4 {
     background-color: blue;
+    
 }
+
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     
