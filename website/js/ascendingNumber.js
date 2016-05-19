@@ -7,9 +7,8 @@ var baseNumber = 1;
 /*takes in user input, compares with the store array*/
 function numberInput() {
     $('.numberOption').click(function() {
-            var clickValue = parseInt($(this).text());
             var choiceID = $(this).attr('id');
-            if(clickValue == store[currIndex]) {
+            if(choiceID == "numberSection" + (store[currIndex].pos + 1)) {
                 /*hides the clicked button*/
                 $(this).css("visibility", "hidden");
                 if(currIndex == store.length -1 ) {
@@ -34,30 +33,29 @@ function numberInput() {
 }
 
 /*generate random number and store into array*/
-function randGen(level) {
- 
- var num = 0;
- 
+function randGen(level) { 
  resetStorage();
  numberInput();
  levelModifier(5);
  for (i = 0; i < 4; i++) {
-     
+     var num = {
+         pos: 0,
+         value: 0
+     };
      if (level < 5) {
          do {
-            number = Math.floor((Math.random() * maxNumber) + baseNumber);
-          } while(store.indexOf(number) != -1);
-         store[i] = num;
+            num.value = Math.floor((Math.random() * maxNumber) + baseNumber);
+          } while(store.indexOf(num.value) != -1);
          document.getElementsByClassName("number")[i].innerHTML = num;
      } else {
          var a = Math.floor((Math.random() * maxNumber) + baseNumber);
          var b = Math.floor((Math.random() * maxNumber) + baseNumber);
-         num = parseInt(a + "/" + b);
-         store[i] = num;
+         num.value = a/b;
          var ab = (a + "/" + b);
          document.getElementsByClassName("number")[i].innerHTML = ab;
      }
-    
+     num.pos = i;
+     store[i] = num;
  }
  /* sorts the numbers */
  store.sort(compareNumbers);
@@ -65,7 +63,7 @@ function randGen(level) {
 
 /*function to sort random gen number */
 function compareNumbers(a,b) {
- return a - b;
+ return a.value - b.value;
 }
 
 /*function to unbind clicks */
