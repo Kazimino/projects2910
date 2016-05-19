@@ -28,6 +28,15 @@ body {
     margin: 0 auto;
 }
 
+.overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 9001;
+    background-color: rgba(0,0,0,0.9);
+    position: relative;
+    display: none;
+}
+
 /* Header */
 
 header {
@@ -70,6 +79,38 @@ footer {
     overflow: hidden;
 }
 
+/* End Game Screen */
+
+.endGame {
+    width: 100%;
+    max-width: 1024px;
+    padding-top: 25vh;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.endGame h1 {
+    margin-bottom: 5vh;
+}
+
+.endGame h3 {
+    margin-bottom: 3vh;
+}
+
+.namePrompt {
+    display: block;
+    margin-bottom: 2vh;
+}
+
+#timeLasted {
+    display: block;
+    font-size: 8vw;
+}
+
+#nameError {
+    display: block;
+}
 
 /* Hexagon */
 .module {
@@ -297,7 +338,7 @@ main > .module:nth-child(7) {
 #leaderList {
     list-style: none;
     width: 100%;
-    font-size: 200%;
+    font-size: 170%;
     overflow-y: auto;
 }
 
@@ -307,11 +348,11 @@ main > .module:nth-child(7) {
 }
 
 .lbRank {
-    width: 25%;
+    width: 15%;
 }
 
 .lbName {
-    width: 35%;
+    width: 45%;
 }
 
 .lbTime {
