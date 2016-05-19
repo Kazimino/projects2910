@@ -8,12 +8,11 @@ $(document).ready(function() {
         $(this).fadeTo("fast", 0.2);
         activeArray[enlarged].input = $('#anagramInput').text();
 
-        var a = activeArray[enlarged].answer[0][0].length;
-        var b = $('#anagramInput').text();
+        var currInput = $('#anagramInput').text();
 
-        if(a.length == b.length){
-            $.each(activeArray[enlarged].answer[0], function(index, value){
-                if(value == b){
+        if(currInput.length == activeArray[enlarged].answer[0].length){
+
+                if(currInput == activeArray[enlarged].answer[0]){
                     $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
                     endGame(enlarged);
                     
@@ -30,7 +29,7 @@ $(document).ready(function() {
                         });
                     }, 600);
                 }
-            });
+
         }
 
     });
@@ -42,6 +41,9 @@ $(document).ready(function() {
 
 });
 
+function checkWord(word){
+
+}
 
 function loadAnagram(){
     $('#anagramInput').html("<h1>" + activeArray[enlarged].input + "</h1>");
@@ -63,17 +65,16 @@ function loadAnagram(){
 
 /* Creates a new Anagram game */
 function generateAnagram(){
+    var size = 4;
     var difficulty = 4;
-    var wordsArray = ["can", "bar", "cat", "dog", "cane", "tart", "dart", "bare", "trees", "shame", "drawl", "shore", "puzzle", "fizzle", "hijack", "jumble"];
-
-    var selectionArray = [];
-    $.each(wordsArray, function(index, value){
-        if(value.length == difficulty){
-            selectionArray.push(value);
-        }
-    });
-
-    var selectedWord = selectionArray[Math.floor(Math.random() * wordsArray.length)];
+    var selectedWord = function(){
+        $.ajax({
+            type: 'GET',
+            url: '../dictionary/get_word.php',
+            data: {length: size, rank: difficulty}
+        })
+    };
+        
     var lettersArray = selectedWord.split("");
 
     
@@ -86,6 +87,6 @@ function generateAnagram(){
     }
 
     var scrambled = lettersArray.join("");
-    return [selectionArray, scrambled];
+    return [selectedWord, scrambled];
 }
 
