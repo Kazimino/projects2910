@@ -453,9 +453,51 @@ main > .module:nth-child(7) {
 }
 #simonSection4 {
     background-color: blue;
->>>>>>> af259d13702ad05d6338e3a07118957b2a0cf4ec
 }
 
+
+/* ascending numbers */
+#ascendingNumber {
+    display: none;
+}
+.numberRow {
+    display: block;
+    width: 30%;
+    height: 22%;
+    margin: auto;
+}
+.numberOption {
+    width: 25%;
+    height: 85%;
+    border-radius:50%;
+    font-size:50px;
+    color:#fff;
+    text-align:center;
+    position: relative;
+    display: inline-block;
+    left: 24%;
+    top: 120%;
+    
+    
+    
+}
+
+#ascendingNumber div{
+    
+    color: black;
+}
+#numberSection1 {
+    background-color: yellow;
+}
+#numberSection2 {
+    background-color: green;
+}
+#numberSection3 {
+    background-color: red;
+}
+#numberSection4 {
+    background-color: blue;
+}
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     

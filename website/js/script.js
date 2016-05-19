@@ -197,7 +197,7 @@ function spawnModule(pos) {
 
     switch (pos) {
         case "top":
-            gameType = "simonGame";
+            gameType = "ascendingNumber";
             break;
         case "center":
             gameType = "anagramGame";
@@ -205,7 +205,7 @@ function spawnModule(pos) {
             data = [];
             break;
         case "bottom":
-            gameType = "simonGame";
+            gameType = "ascendingNumber";
             break;
         case "topLeft":
             gameType = "anagramGame";
@@ -213,9 +213,11 @@ function spawnModule(pos) {
             data = [];
             break;
         case "bottomRight":
-            gameType = "boxGame";
+            gameType = "ascendingNumber";
             break;
         case "topRight":
+            gameType = "ascendingNumber";
+            break;
         case "bottomLeft":    
             gameType = "mathGame";
             mathArr = mathGame();
@@ -223,7 +225,7 @@ function spawnModule(pos) {
             gameAnswer = mathArr[1];
             break;
         default:
-            gameType = "boxGame";
+            gameType = "ascendingNumber";
             break;
     }
 
@@ -251,6 +253,11 @@ function loadGame(pos) {
     }
     if (gameType == "simonGame") {
         startSimonSays(3, 500);
+    }
+
+    if(gameType == "ascendingNumber") {
+        
+        randGen();
     }
 }
 
@@ -319,7 +326,7 @@ function playGame() {
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
-    spawnModule("top");
+    spawnModule("bottomRight");
     clock = setInterval(timerStart, 100);
 }
 
