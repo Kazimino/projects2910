@@ -34,7 +34,7 @@ body {
     z-index: 9001;
     background-color: rgba(0,0,0,0.9);
     position: relative;
-    display: none;
+    display:;
 }
 
 /* Header */
@@ -54,7 +54,7 @@ header {
     margin: 0 auto;
     display: block;
     position: relative;
-    top: 10%;
+    top:10%;
 }
 
 /* Main Frame */
@@ -80,6 +80,13 @@ footer {
 }
 
 /* End Game Screen */
+.egbtns {
+    width:26%;
+    cursor:pointer;
+    margin:auto;
+    margin-top:4%;
+    display:block;
+}
 
 .endGame {
     width: 100%;
@@ -88,6 +95,8 @@ footer {
     margin: 0 auto;
     text-align: center;
     display: block;
+    position:relative;
+    top:-10%;
 }
 
 .endGame h1 {
@@ -306,12 +315,13 @@ main > .module:nth-child(7) {
     transition: background-position 100ms linear;
 }
 
+
 /* Menu CSS */
 .menulogo {
     height: 40%;
     margin: 0 auto;
     display: block;
-    padding-bottom: 7%;
+    padding-bottom: 1%;
 }
 
 .menuItem {
@@ -320,8 +330,13 @@ main > .module:nth-child(7) {
     display: block;
     position: relative;
     border-radius: 5%;
-    margin-top: 5%;
+    margin-top: 1%;
     cursor: pointer;
+}
+
+#btnSize {
+    height:16%;
+    margin-top:4%;
 }
 
 /* LeaderBoard */
@@ -498,7 +513,6 @@ main > .module:nth-child(7) {
 }
 #simonSection4 {
     background-color: blue;
->>>>>>> af259d13702ad05d6338e3a07118957b2a0cf4ec
 }
 
 /* tablet / mobile */

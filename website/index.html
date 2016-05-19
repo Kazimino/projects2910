@@ -302,6 +302,9 @@
             <div class="leaderBoard">
                 <h1>Leaderboard</h1>
                 <ul id="leaderList"></ul>
+                <img src="images/leaderboardbtn.png" data-alt-src="images/leaderboardbtnCL.png" class="menuItem" id="btnSize" onclick="loadLeaderBoard()">
+                <img src="images/CompanyLogo.png" class="menuItem">
+
             </div>
         </main>
                 
@@ -312,15 +315,19 @@
                 <div id="heatMeter"></div>
             </div>
         </footer>
-        
+<!-------------- END GAME OVERLAY BROS ------------->
         <div class="overlay">
             <div class="endGame">
                 <h1>Meltdown!</h1>
-                <h3>Your time lasted: <span id="timeLasted"></span></h3>
+                <h3>Your Lasted: <span id="timeLasted"></span></h3>
                 <div class="scoreSubmission">
                     <span class="namePrompt">Enter your name:</span>
                     <input id="scoreName" type="text"><input id="scoreSubmit" value="Submit" type="button">
                     <span id="nameError"></span>
+                </div>
+                <div id="overlayBtn">
+                    <img src="images/mainmenubtnC.png" data-alt-src="images/mainmenubtn.png" class="egbtns" onclick="mainMenu()"/>
+                    <img src="images/tryAgainUC.png" data-alt-src="images/tryAgainC.png" class="egbtns" onclick="playGame()"/>
                 </div>
             </div>
         </div>
