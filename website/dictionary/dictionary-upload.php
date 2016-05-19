@@ -6,17 +6,22 @@ $query = "SELECT * FROM Dictionary LIMIT 1;";
 $result = $db_con->query($query);
 if($result->num_rows == 0) {
     $dict = fopen("dictionary-raw.txt", "r");
-    echo "<b>Inserting Words: </b><br>"
-    $query = "INSERT INTO Dictionary (word, length) VALUES";
+    echo "<b>Inserting Words: </b>\n";
+    $query = "INSERT INTO Dictionary (word, length, rank) VALUES";
+    $words = array();
+    $rank = array(3 => 0, 4 => 0, 5 => 0, 6 => 0);
     while(!feof($dict)) {
-        $line = fgets($dict);
-        if($line.length >= 3 && $line.length <= 6) {
-            $query .= " ('$line', " . $line.length . "),";
-            echo $line . "<br>";
+        $line = trim(fgets($dict));
+	$words[$line] = array_key_exists($line, $words) ? ++$words[$line] : 1;
+	$length = strlen($line);
+        if($length >= 3 && $length <= 6 && $words[$line] == 1 && ctype_alpha($line)) {
+            $query .= " (\"$line\", $length, ".++$rank[$length]."),";
+            echo $line . "\n";
         }
     }
     $query = rtrim($query, ",") . ";";
-    $db_con->query($query);
+    $db_con->query($query)
+	or die("Error: " . mysqli_error($db_con));
     fclose($dict);
 } else {
     echo "<b>error: Dictionary already populated</b>";
