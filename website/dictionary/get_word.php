@@ -19,5 +19,7 @@ $select = "SELECT *
 $result = $db_con->query($select)
     or die("Error " . mysqli_error($db_con));
 
-echo $result;
+$value = mysqli_fetch_object($result);
+
+echo $value['word'];
 ?>
