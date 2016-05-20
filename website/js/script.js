@@ -234,7 +234,7 @@ function spawnModule(pos) {
     var mathArr = [];
 
     switch (pos) {
-        case "top":
+        /*case "top":
         case "bottom":
             gameType = "simonGame";
             break;
@@ -248,7 +248,7 @@ function spawnModule(pos) {
             mathArr = mathGame();
             data = mathArr[0];
             gameAnswer = mathArr[1];
-            break;
+            break;*/
         default:
             gameType = "anagramGame";
             gameAnswer = generateAnagram();

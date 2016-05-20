@@ -77,13 +77,22 @@ function loadAnagram(){
 /* this function calls the database to return a random word given
 the word length and difficulty(rarity).
  */
-function getWordFromDictionary(size, difficulty){
-
-    return $.ajax({
+function getWordFromDictionary(size, diff){
+    var word;
+    $.ajax({
+	async: false,
         type: 'GET',
         url: '../dictionary/get_word.php',
-        data: {length: size, rank: difficulty}
+        data: {
+	    length: size,
+	    rank: diff,
+	},
+	success: function(response) {
+	    word = response;
+	}
     });
+
+    return word;
 
     /* test for local server: */
     //return "doggy";
@@ -92,9 +101,9 @@ function getWordFromDictionary(size, difficulty){
 /* Creates a new Anagram game */
 function generateAnagram(){
     var size = 4;
-    var difficulty = 4;
-    var selectedWord = getWordFromDictionary(size, difficulty);
-        
+    var diff = 4;
+    var selectedWord = getWordFromDictionary(size, diff);
+    console.log(getWordFromDictionary(4,4));
     var lettersArray = selectedWord.split("");
 
     
