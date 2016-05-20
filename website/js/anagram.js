@@ -35,6 +35,7 @@ $(document).ready(function() {
         $(this).html("<h1>" + $(this).text().slice(0, -1) + "</h1>");
         var lastPressed = activeArray[enlarged].data.pop();
         $("#letterChoice" + lastPressed).css("opacity", 1.0);
+        $("#letterChoice" + lastPressed).css("pointer-events", "auto");
     })
 
 });
