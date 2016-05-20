@@ -77,12 +77,12 @@ function loadAnagram(){
     var i = 0;
     $('.letterChoice').each(function(){
         $(this).css("opacity", 1.0);
-	if($(this).text() == "") {
-	    $(this).css("pointer-events", "none");
-	}
+        if($(this).text() == "") {
+            $(this).css("pointer-events", "none");
+        }
         if(i < scrambled.length){
             $(this).html("<h1>" + scrambled[i++] + "</h1>");
-	    $(this).css("pointer-events", "auto");
+        $(this).css("pointer-events", "auto");
         }
     });
 
@@ -122,8 +122,6 @@ function generateAnagram(){
     
     var selectedWord = getWordFromDictionary(difficulty + 2);
     var lettersArray = selectedWord.split("");
-
-    
 
     for(var i = lettersArray.length - 1; i > 0; i--){
         var j = Math.floor(Math.random() * lettersArray.length);
