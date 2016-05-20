@@ -94,7 +94,7 @@ function loadAnagram(){
 /* this function calls the database to return a random word given
 the word length and difficulty(rarity).
  */
-function getWordFromDictionary(size, diff){
+function getWordFromDictionary(size){
     var word;
     
     $.ajax({
@@ -103,7 +103,6 @@ function getWordFromDictionary(size, diff){
         url: '../dictionary/get_word.php',
         data: {
             length: size,
-            rank: diff,
         },
         success: function(response) {
             word = response;
@@ -121,14 +120,7 @@ function generateAnagram(){
         data: [],
     };
     
-    var diff;
-    if(sec >= 54){
-	diff = 10;
-    } else {
-	diff = 1 + Math.floor(sec / 6);
-    }
-
-    var selectedWord = getWordFromDictionary(difficulty + 2, diff);
+    var selectedWord = getWordFromDictionary(difficulty + 2);
     var lettersArray = selectedWord.split("");
 
     
