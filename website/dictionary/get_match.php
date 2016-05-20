@@ -1,7 +1,7 @@
 <?php
 include("../leaderboard/db_connect.php");
 
-$word = array_key_exists("word", $_GET) ? $_GET["word"] : "1";
+$word = array_key_exists("word", $_GET) ? $_GET["word"] : "";
 
 $select = "SELECT *
             FROM Dictionary
@@ -12,5 +12,5 @@ $result = $db_con->query($select)
 
 $count = $result->num_rows;
 
-return $count != 0;
+echo $count;
 ?>

@@ -41,12 +41,19 @@ $(document).ready(function() {
 /* this function takes in a word and checks if it exists in the dictionary.
 Returns true if a match is found and false if there are no matches.
  */
-function checkWord(word){
-    return $.ajax({
+function checkWord(validate){
+    var valid = 0;
+    console.log(validate);
+    $.ajax({
+	async: false,
         type: 'GET',
         url: '../dictionary/get_match.php',
-        data: {word: word}
+        data: {word: validate},
+	success: function(response) {
+	    valid = response;
+	}
     });
+    return valid == 1;
 }
 
 function resetGame() {
@@ -75,7 +82,7 @@ function loadAnagram(){
 
     $.each(pressed, function(index, value){
         $("#letterChoice" + value).css("opacity", 0.2);
-    })
+    });
 }
 
 /* this function calls the database to return a random word given
@@ -107,7 +114,6 @@ function generateAnagram(){
     var size = 4;
     var diff = 4;
     var selectedWord = getWordFromDictionary(size, diff);
-    console.log(getWordFromDictionary(4,4));
     var lettersArray = selectedWord.split("");
 
     
