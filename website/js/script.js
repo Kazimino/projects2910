@@ -295,7 +295,7 @@ function heatGenerate(){
     }
     
     if(totalHeat > 0) {
-        totalHeat -= COOLANT_LEVEL;
+        totalHeat = totalHeat < COOLANT_LEVEL ? 0 : totalHeat - COOLANT_LEVEL;
     }
     
     if(totalHeat >= MAX_HEAT){
