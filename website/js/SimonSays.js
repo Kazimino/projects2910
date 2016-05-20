@@ -1,38 +1,81 @@
-// Variable for playSequence.
-var n = 0;
+$(document).ready(function() {
+    $('.simonSection').click(function() {
+        var choiceID = $(this).attr('id');
+        var currModule = activeArray[enlarged];
+        chooseBox(choiceID);
+        if(choiceID == "simonSection" + currModule.answer[currModule.input.length]) {
+            if(currModule.input.length == currModule.answer.length - 1 ) {
+                endGame(enlarged);
+            }
+            currModule.input += "1";
+        } else {
+            wrongAnswer();
+            currModule.input = "";
+            setTimeout(function() {
+                playSequence();
+            }, 750);
+        }
+    });
+});
 
-// Get a random number between 1-4 used for random sequence.
-function getNum() {
-    var num = Math.floor((Math.random() * 4) + 1);
-    return num;
+function generateSimon() {
+    var gameInfo = {
+        type: "simonGame",
+        answer: [],
+        data: false
+    };
+    
+    for (var i = 0; i < difficulty + 2; i++) {
+        gameInfo.answer[i] = getNum();
+    }
+    
+    // Get a random number between 1-4 used for random sequence.
+    function getNum() {
+        var num = Math.floor((Math.random() * 4) + 1);
+        return num;
+    }
+    
+    return gameInfo;
+}
+
+function loadSimon() {
+    if(!activeArray[enlarged].data) {
+        playSequence();
+    }
+}
+
+// Play the sequence in chosenSteps.
+function playSequence() {
+    var i = 0;
+    var interval = setInterval(function() {
+        chooseBox("simonSection" + activeArray[enlarged].answer[i++]);
+        if (i >= activeArray[enlarged].answer.length) {
+            clearInterval(interval);
+        }
+    }, 500);
+    activeArray[enlarged].data = true;
 }
 
 // Display a box as being part of the sequence or clicked.
 function chooseBox(choice) {
-    $("#simonSection" + choice).css("opacity", "0.2");
+    $('#' + choice).css("opacity", "0.2");
     setTimeout(function() {
         $(".simonSection").css("opacity", "1");
     }, 300);
 }
 
-// Reset all click events of Simon Says game sections.
-function resetSimon() {
-    $("#simonSection1").unbind("click");
-    $("#simonSection2").unbind("click");
-    $("#simonSection3").unbind("click");
-    $("#simonSection4").unbind("click");
-}
 
+/*
 // Handle game logic if a part has been clicked.
-function simonClick(chosenArray, inputArray, index, steps, delay) {
+function simonClick(inputArray, index, steps) {
     if (!(chosenArray[index] == inputArray[index])) {
         wrongAnswer();
         n = 0;
         resetSimon();
         setTimeout(function() {
-            playSequence(chosenArray, steps, delay);
+            playSequence(steps);
             inputSteps = new Array();
-            takeInput(chosenArray, steps, delay);
+            takeInput(steps);
         }, 750);
         return;
     } else {
@@ -88,10 +131,7 @@ function playSequence(chosenSteps, steps, delay) {
 
 // Start Simon says game.
 function startSimonSays(steps, delay) {
-    var chosenSteps = new Array();
-    for (var i = 0; i < steps; i++) {
-        chosenSteps[i] = getNum();
-    }
     playSequence(chosenSteps, steps, delay);
     takeInput(chosenSteps, steps, delay);
 }
+*/

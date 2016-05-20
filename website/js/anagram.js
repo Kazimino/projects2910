@@ -43,17 +43,18 @@ $(document).ready(function() {
 Returns true if a match is found and false if there are no matches.
  */
 function checkWord(validate){
-    var valid = 0;
-    console.log(validate);
+    var valid = false;
+    
     $.ajax({
-	async: false,
+        async: false,
         type: 'GET',
         url: '../dictionary/get_match.php',
         data: {word: validate},
-	success: function(response) {
-	    valid = response;
-	}
+        success: function(response) {
+            valid = response;
+        }
     });
+    
     return valid == 1;
 }
 
@@ -91,30 +92,33 @@ the word length and difficulty(rarity).
  */
 function getWordFromDictionary(size, diff){
     var word;
+    
     $.ajax({
-	async: false,
+        async: false,
         type: 'GET',
         url: '../dictionary/get_word.php',
         data: {
-	    length: size,
-	    rank: diff,
-	},
-	success: function(response) {
-	    word = response;
-	}
+            length: size,
+            rank: diff,
+        },
+        success: function(response) {
+            word = response;
+        }
     });
 
     return word;
-
-    /* test for local server: */
-    //return "doggy";
 }
 
 /* Creates a new Anagram game */
 function generateAnagram(){
-    var size = 4;
+    var gameInfo = {
+        type: "anagramGame",
+        answer: "";
+        data: [],
+    };
+    
     var diff = 4;
-    var selectedWord = getWordFromDictionary(size, diff);
+    var selectedWord = getWordFromDictionary(difficulty + 2, diff);
     var lettersArray = selectedWord.split("");
 
     
@@ -126,7 +130,7 @@ function generateAnagram(){
         lettersArray[j] = tmp;
     }
 
-    var scrambled = lettersArray.join("");
-    return scrambled;
+    gameInfo.answer = lettersArray.join("");
+    return gameInfo;
 }
 

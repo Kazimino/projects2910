@@ -42,42 +42,10 @@ $(document).ready(function() {
         }
     });
     
-    /*backwards functionality function */
+    /*backwards function */
     $('#backbutton').click(function() {
         hideCurrGame();
-    });
-	
-    /* JavaScript/jQuery for dummy games */
-    /* Box Game */
-    $('.box').mouseenter(function() {
-        $(this).css("border", "1px solid white");
-    });
-    $('.box').mouseleave(function() {
-        $(this).css("border", "none");
-    });
-    
-    /* Notifies user they selected correct color and hides the current game*/
-    $('#greenBox').click(function() {
-        endGame(enlarged);
-    });
-    
-    /* Number Game */
-    $('.mathOption').mouseenter(function() {
-        $(this).css("background-color", "black");
-     });
-    $('.mathOption').mouseleave(function() {
-        $(this).css("background-color", "gray");
-    });
-    
-    /* Notifies user they selected correct operator and hides the current game */
-    $('.mathOption').click(function() {
-        var correct = false;
-        $clicked = $(this).text().trim();
-        
-        checkMathAnswer(enlarged, $clicked);
-        
-    });
-
+    });    
 
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
@@ -105,6 +73,7 @@ var min = 0;
 var sec = 0;
 var dsec = 0;
 var totalHeat = 0;
+var totalTime = 0;
 var activeArray = [];
 var activeMini = 0;
 
@@ -119,7 +88,6 @@ function module(type, answer, data) {
     this.input = "";
     this.answer = answer;
     this.data = data;
-
 }
 
 
@@ -186,7 +154,8 @@ function enlargeGame(pos) {
 // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
 function timerStart(){
     heatGenerate();
-    var totalTime = dsec + sec * 10 + min * 600;
+    dsec++;
+    totalTime++;
     if(dsec == 10) {
         dsec = 0;
         sec++;
@@ -195,16 +164,17 @@ function timerStart(){
             min++;
         }
     }
+    
     if(totalTime % GAME_SPAWN_TIME == 0) {
         spawnRandomGame();
     }
+    
     if(difficulty < MAX_DIFFICULTY && totalTime % DIFF_INCREASE == 0) {
         difficulty++;
     }
     
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
     
-    dsec += 1;
     if(totalHeat >= MAX_HEAT){
         clearInterval(clock);
     }
@@ -229,35 +199,27 @@ for anagram, what is returned is an array with the first index
  index being the scrambled letters to use.*/
 
 function spawnModule(pos) {
-
-    var gameType, gameAnswer, data;
-    var mathArr = [];
+    var gameInfo;
 
     switch (pos) {
-        /*case "top":
+        case "top":
         case "bottom":
-            gameType = "simonGame";
+            gameInfo = generateSimon();
             break;
         case "topLeft":
         case "bottomRight":
-            gameType = "ascendingNumber";
+            gameInfo = generateAscNum();
             break;
         case "topRight":
-        case "bottomLeft":    
-            gameType = "mathGame";
-            mathArr = mathGame();
-            data = mathArr[0];
-            gameAnswer = mathArr[1];
-            break;*/
-        default:
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            data = [];
+        case "bottomLeft":
+            gameInfo = generateMath();
+            break;
+        case "center":
+            gameInfo = generateAnagram();
             break;
     }
 
-    activeArray[pos] = new module(gameType, gameAnswer, data);
-
+    activeArray[pos] = new module(gameInfo.type, gameInfo.answer, gameInfo.data);
 
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
@@ -270,20 +232,19 @@ function spawnModule(pos) {
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
-
-    if(gameType == "anagramGame") {
-        loadAnagram();
-    }
-    
-    if(gameType == "mathGame") {
-        $('#prob').text(activeArray[pos].data);
-    }
-    if (gameType == "simonGame") {
-        startSimonSays(3, 500);
-    }
-
-    if(gameType == "ascendingNumber") {
-        randGen();
+    switch(gameType) {
+        case "anagramGame":
+            loadAnagram();
+            break;
+        case "mathGame":
+            $('#prob').text(activeArray[pos].data);
+            break;
+        case "simonGame":
+            loadSimon();
+            break;
+        case "ascendingNumber":
+            loadAscNum();
+            break;
     }
 }
 
@@ -351,17 +312,21 @@ function heatGenerate(){
 /* At this current moment, all this does is fade from Menu to Game.
    used for onclick on PlayButton.*/
 function playGame() {
-
     showFrame();
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
     clock = setInterval(timerStart, 100);
-    
+    spawnRandomGame();
 }
 
 function retry() {
     $('.overlay').fadeOut(250);
+    resetAll();
+    playGame();
+}
+
+function resetAll() {
     totalHeat = 0;
     activeMini = 0;
     min = 0;
@@ -371,7 +336,6 @@ function retry() {
     for(var key in activeArray) {
         endGame(key);
     }
-    playGame();
 }
 
 /*loads scores for leaderboard */
@@ -392,7 +356,7 @@ function showFrame() {
 
 /* called when the heat bar reaches max heat */
 function loseGame() {
-    $("#timeLasted").html(min + ":" + sec + ":" + dsec);
+    $("#timeLasted").html(min + ":" + (sec < 10 ? "0" + sec : sec) + ":" + dsec);
     $(".overlay").fadeIn(500);
 }
 
@@ -464,8 +428,11 @@ function logoClick() {
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
     $('.overlay').fadeOut(250);
-    $('.module').fadeOut(250);
+    $('main > .module').fadeOut(250);
+    $('#ingame').fadeOut(250);
+    $('#mini').fadeOut(250);
     $('header').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
+    resetAll()
 }

@@ -517,7 +517,6 @@ main > .module:nth-child(7) {
 }
 #simonSection4 {
     background-color: blue;
-
 }
 
 
@@ -528,11 +527,9 @@ main > .module:nth-child(7) {
 .numberRow {
     display: block;
     width: 40%;
-    height: 30%;
+    height: 33%;
     margin: auto;    
-    margin-top: 2%;
-    
-    
+    margin-top: 4%;
 }
 
 .numberOption {
@@ -544,10 +541,10 @@ main > .module:nth-child(7) {
     position: relative;
     display: inline-block;
     left: 16%;
-    top: 45%;
     border-style:solid;
     margin-left: 2%;
     cursor: pointer;
+    line-height: 330%;
 }
 
 .numberOption span {
