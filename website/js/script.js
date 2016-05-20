@@ -428,9 +428,12 @@ function logoClick() {
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
     $('.overlay').fadeOut(250);
-    $('main > .module').fadeOut(250);
-    $('#ingame').fadeOut(250);
-    $('#mini').fadeOut(250);
+    if(enlarged == "") {
+        $('main > .module').fadeOut(250);
+    } else {
+        $('#ingame').fadeOut(250);
+        $('#mini').fadeOut(250);
+    }
     $('header').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
