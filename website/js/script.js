@@ -228,6 +228,8 @@ function spawnModule(pos) {
 
     switch (pos) {
         case "top":
+            gameType = "simonGame";
+            break;
         case "bottom":
             gameType = "simonGame";
             break;

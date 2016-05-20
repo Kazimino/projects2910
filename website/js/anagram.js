@@ -1,4 +1,9 @@
-
+/* this code enters the user's input every time a button is pressed.
+it checks whether the input matches the scrambled word's length.  if
+the input length matches, it then makes a call to the database to check
+if the input is a valid word. If the word is valid, the game is closed.
+ If the word is invalid, an error message is displayed and the game is
+ reset. */
 $(document).ready(function() {
     $('.letterChoice').click(function() {
         $(this).css("pointer-events", "none");
@@ -17,7 +22,7 @@ $(document).ready(function() {
 
             } else {
                 wrongAnswer();
-                $('#anagramAnswer').html("<h1>" + "You fucked up" + "</h1>");
+                $('#anagramAnswer').html("<h1>" + "Try Again" + "</h1>");
                 activeArray[enlarged].input = [];
                 activeArray[enlarged].data = [];
                 $('#anagramInput').html("<h1></h1>");
@@ -26,6 +31,7 @@ $(document).ready(function() {
                         $(this).fadeTo("fast", 1);
                         $(this).css("pointer-events", "auto");
                     });
+                    $('#anagramAnswer').html("<h1></h1>");
                 }, 600);
             }
 
@@ -39,17 +45,20 @@ $(document).ready(function() {
     })
 
 });
-
+/* this function takes in a word and checks if it exists in the dictionary.
+Returns true if a match is found and false if there are no matches.
+ */
 function checkWord(word){
-    if(word == activeArray[enlarged].answer){
-        return true;
-    }
-    return false;
+    return $.ajax({
+        type: 'GET',
+        url: '../dictionary/get_match.php',
+        data: {word: word}
+    });
 }
 
+/*  this function loads the saved state of the game module */
 function loadAnagram(){
     $('#anagramInput').html("<h1>" + activeArray[enlarged].input + "</h1>");
-    $('#anagramAnswer').html("<h1>" + activeArray[enlarged].answer[0] + "</h1>");
     var scrambled = activeArray[enlarged].answer.split("");
     var pressed = activeArray[enlarged].data;
     var i = 0;
@@ -65,6 +74,9 @@ function loadAnagram(){
     })
 }
 
+/* this function calls the database to return a random word given
+the word length and difficulty(rarity).
+ */
 function getWordFromDictionary(size, difficulty){
 
     return $.ajax({
@@ -73,7 +85,8 @@ function getWordFromDictionary(size, difficulty){
         data: {length: size, rank: difficulty}
     });
 
-    return "doggy";
+    /* test for local server: */
+    //return "doggy";
 }
 
 /* Creates a new Anagram game */
