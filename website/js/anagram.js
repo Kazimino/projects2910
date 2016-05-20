@@ -89,10 +89,20 @@ function getWordFromDictionary(size, difficulty){
     //return "doggy";
 }
 
-/* Creates a new Anagram game */
+/* Creates a new Anagram game.  The length of the word generated is
+ * based on the time on the clock.  the length is increased by one
+  * letter every minute the game is active, up to 6 characters.
+  * the difficulty(rarity) of the word is increased from 1 to 10
+  * based on how many seconds have gone by.  this difficulty scales
+  * to the length of the word by bsically resetting every minute.  */
 function generateAnagram(){
-    var size = 4;
-    var difficulty = 4;
+    var time = min;
+    size = 3 + min;
+    if(sec >= 54){
+        difficulty = 10;
+    } else {}
+    difficulty = 1 + parseInt(sec / 6);
+
     var selectedWord = getWordFromDictionary(size, difficulty);
         
     var lettersArray = selectedWord.split("");
