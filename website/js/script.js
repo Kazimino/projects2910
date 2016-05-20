@@ -222,8 +222,12 @@ function spawnRandomGame() {
     }
 }
 
-/* put game generation code in here */
-/* generates a module and calls a game */
+
+/* generates a module and calls a game.
+for anagram, what is returned is an array with the first index
+ being an array of words of the same length in the dictionary, and the second
+ index being the scrambled letters to use.*/
+
 function spawnModule(pos) {
 
     var gameType, gameAnswer, data;
