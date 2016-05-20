@@ -18,21 +18,14 @@ $(document).ready(function() {
         if(currInput.length == activeArray[enlarged].answer.length){
             if(checkWord(currInput)){
                 $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
+                resetGame();
                 endGame(enlarged);
-
             } else {
                 wrongAnswer();
                 $('#anagramAnswer').html("<h1>" + "Try Again" + "</h1>");
                 activeArray[enlarged].input = [];
                 activeArray[enlarged].data = [];
-                $('#anagramInput').html("<h1></h1>");
-                setTimeout(function(){
-                    $('.letterChoice').each(function(){
-                        $(this).fadeTo("fast", 1);
-                        $(this).css("pointer-events", "auto");
-                    });
-                    $('#anagramAnswer').html("<h1></h1>");
-                }, 600);
+                resetGame();
             }
 
         }
@@ -54,6 +47,17 @@ function checkWord(word){
         url: '../dictionary/get_match.php',
         data: {word: word}
     });
+}
+
+function resetGame() {
+    $('#anagramInput').html("<h1></h1>");
+    setTimeout(function(){
+        $('.letterChoice').each(function(){
+            $(this).fadeTo("fast", 1);
+            $(this).css("pointer-events", "auto");
+        });
+        $('#anagramAnswer').html("<h1></h1>");
+    }, 600);
 }
 
 /*  this function loads the saved state of the game module */
