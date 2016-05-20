@@ -399,7 +399,7 @@ function ajaxSubmitScore(playerName) {
             name: playerName,
         },
         success: function(response) {
-            $('.scoreSubmission').hide();
+            $('.scoreSubmission').html("<h3>Your Rank:<span>#" + response + "</span></h3>");
         }
     });
 }

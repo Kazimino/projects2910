@@ -113,7 +113,7 @@ footer {
     margin-bottom: 2vh;
 }
 
-#timeLasted {
+h3 span {
     display: block;
     font-size: 8vw;
 }
