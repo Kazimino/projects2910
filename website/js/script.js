@@ -228,8 +228,6 @@ function spawnModule(pos) {
 
     switch (pos) {
         case "top":
-            gameType = "simonGame";
-            break;
         case "bottom":
             gameType = "simonGame";
             break;
@@ -238,7 +236,7 @@ function spawnModule(pos) {
             gameType = "ascendingNumber";
             break;
         case "topRight":
-        case "bottomLeft":    
+        case "bottomLeft":
             gameType = "mathGame";
             mathArr = mathGame();
             data = mathArr[0];
