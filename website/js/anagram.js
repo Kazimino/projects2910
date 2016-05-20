@@ -113,7 +113,7 @@ function getWordFromDictionary(size, diff){
 function generateAnagram(){
     var gameInfo = {
         type: "anagramGame",
-        answer: "";
+        answer: "",
         data: [],
     };
     
