@@ -360,6 +360,7 @@ main > .module:nth-child(7) {
     width: 100%;
     font-size: 170%;
     overflow-y: auto;
+    height: 95%;
 }
 
 #leaderList span {
