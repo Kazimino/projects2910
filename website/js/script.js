@@ -66,12 +66,16 @@ $(document).ready(function() {
     });
 
     $('.logo').click(function(){
-	if(totalTime > 0) {
-	    // if in game
-	} else {
-	    $('.leaderBoard').hide();
-	    mainMenu();
-	}
+        if(totalTime > 0) {
+            // if in game
+        } else {
+            $('.leaderBoard').hide();
+            mainMenu();
+        }
+    });
+    
+    $('#loadMore').click(function() {
+        ajaxGetScores(); 
     });
 });
 
@@ -379,7 +383,7 @@ function ajaxGetScores() {
         },
         success: function (response) {
             $('#leaderList').html(
-		(scoresLoaded > 0 ? $('#leaderList').html() : "") + response);
+                (scoresLoaded > 0 ? $('#leaderList').html() : "") + response);
             scoresLoaded += 10;
         }
     });
