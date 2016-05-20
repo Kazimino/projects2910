@@ -81,7 +81,7 @@ footer {
 
 /* End Game Screen */
 .egbtns {
-    width:26%;
+    height:10%;
     cursor:pointer;
     margin:auto;
     margin-top:4%;
@@ -332,6 +332,10 @@ main > .module:nth-child(7) {
     border-radius: 5%;
     margin-top: 1%;
     cursor: pointer;
+}
+
+.menuItem:last-child {
+    cursor: default;
 }
 
 #btnSize {

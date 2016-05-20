@@ -1,10 +1,14 @@
 /* Constants */
 var MAX_HEAT = 50000;
 var HEAT_PER_TICK  = 0.5;
-var GAME_SPAWN_TIME = 10;
+var GAME_SPAWN_TIME = 50;
+var DIFF_INCREASE = 600;
+var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
 var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
+
+var difficulty = 1;
 
 $(document).ready(function() {
     resizeMain();
@@ -182,7 +186,7 @@ function enlargeGame(pos) {
 // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
 function timerStart(){
     heatGenerate();
-    
+    var totalTime = dsec + sec * 10 + min * 600;
     if(dsec == 10) {
         dsec = 0;
         sec++;
@@ -190,9 +194,12 @@ function timerStart(){
             sec = 0;
             min++;
         }
-        if(sec % GAME_SPAWN_TIME == 0) {
-            spawnRandomGame();
-        }
+    }
+    if(totalTime % GAME_SPAWN_TIME == 0) {
+        spawnRandomGame();
+    }
+    if(difficulty < MAX_DIFFICULTY && totalTime % DIFF_INCREASE == 0) {
+        difficulty++;
     }
     
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
@@ -272,7 +279,6 @@ function loadGame(pos) {
     }
 
     if(gameType == "ascendingNumber") {
-        
         randGen();
     }
 }
@@ -281,7 +287,9 @@ function loadGame(pos) {
 function endGame(pos) {
     $('#' + pos + " .gauge-fill").height(0);
     $('#' + pos + ' .icon').css("display", "none");
-    hideCurrGame();
+    if(enlarged != "") {
+        hideCurrGame();
+    }
     delete activeArray[pos];
 }
 
@@ -344,20 +352,23 @@ function playGame() {
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
-    spawnModule("bottomRight");
     clock = setInterval(timerStart, 100);
     
 }
 
-/*function retry() {
+function retry() {
     $('.overlay').fadeOut(250);
-    activeArray = null;
     totalHeat = 0;
     activeMini = 0;
     min = 0;
     sec = 0;
     dsec = 0;
-}*/
+    difficulty = 1;
+    for(var key in activeArray) {
+        endGame(key);
+    }
+    playGame();
+}
 
 /*loads scores for leaderboard */
 var scoresLoaded = 0;
