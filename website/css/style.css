@@ -34,7 +34,7 @@ body {
     z-index: 9001;
     background-color: rgba(0,0,0,0.9);
     position: relative;
-    display: none;
+    display:none;
 }
 
 /* Header */
@@ -54,7 +54,7 @@ header {
     margin: 0 auto;
     display: block;
     position: relative;
-    top: 10%;
+    top:10%;
 }
 
 /* Main Frame */
@@ -80,6 +80,13 @@ footer {
 }
 
 /* End Game Screen */
+.egbtns {
+    width:26%;
+    cursor:pointer;
+    margin:auto;
+    margin-top:4%;
+    display:block;
+}
 
 .endGame {
     width: 100%;
@@ -88,6 +95,8 @@ footer {
     margin: 0 auto;
     text-align: center;
     display: block;
+    position:relative;
+    top:-10%;
 }
 
 .endGame h1 {
@@ -306,12 +315,13 @@ main > .module:nth-child(7) {
     transition: background-position 100ms linear;
 }
 
+
 /* Menu CSS */
 .menulogo {
     height: 40%;
     margin: 0 auto;
     display: block;
-    padding-bottom: 7%;
+    padding-bottom: 1%;
 }
 
 .menuItem {
@@ -320,8 +330,13 @@ main > .module:nth-child(7) {
     display: block;
     position: relative;
     border-radius: 5%;
-    margin-top: 5%;
+    margin-top: 1%;
     cursor: pointer;
+}
+
+#btnSize {
+    height:16%;
+    margin-top:4%;
 }
 
 /* LeaderBoard */
@@ -415,6 +430,7 @@ main > .module:nth-child(7) {
     background-color: gray;
     color: white;
     border-radius: 10%;
+    cursor: pointer;
 }
 
 .mathOption h1 {
@@ -467,6 +483,8 @@ main > .module:nth-child(7) {
     background-color: gray;
     color: white;
     vertical-align: top;
+    cursor: pointer;
+    border-radius: 10%;
 }
 
 /* Simon says game CSS */
@@ -482,6 +500,7 @@ main > .module:nth-child(7) {
     width: 100%;
     height: 50%;
     border-bottom: 4px solid black;
+    cursor:pointer;
 }
 #simonSection1 {
     background-color: yellow;
@@ -494,7 +513,60 @@ main > .module:nth-child(7) {
 }
 #simonSection4 {
     background-color: blue;
->>>>>>> af259d13702ad05d6338e3a07118957b2a0cf4ec
+
+}
+
+
+/* ascending numbers */
+#ascendingNumber {
+    display: none;
+}
+.numberRow {
+    display: block;
+    width: 40%;
+    height: 30%;
+    margin: auto;    
+    margin-top: 2%;
+    
+    
+}
+
+.numberOption {
+    width: 30%;
+    height: 100%;
+    border-radius:50%;
+    font-size:4vh;    
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 16%;
+    top: 45%;
+    border-style:solid;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.numberOption span {
+    color: ;
+    display: inline-block;
+    margin-top: 25%;
+}
+
+#numberSection1 {
+    background-color: blueviolet;
+}
+
+#numberSection2 {
+    background-color: green;
+}
+
+#numberSection3 {
+    background-color: red;
+}
+
+#numberSection4 {
+    background-color: blue;
+    
 }
 
 /* tablet / mobile */
