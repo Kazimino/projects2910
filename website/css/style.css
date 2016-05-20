@@ -387,6 +387,8 @@ main > .module:nth-child(7) {
     background-color: #1e1e1e;
     margin-top: 15px;
     cursor: pointer;
+    text-align: center;
+    line-height: 10vh;
 }
 
 /* Icons for hexagons */
