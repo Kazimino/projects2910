@@ -46,18 +46,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="anagram.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="anagram.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/anagram.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="96" column="67" selection-start-line="96" selection-start-column="67" selection-end-line="96" selection-end-column="67" />
+            <state relative-caret-position="1021">
+              <caret line="105" column="17" selection-start-line="105" selection-start-column="17" selection-end-line="105" selection-end-column="17" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -85,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_match.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_match.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dictionary/get_match.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="528">
+              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -111,7 +109,7 @@
             <state relative-caret-position="10197">
               <caret line="309" column="17" selection-start-line="309" selection-start-column="17" selection-end-line="309" selection-end-column="17" />
               <folding>
-                <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+                <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -331,7 +329,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83316000" />
+    <option name="totallyTimeSpent" value="83745000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="-14" width="3868" height="2098" extended-state="6" />
@@ -391,7 +389,7 @@
         <state relative-caret-position="10197">
           <caret line="309" column="17" selection-start-line="309" selection-start-column="17" selection-end-line="309" selection-end-column="17" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -448,9 +446,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -484,9 +480,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -529,7 +523,7 @@
         <state relative-caret-position="10197">
           <caret line="309" column="17" selection-start-line="309" selection-start-column="17" selection-end-line="309" selection-end-column="17" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -571,7 +565,7 @@
         <state relative-caret-position="12738">
           <caret line="386" column="27" selection-start-line="386" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -597,7 +591,7 @@
         <state relative-caret-position="7986">
           <caret line="242" column="13" selection-start-line="242" selection-start-column="13" selection-end-line="242" selection-end-column="13" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -623,7 +617,7 @@
         <state relative-caret-position="10329">
           <caret line="313" column="1" selection-start-line="313" selection-start-column="1" selection-end-line="313" selection-end-column="1" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -641,7 +635,7 @@
         <state relative-caret-position="6303">
           <caret line="191" column="16" selection-start-line="191" selection-start-column="16" selection-end-line="191" selection-end-column="16" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -688,7 +682,7 @@
         <state relative-caret-position="10197">
           <caret line="309" column="17" selection-start-line="309" selection-start-column="17" selection-end-line="309" selection-end-column="17" />
           <folding>
-            <marker date="1463689491742" expanded="true" signature="8343:8345" placeholder="{...}" />
+            <marker date="1463766560904" expanded="true" signature="8343:8345" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -733,31 +727,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dictionary/get_match.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/equation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/anagram.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="96" column="67" selection-start-line="96" selection-start-column="67" selection-end-line="96" selection-end-column="67" />
+        <state relative-caret-position="1021">
+          <caret line="105" column="17" selection-start-line="105" selection-start-column="17" selection-end-line="105" selection-end-column="17" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dictionary/get_match.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
