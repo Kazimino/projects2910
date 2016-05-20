@@ -380,6 +380,14 @@ main > .module:nth-child(7) {
     width: 35%;
 }
 
+#loadMore {
+    width: 100%;
+    height: 15%;
+    background-color: #fff;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
 /* Icons for hexagons */
 .icon {
     position: absolute;
