@@ -64,6 +64,15 @@ $(document).ready(function() {
             validateSubmit();
         }
     });
+
+    $('.logo').click(function(){
+	if(totalTime > 0) {
+	    // if in game
+	} else {
+	    $('.leaderBoard').hide();
+	    mainMenu();
+	}
+    });
 });
 
 var enlarged = "";
@@ -369,7 +378,8 @@ function ajaxGetScores() {
             offset: scoresLoaded,
         },
         success: function (response) {
-            $('#leaderList').html($('#leaderList').html() + response);
+            $('#leaderList').html(
+		(scoresLoaded > 0 ? $('#leaderList').html() : "") + response);
             scoresLoaded += 10;
         }
     });
@@ -427,6 +437,7 @@ function logoClick() {
 
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
+    resetAll();
     $('.overlay').fadeOut(250);
     if(enlarged == "") {
         $('main > .module').fadeOut(250);
@@ -437,5 +448,4 @@ function mainMenu() {
     $('header').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
-    resetAll()
 }

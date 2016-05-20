@@ -55,6 +55,7 @@ header {
     display: block;
     position: relative;
     top:10%;
+    cursor: pointer;
 }
 
 /* Main Frame */
