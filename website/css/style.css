@@ -389,29 +389,6 @@ main > .module:nth-child(7) {
     cursor: pointer;
 }
 
-/* Dummy box game CSS */
-#boxGame {
-    text-align: center;
-    height: 60%;
-    width: 30%;
-    position: absolute;
-    display: none;
-    left: 35%;
-    top: 20%;
-}
-.box {
-    background-color: red;
-    height: 100%;
-    width: 30%;
-    display: inline-block;
-    margin-right: 2%;
-}
-.box:nth-child(3) {
-    background-color: blue;
-}
-.box:nth-child(4) {
-    background-color: green;
-}
 
 /* Dummy number game CSS */
 #mathGame {
