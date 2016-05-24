@@ -4,6 +4,7 @@ var HEAT_PER_TICK  = 0.5;
 var GAME_SPAWN_TIME = 5;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
+var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
 
 /* Variables used for difficulty. */
 var level = 0;
@@ -78,6 +79,17 @@ $(document).ready(function() {
     });
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
+    
+    /* score submission */
+    $('#scoreSubmit').click(function() {
+        validateSubmit();
+    });
+    
+    $('#scoreName').keydown(function(e) {
+        if(e.keyCode == 13) {
+            validateSubmit();
+        }
+    });
 });
 
 var enlarged = "";
@@ -89,7 +101,6 @@ var dsec = 0;
 var totalHeat = 0;
 var activeArray = [];
 var activeMini = 0;
-var posList = ['top', 'topLeft', 'topRight', 'center', 'bottomLeft', 'bottomRight', 'bottom'];
 
 var clock;
 var timer;
@@ -174,7 +185,7 @@ function timerStart(){
         }
         /* Conditions to change difficulty */
         if ((sec % 30 == 0) && (level <= 4)) {
-            if (mathMultiplier < 4) {
+            if (mathMultiplier < 3) {
                 mathMultiplier++;
             }
             simonSteps++;
@@ -196,6 +207,7 @@ function timerStart(){
 function spawnRandomGame() {
     if(activeArray.length < 7) {
         var gameLocation;
+        var posList = ['top', 'topLeft', 'topRight', 'center', 'bottomLeft', 'bottomRight', 'bottom'];
         do {
             gameLocation = posList[Math.floor((Math.random() * 7))];
         } while(activeArray[gameLocation] != null);
@@ -213,6 +225,8 @@ function spawnModule(pos) {
         case "top":
         case "bottom":
             gameType = "simonGame";
+            gameAnswer = initSimonSays(1);
+            data = [];
             break;
         case "center":
             gameType = "anagramGame";
@@ -249,7 +263,6 @@ function spawnModule(pos) {
     }
 }
 
-
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
@@ -261,7 +274,7 @@ function loadGame(pos) {
         $('#prob').text(activeArray[pos].data);
     }
     if (gameType == "simonGame") {
-        startSimonSays(simonSteps, simonInterval);
+        playSimon();
     }
 }
 
@@ -313,8 +326,8 @@ function heatGenerate(){
     }
     
     if(totalHeat >= MAX_HEAT){
-        // lose
         totalHeat = MAX_HEAT;
+        loseGame();
     }
     var meterColour;
     meterColour = 'hsl(' + (120 - ((totalHeat/MAX_HEAT) * 120)) + ', 100%, 50%)';
@@ -339,7 +352,7 @@ function loadLeaderBoard() {
     scoresLoaded = 0;
     $(".menu").hide();
     $('header, .leaderBoard').fadeIn(500);
-    ajaxGetScores(scoresLoaded);
+    ajaxGetScores();
 }
 
 function showFrame() {
@@ -349,18 +362,59 @@ function showFrame() {
     });
 }
 
-function ajaxGetScores(loaded) {
+function loseGame() {
+    $("#timeLasted").html(min + ":" + sec + ":" + dsec);
+    $(".overlay").fadeIn(500);
+}
+
+function ajaxGetScores() {
     $.ajax({
         type: 'GET',
         url: '../leaderboard/get_records.php',
         data: {
-            offset: loaded,
+            offset: scoresLoaded,
         },
         success: function (response) {
             $('#leaderList').html($('#leaderList').html() + response);
             scoresLoaded += 10;
         }
     });
+}
+
+function ajaxSubmitScore(playerName) {
+    $.ajax({
+        type: 'POST',
+        url: '/leaderboard/submit_score.php',
+        data: {
+            score: min * 600 + sec * 10 + dsec,
+            name: playerName,
+        },
+        success: function(response) {
+            $('.scoreSubmission').hide();
+        }
+    });
+}
+
+function validateSubmit() {
+    var name = $('#scoreName').val();
+    var errMsg = nameValidate(name);
+    if(errMsg == "") {
+        ajaxSubmitScore(name);
+    } else {
+        $('#scoreName').css("background-color","#ff4141");
+        $('#nameError').html(errMsg);
+    }
+}
+
+function nameValidate(name) {
+    var errMsg = "";
+    if(!RegExp(/^.{3,15}$/).test(name)) {
+        errMsg += "Name must be between 3 - 15 characters<br>";
+    }
+    if(!RegExp(/^[a-z0-9_]*$/i).test(name)) {
+        errMsg += "Name can only contain alphanumeric characters or '_'";
+    }
+    return errMsg;
 }
 
 var logoCount = 0;
@@ -373,4 +427,3 @@ function logoClick() {
         alert("REESES' PEANUT BUTTER CUPS?!");
     }
 }
-

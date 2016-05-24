@@ -1,5 +1,6 @@
-// Variable for playSequence.
+// Variables for Simon.
 var n = 0;
+var steps;
 
 // Get a random number between 1-4 used for random sequence.
 function getNum() {
@@ -24,15 +25,15 @@ function resetSimon() {
 }
 
 // Handle game logic if a part has been clicked.
-function simonClick(chosenArray, inputArray, index, steps, delay) {
-    if (!(chosenArray[index] == inputArray[index])) {
+function simonClick(inputArray, index) {
+    if (!(activeArray[enlarged].answer[index] == inputArray[index])) {
         wrongAnswer();
         n = 0;
         resetSimon();
         setTimeout(function() {
-            playSequence(chosenArray, steps, delay);
-            inputSteps = new Array();
-            takeInput(chosenArray, steps, delay);
+            playSequence();
+            inputSteps = [];
+            takeInput();
         }, 750);
         return;
     } else {
@@ -46,52 +47,102 @@ function simonClick(chosenArray, inputArray, index, steps, delay) {
 }
 
 // Apply click effects to Simon Says game sections.
-function takeInput(chosenSteps, steps, delay) {
-    var inputSteps = new Array();
+function takeInput() {
+    var inputSteps = [];
     var i = 0;
     $("#simonSection1").click(function() {
         inputSteps[i] = 1;
         chooseBox(1);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
+        simonClick(inputSteps, i);
         i++;
     });
     $("#simonSection2").click(function() {
         inputSteps[i] = 2;
         chooseBox(2);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
+        simonClick(inputSteps, i);
         i++;
     });
     $("#simonSection3").click(function() {
         inputSteps[i] = 3;
         chooseBox(3);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
+        simonClick(inputSteps, i);
         i++;
     });
     $("#simonSection4").click(function() {
         inputSteps[i] = 4;
         chooseBox(4);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
+        simonClick(inputSteps, i);
+        i++;
+    });
+}
+
+function getInput() {
+    var i = 0;
+    $("#simonSection1").click(function() {
+        activeArray[enlarged].data[i] = 1;
+        chooseBox(1);
+        i++;
+    });
+    $("#simonSection2").click(function() {
+        activeArray[enlarged].data[i] = 2;
+        chooseBox(2);
+        i++;
+    });
+    $("#simonSection3").click(function() {
+        activeArray[enlarged].data[i] = 3;
+        chooseBox(3);
+        i++;
+    });
+    $("#simonSection4").click(function() {
+        activeArray[enlarged].data[i] = 4;
+        chooseBox(4);
         i++;
     });
 }
 
 // Play the sequence in chosenSteps.
-function playSequence(chosenSteps, steps, delay) {
+function playSequence() {
     var interval = setInterval(function() {
-        chooseBox(chosenSteps[n]);
+        chooseBox(activeArray[enlarged].answer[n]);
         n++;
         if (n > steps) {
             clearInterval(interval);
         }
-    }, delay);
+    }, 500);
+}
+
+function playSimon() {
+    resetSimon();
+    playSequence();
+    takeInput();
+}
+
+function runSimon() {
+    var win = false;
+    while (!win) {
+        win = playSimon();
+    }
 }
 
 // Start Simon says game.
-function startSimonSays(steps, delay) {
-    var chosenSteps = new Array();
+function initSimonSays(difficulty) {
+    var chosenSteps = [];
+    switch (difficulty) {
+        case 1:
+            steps = 3;
+            break;
+        case 2:
+            steps = 4;
+            break;
+        case 3:
+            steps = 5;
+            break;
+        case 4:
+            steps = 6;
+            break;
+    }
     for (var i = 0; i < steps; i++) {
         chosenSteps[i] = getNum();
     }
-    playSequence(chosenSteps, steps, delay);
-    takeInput(chosenSteps, steps, delay);
+    return chosenSteps;
 }
