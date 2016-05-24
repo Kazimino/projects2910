@@ -1,4 +1,5 @@
 <?php
+/* this file gets a word */
 include("../leaderboard/db_connect.php");
 
 $length = array_key_exists("length", $_GET) ? $_GET["length"] : "4";

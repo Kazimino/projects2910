@@ -34,6 +34,8 @@ $(document).ready(function() {
         enlargeGame($(this).data("pos"));
     });
     
+    /*clickable mini heat guages allows us to switch 
+    to that game that is associate with the heat guage clicked*/
     $('#mini .module').click(function() {
         var pos = $(this).data("pos")
         if(pos != 0) {
@@ -58,13 +60,14 @@ $(document).ready(function() {
     $('#scoreSubmit').click(function() {
         validateSubmit();
     });
-    
+    /*submit button click fo leaderboard.*/
     $('#scoreName').keydown(function(e) {
         if(e.keyCode == 13) {
             validateSubmit();
         }
     });
 
+    /*takes the user to the main menu if clicked*/
     $('.logo').click(function(){
         if(totalTime > 0) {
             // if in game
@@ -74,6 +77,8 @@ $(document).ready(function() {
         }
     });
     
+    /*ajax function loading more scores in the leaderboard 
+    screen*/
     $('#loadMore').click(function() {
         ajaxGetScores(); 
     });
