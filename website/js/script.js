@@ -1,22 +1,27 @@
 /* Constants */
 var MAX_HEAT = 50000;
 var HEAT_PER_TICK  = 0.5;
-var GAME_SPAWN_TIME = 5;
+var GAME_SPAWN_TIME = 50;
+var DIFF_INCREASE = 600;
+var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
 var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
-
-/* Variables used for difficulty. */
-var level = 0;
-var simonSteps = 3;
-var simonInterval = 500;
-var mathMultiplier = 2;
+var difficulty = 1;
 
 $(document).ready(function() {
     resizeMain();
      
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
+        var menu = $(this);
+        var newSource = menu.data('alt-src');
+        menu.data('alt-src', menu.attr('src'));
+        menu.attr('src', newSource);
+    });
+    
+    /* hover for overlay buttons */
+    $('.egbtns').hover(function() {
         var menu = $(this);
         var newSource = menu.data('alt-src');
         menu.data('alt-src', menu.attr('src'));
@@ -36,42 +41,10 @@ $(document).ready(function() {
         }
     });
     
-    /*backwards functionality function */
+    /*backwards function */
     $('#backbutton').click(function() {
         hideCurrGame();
-    });
-	
-    /* JavaScript/jQuery for dummy games */
-    /* Box Game */
-    $('.box').mouseenter(function() {
-        $(this).css("border", "1px solid white");
-    });
-    $('.box').mouseleave(function() {
-        $(this).css("border", "none");
-    });
-    
-    /* Notifies user they selected correct color and hides the current game*/
-    $('#greenBox').click(function() {
-        endGame(enlarged);
-    });
-    
-    /* Number Game */
-    $('.mathOption').mouseenter(function() {
-        $(this).css("background-color", "black");
-     });
-    $('.mathOption').mouseleave(function() {
-        $(this).css("background-color", "gray");
-    });
-    
-    /* Notifies user they selected correct operator and hides the current game */
-    $('.mathOption').click(function() {
-        var correct = false;
-        $clicked = $(this).text().trim();
-        
-        checkMathAnswer(enlarged, $clicked);
-        
-    });
-
+    });    
 
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
@@ -90,6 +63,19 @@ $(document).ready(function() {
             validateSubmit();
         }
     });
+
+    $('.logo').click(function(){
+        if(totalTime > 0) {
+            // if in game
+        } else {
+            $('.leaderBoard').hide();
+            mainMenu();
+        }
+    });
+    
+    $('#loadMore').click(function() {
+        ajaxGetScores(); 
+    });
 });
 
 var enlarged = "";
@@ -99,6 +85,7 @@ var min = 0;
 var sec = 0;
 var dsec = 0;
 var totalHeat = 0;
+var totalTime = 0;
 var activeArray = [];
 var activeMini = 0;
 
@@ -106,6 +93,7 @@ var clock;
 var timer;
 var heatMeter;
 
+/* module object */
 function module(type, answer, data) {
     this.heat = 0;
     this.type = type;
@@ -115,6 +103,7 @@ function module(type, answer, data) {
 }
 
 // padding function for leading zeroes on timer
+/* pads the timer. */
 function pad(time){
     if(time  < 10){
         return "0" + time;
@@ -122,6 +111,7 @@ function pad(time){
     return time;
 }
 
+/* resizes the main board */
 function resizeMain() {
     var $main = $('main');
     $main.width($main.height());
@@ -129,6 +119,7 @@ function resizeMain() {
     $main.css("left", $(window).width() / 2 - $main.height() / 2);
 }
 
+/* hides the current in game screen */
 function hideCurrGame() {
     var currGameType = activeArray[enlarged].type;
     enlarged = "";
@@ -144,6 +135,7 @@ function hideCurrGame() {
     $('#mini .module').data("pos", 0);
 }
 
+/* functions enlarges a game to play mode */
 function enlargeGame(pos) {
     enlarged = pos;
     
@@ -173,6 +165,8 @@ function enlargeGame(pos) {
 // timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
 function timerStart(){
     heatGenerate();
+    dsec++;
+    totalTime++;
     if(dsec == 10) {
         dsec = 0;
         sec++;
@@ -180,30 +174,24 @@ function timerStart(){
             sec = 0;
             min++;
         }
-        if(sec % GAME_SPAWN_TIME == 0) {
-            spawnRandomGame();
-        }
-        /* Conditions to change difficulty */
-        if ((sec % 30 == 0) && (level <= 4)) {
-            if (mathMultiplier < 3) {
-                mathMultiplier++;
-            }
-            simonSteps++;
-            level++;
-        }
-        if ((sec % 30 == 0) && (level <= 4)) {
-            GAME_SPAWN_TIME--;
-        }
+    }
+    
+    if(totalTime % GAME_SPAWN_TIME == 0) {
+        spawnRandomGame();
+    }
+    
+    if(difficulty < MAX_DIFFICULTY && totalTime % DIFF_INCREASE == 0) {
+        difficulty++;
     }
     
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
     
-    dsec += 1;
     if(totalHeat >= MAX_HEAT){
         clearInterval(clock);
     }
 }
 
+/* spawns a random module */
 function spawnRandomGame() {
     if(activeArray.length < 7) {
         var gameLocation;
@@ -215,46 +203,34 @@ function spawnRandomGame() {
     }
 }
 
-/* put game generation code in here */
-function spawnModule(pos) {
 
-    var gameType, gameAnswer, data;
-    var mathArr = [];
+/* generates a module and calls a game.
+for anagram, what is returned is an array with the first index
+ being an array of words of the same length in the dictionary, and the second
+ index being the scrambled letters to use.*/
+
+function spawnModule(pos) {
+    var gameInfo;
 
     switch (pos) {
         case "top":
         case "bottom":
-            gameType = "simonGame";
-            gameAnswer = initSimonSays(1);
-            data = [];
-            break;
-        case "center":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            data = [];
+            gameInfo = generateSimon();
             break;
         case "topLeft":
-            gameType = "anagramGame";
-            gameAnswer = generateAnagram();
-            data = [];
-            break;
         case "bottomRight":
-            gameType = "boxGame";
+            gameInfo = generateAscNum();
             break;
         case "topRight":
-        case "bottomLeft":    
-            gameType = "mathGame";
-            mathArr = mathGame(mathMultiplier);
-            data = mathArr[0];
-            gameAnswer = mathArr[1];
+        case "bottomLeft":
+            gameInfo = generateMath();
             break;
-        default:
-            gameType = "boxGame";
+        case "center":
+            gameInfo = generateAnagram();
             break;
     }
 
-    activeArray[pos] = new module(gameType, gameAnswer, data);
-
+    activeArray[pos] = new module(gameInfo.type, gameInfo.answer, gameInfo.data);
 
     $('#' + pos + " .icon").fadeIn(250);
     if(enlarged != "") {
@@ -263,28 +239,37 @@ function spawnModule(pos) {
     }
 }
 
+/*loads a mini game */
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
-
-    if(gameType == "anagramGame") {
-        loadAnagram();
-    }
-    if(gameType == "mathGame") {
-        $('#prob').text(activeArray[pos].data);
-    }
-    if (gameType == "simonGame") {
-        playSimon();
+    switch(gameType) {
+        case "anagramGame":
+            loadAnagram();
+            break;
+        case "mathGame":
+            $('#prob').text(activeArray[pos].data);
+            break;
+        case "simonGame":
+            loadSimon();
+            break;
+        case "ascendingNumber":
+            loadAscNum();
+            break;
     }
 }
 
+/*called at the end of a mini game */
 function endGame(pos) {
     $('#' + pos + " .gauge-fill").height(0);
     $('#' + pos + ' .icon').css("display", "none");
-    hideCurrGame();
+    if(enlarged != "") {
+        hideCurrGame();
+    }
     delete activeArray[pos];
 }
 
+/* called when an answer is incorrect */
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
     
@@ -299,7 +284,6 @@ function wrongAnswer() {
 
 // heat gauge heat increase function.  increases heat by 5 every second and adds heat
 // from gauges to main heat bar.
-
 function heatGenerate(){
     for(var key in activeArray) {
         if(activeArray[key].heat < 100) {
@@ -322,7 +306,7 @@ function heatGenerate(){
     }
     
     if(totalHeat > 0) {
-        totalHeat -= COOLANT_LEVEL;
+        totalHeat = totalHeat < COOLANT_LEVEL ? 0 : totalHeat - COOLANT_LEVEL;
     }
     
     if(totalHeat >= MAX_HEAT){
@@ -343,10 +327,29 @@ function playGame() {
     $("main > .module").fadeIn(500, function() {
         $(this).css("display", "block");
     });
-    spawnModule("top");
     clock = setInterval(timerStart, 100);
+    spawnRandomGame();
 }
 
+function retry() {
+    $('.overlay').fadeOut(250);
+    resetAll();
+    playGame();
+}
+
+function resetAll() {
+    totalHeat = 0;
+    activeMini = 0;
+    min = 0;
+    sec = 0;
+    dsec = 0;
+    difficulty = 1;
+    for(var key in activeArray) {
+        endGame(key);
+    }
+}
+
+/*loads scores for leaderboard */
 var scoresLoaded = 0;
 function loadLeaderBoard() {
     scoresLoaded = 0;
@@ -362,11 +365,13 @@ function showFrame() {
     });
 }
 
+/* called when the heat bar reaches max heat */
 function loseGame() {
-    $("#timeLasted").html(min + ":" + sec + ":" + dsec);
+    $("#timeLasted").html(min + ":" + (sec < 10 ? "0" + sec : sec) + ":" + dsec);
     $(".overlay").fadeIn(500);
 }
 
+/*ajax call to get scores from the database */
 function ajaxGetScores() {
     $.ajax({
         type: 'GET',
@@ -375,12 +380,14 @@ function ajaxGetScores() {
             offset: scoresLoaded,
         },
         success: function (response) {
-            $('#leaderList').html($('#leaderList').html() + response);
+            $('#leaderList').html(
+                (scoresLoaded > 0 ? $('#leaderList').html() : "") + response);
             scoresLoaded += 10;
         }
     });
 }
 
+/*ajax call to submit scores */
 function ajaxSubmitScore(playerName) {
     $.ajax({
         type: 'POST',
@@ -390,11 +397,12 @@ function ajaxSubmitScore(playerName) {
             name: playerName,
         },
         success: function(response) {
-            $('.scoreSubmission').hide();
+            $('.scoreSubmission').html("<h3>Your Rank:<span>#" + response + "</span></h3>");
         }
     });
 }
 
+/*validate score submission */
 function validateSubmit() {
     var name = $('#scoreName').val();
     var errMsg = nameValidate(name);
@@ -406,6 +414,7 @@ function validateSubmit() {
     }
 }
 
+/* validate name submission for leaderboard*/
 function nameValidate(name) {
     var errMsg = "";
     if(!RegExp(/^.{3,15}$/).test(name)) {
@@ -426,4 +435,19 @@ function logoClick() {
         $('#center .icon').attr("src", "images/Easter/chris.png");
         alert("REESES' PEANUT BUTTER CUPS?!");
     }
+}
+
+/*function that loads the main menu from the overlay screen*/
+function mainMenu() {
+    resetAll();
+    $('.overlay').fadeOut(250);
+    if(enlarged == "") {
+        $('main > .module').fadeOut(250);
+    } else {
+        $('#ingame').fadeOut(250);
+        $('#mini').fadeOut(250);
+    }
+    $('header').fadeOut(250);
+    $('footer').fadeOut(250);
+    $('.menu').fadeIn(250);
 }

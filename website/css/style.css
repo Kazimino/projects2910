@@ -54,7 +54,8 @@ header {
     margin: 0 auto;
     display: block;
     position: relative;
-    top: 10%;
+    top:10%;
+    cursor: pointer;
 }
 
 /* Main Frame */
@@ -80,6 +81,13 @@ footer {
 }
 
 /* End Game Screen */
+.egbtns {
+    height:10%;
+    cursor:pointer;
+    margin:auto;
+    margin-top:4%;
+    display:block;
+}
 
 .endGame {
     width: 100%;
@@ -88,6 +96,8 @@ footer {
     margin: 0 auto;
     text-align: center;
     display: block;
+    position:relative;
+    top:-10%;
 }
 
 .endGame h1 {
@@ -103,7 +113,7 @@ footer {
     margin-bottom: 2vh;
 }
 
-#timeLasted {
+#timeLasted h3 span {
     display: block;
     font-size: 8vw;
 }
@@ -276,7 +286,6 @@ main > .module:nth-child(7) {
     bottom: 0;
 }
 
-
 #timerBox{
     vertical-align: top;
     margin: auto;
@@ -288,7 +297,6 @@ main > .module:nth-child(7) {
     border-radius: 25px;
     border: 2px solid white;
 }
-
 
 #heatMeter {
     margin: auto;
@@ -311,7 +319,7 @@ main > .module:nth-child(7) {
     height: 40%;
     margin: 0 auto;
     display: block;
-    padding-bottom: 7%;
+    padding-bottom: 1%;
 }
 
 .menuItem {
@@ -320,8 +328,17 @@ main > .module:nth-child(7) {
     display: block;
     position: relative;
     border-radius: 5%;
-    margin-top: 5%;
+    margin-top: 1%;
     cursor: pointer;
+}
+
+.menuItem:last-child {
+    cursor: default;
+}
+
+#btnSize {
+    height:16%;
+    margin-top:4%;
 }
 
 /* LeaderBoard */
@@ -340,6 +357,7 @@ main > .module:nth-child(7) {
     width: 100%;
     font-size: 170%;
     overflow-y: auto;
+    height: 95%;
 }
 
 #leaderList span {
@@ -360,6 +378,17 @@ main > .module:nth-child(7) {
     width: 35%;
 }
 
+#loadMore {
+    width: 100%;
+    height: 15%;
+    color: #fff;
+    background-color: #1e1e1e;
+    margin-top: 15px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 10vh;
+}
+
 /* Icons for hexagons */
 .icon {
     position: absolute;
@@ -369,29 +398,6 @@ main > .module:nth-child(7) {
     cursor: pointer;
 }
 
-/* Dummy box game CSS */
-#boxGame {
-    text-align: center;
-    height: 60%;
-    width: 30%;
-    position: absolute;
-    display: none;
-    left: 35%;
-    top: 20%;
-}
-.box {
-    background-color: red;
-    height: 100%;
-    width: 30%;
-    display: inline-block;
-    margin-right: 2%;
-}
-.box:nth-child(3) {
-    background-color: blue;
-}
-.box:nth-child(4) {
-    background-color: green;
-}
 
 /* Dummy number game CSS */
 #mathGame {
@@ -415,6 +421,7 @@ main > .module:nth-child(7) {
     background-color: gray;
     color: white;
     border-radius: 10%;
+    cursor: pointer;
 }
 
 .mathOption h1 {
@@ -467,6 +474,8 @@ main > .module:nth-child(7) {
     background-color: gray;
     color: white;
     vertical-align: top;
+    cursor: pointer;
+    border-radius: 10%;
 }
 
 /* Simon says game CSS */
@@ -482,6 +491,7 @@ main > .module:nth-child(7) {
     width: 100%;
     height: 50%;
     border-bottom: 4px solid black;
+    cursor:pointer;
 }
 #simonSection1 {
     background-color: yellow;
@@ -494,7 +504,56 @@ main > .module:nth-child(7) {
 }
 #simonSection4 {
     background-color: blue;
->>>>>>> af259d13702ad05d6338e3a07118957b2a0cf4ec
+}
+
+/* ascending numbers */
+#ascendingNumber {
+    display: none;
+}
+
+.numberRow {
+    display: block;
+    width: 40%;
+    height: 33%;
+    margin: auto;    
+    margin-top: 4%;
+}
+
+.numberOption {
+    width: 30%;
+    height: 100%;
+    border-radius:50%;
+    font-size:4vh;    
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 16%;
+    border-style:solid;
+    margin-left: 2%;
+    cursor: pointer;
+    line-height: 330%;
+}
+
+.numberOption span {
+    color: ;
+    display: inline-block;
+    margin-top: 25%;
+}
+
+#numberSection1 {
+    background-color: blueviolet;
+}
+
+#numberSection2 {
+    background-color: green;
+}
+
+#numberSection3 {
+    background-color: red;
+}
+
+#numberSection4 {
+    background-color: blue;
 }
 
 /* tablet / mobile */
@@ -507,5 +566,4 @@ main > .module:nth-child(7) {
     #leaderList {
         font-size: 5vw;
     }
-
 }

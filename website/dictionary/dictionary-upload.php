@@ -12,9 +12,15 @@ if($result->num_rows == 0) {
     $rank = array(3 => 0, 4 => 0, 5 => 0, 6 => 0);
     while(!feof($dict)) {
         $line = trim(fgets($dict));
+<<<<<<< HEAD
 	$words[$line] = array_key_exists($line, $words) ? ++$words[$line] : 1;
 	$length = strlen($line);
         if($length >= 3 && $length <= 6 && $words[$line] == 1 && ctype_alpha($line)) {
+=======
+        $words[$line] = array_key_exists($line, $words) ? ++$words[$line] : 1;
+        $length = strlen($line);
+        if($length >= 3 && $length <= 6 && $words[$line] == 1 && ctype_alpha($line) && preg_match('/[aeiouy]/', $line) == 1) {
+>>>>>>> 463a68be37ad10073b050be4dd8247472856d5ad
             $query .= " (\"$line\", $length, ".++$rank[$length]."),";
             echo $line . "\n";
         }
