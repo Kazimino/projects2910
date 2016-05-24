@@ -17,12 +17,9 @@ $(document).ready(function() {
 
         if(currInput.length == activeArray[enlarged].answer.length){
             if(checkWord(currInput)){
-                $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
                 endGame(enlarged);
-
             } else {
                 wrongAnswer();
-                $('#anagramAnswer').html("<h1>" + "Try Again" + "</h1>");
                 activeArray[enlarged].input = [];
                 activeArray[enlarged].data = [];
                 $('#anagramInput').html("<h1></h1>");
@@ -31,7 +28,6 @@ $(document).ready(function() {
                         $(this).fadeTo("fast", 1);
                         $(this).css("pointer-events", "auto");
                     });
-                    $('#anagramAnswer').html("<h1></h1>");
                 }, 600);
             }
 
@@ -64,8 +60,11 @@ function loadAnagram(){
     var i = 0;
     $('.letterChoice').each(function(){
         $(this).css("opacity", 1.0);
+        $(this).text("");
+        $(this).css("pointer-events", "none");
         if(i < scrambled.length){
             $(this).html("<h1>" + scrambled[i++] + "</h1>");
+            $(this).css("pointer-events", "auto");
         }
     });
 
