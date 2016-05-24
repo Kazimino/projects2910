@@ -43,12 +43,12 @@ function generateAscNum() {
         case 3:
             maxNumber = 50;
             baseNumber = -50;
-            fracChance = 0.5;
+            fracChance = 0.25;
             break;
         case 4:
             maxNumber = 100;
             baseNumber = -100;
-            fracChance = 0.75;
+            fracChance = 0.25;
             break;
     }
     
