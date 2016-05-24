@@ -303,6 +303,7 @@
                     </div>
                 </div>
             </div>
+<!----------------- Audio files for stuffs here ------------------->
 
     <!-------------In game hexagon ends here -------------->
             <div class="menu">
