@@ -30,6 +30,7 @@
         <script src="js/equation.js"></script>
         <script src="js/ascendingNumber.js"></script>
         <script src="js/simonSays.js"></script>
+        <script src="js/sound.js"></script>
         <title>Reactor</title>
     </head>
     <body>
@@ -40,8 +41,8 @@
                 <img src="images/reactor_logo.png" class="logo">
             </div>
         </header>
-<!-------------the main tag supports the game itself holds many different 
-    - hexgon modules  --------------->
+<!----------the main tag supports the game itself holds many different 
+    - hexagon modules  --------------->
         <main>
             <div class="module" id="top">		
                 <div class="hexagon">
@@ -304,6 +305,8 @@
                 </div>
             </div>
 <!----------------- Audio files for stuffs here ------------------->
+            <audio id="sound"></audio>
+            <audio id="bgm"></audio>
 
     <!-------------In game hexagon ends here -------------->
             <div class="menu">
@@ -326,6 +329,8 @@
                 <div id="timerBox">
                 </div>
                 <div id="heatMeter"></div>
+                <img src="images/soundUC.png" data-alt-src="images/soundC.png" id="soundbtn" />
+                <img src="images/muteUC.png" data-alt-src="images/muteC.png" id="mutebtn" />
             </div>
         </footer>
 <!-------------- END GAME OVERLAY BROS ------------->

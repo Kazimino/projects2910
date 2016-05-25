@@ -7,6 +7,7 @@ $(document).ready(function() {
             /*hides the clicked button*/
             $(this).css("visibility", "hidden");
             if(currModule.input.length == currModule.answer.length - 1 ) {
+                playCorrect();
                 endGame(enlarged);
                 /*shows the hidden buttons*/
                 $(".numberOption").css("visibility", "visible");
@@ -14,6 +15,7 @@ $(document).ready(function() {
             currModule.input += "1";
         } else {
             wrongAnswer();
+            playIncorrect();
         }
     });
 });

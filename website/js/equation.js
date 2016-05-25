@@ -11,11 +11,11 @@ $(document).ready(function(){
     $('.mathOption').click(function() {
         var $clicked = $(this).text().trim();
         if($clicked == activeArray[enlarged].answer) {
+            playCorrect();
             endGame(enlarged);
         } else {
-            //need a function to show that answer was
             wrongAnswer();
-            //wrong and they need to keep trying 
+            playIncorrect();
         }
     });
 });

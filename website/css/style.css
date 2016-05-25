@@ -615,6 +615,26 @@ main > .module:nth-child(7) {
     
 }
 
+/*css for sound/mute button */
+#soundbtn {
+    width: 50px;
+    position: absolute;
+    top: 25%;
+    right:6% ;
+    cursor: pointer;
+    display:block;
+}
+
+#mutebtn {
+    width: 50px;
+    position: absolute;
+    top: 25%;
+    right:6% ;
+    cursor: pointer;
+    display:none;
+}
+
+
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
     

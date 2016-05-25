@@ -6,11 +6,13 @@ $(document).ready(function() {
         chooseBox(choiceID);
         if(choiceID == "simonSection" + currModule.answer[currModule.input.length]) {
             if(currModule.input.length == currModule.answer.length - 1 ) {
+                playCorrect();
                 endGame(enlarged);
             }
             currModule.input += "1";
         } else {
             wrongAnswer();
+            playIncorrect();
             currModule.input = "";
             setTimeout(function() {
                 playSequence();

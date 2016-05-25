@@ -12,7 +12,8 @@ var difficulty = 1;
 
 $(document).ready(function() {
     resizeMain();
-     
+    
+    
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var menu = $(this);
@@ -28,6 +29,39 @@ $(document).ready(function() {
         menu.data('alt-src', menu.attr('src'));
         menu.attr('src', newSource);
     });
+    
+    /*hover function for sound button */
+    $('#soundbtn').hover(function() {
+        var menu = $(this);
+        var newSource = menu.data('alt-src');
+        menu.data('alt-src', menu.attr('src'));
+        menu.attr('src', newSource);
+    });
+    
+    
+    $('#mutebtn').hover(function() {
+        var menu = $(this);
+        var newSource = menu.data('alt-src');
+        menu.data('alt-src', menu.attr('src'));
+        menu.attr('src', newSource);
+    });
+    
+    /*click function for mute button */
+    $('#soundbtn').click(function() {
+        $(this).hide();    
+        muteSFX();
+        muteBGM();
+        $('#mutebtn').css({display: 'block'});
+        
+    });
+    
+    $('#mutebtn').click(function() {
+        $(this).css({display: 'none'});
+        unmuteSFX();
+        playBGM();
+        $('#soundbtn').show();
+    });
+    
     
     /*this function is for enlarging a module for in game play */
     $('.icon').click(function() {
@@ -336,8 +370,10 @@ function playGame() {
     });
     clock = setInterval(timerStart, 100);
     spawnRandomGame();
+    playBackgroundMusic();
 }
 
+/* called when person clicks retry. */
 function retry() {
     $('.overlay').fadeOut(250);
     resetAll();
@@ -376,6 +412,7 @@ function showFrame() {
 function loseGame() {
     $("#timeLasted").html(min + ":" + (sec < 10 ? "0" + sec : sec) + ":" + dsec);
     $(".overlay").fadeIn(500);
+    stopBGM();
 }
 
 /*ajax call to get scores from the database */
