@@ -99,7 +99,7 @@ header {
 }
 
 #loginForm, #registerForm {
-    height: 0;
+    display: none;
 }
 
 /* Main Frame */
