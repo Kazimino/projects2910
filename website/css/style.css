@@ -69,6 +69,7 @@ header {
     border-radius: 5%;
     overflow: hidden;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+    display: none;
 }
 
 .dropMenu li {
