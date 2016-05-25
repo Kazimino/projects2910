@@ -466,6 +466,18 @@ main > .module:nth-child(7) {
     margin: auto;
 }
 
+#midLetterRow {
+    border-radius: 25px;
+    border: 2px solid white;
+}
+#anagramInput{
+    margin: auto;
+    color: white;
+    font-size: 5vh;
+    text-align: center;
+    vertical-align: center;
+}
+
 .letterChoice {
     height: 80%;
     width: 25%;
@@ -538,7 +550,6 @@ main > .module:nth-child(7) {
 }
 
 .numberOption span {
-    color: ;
     display: inline-block;
     margin-top: 25%;
 }

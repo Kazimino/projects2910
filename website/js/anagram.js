@@ -17,12 +17,9 @@ $(document).ready(function() {
 
         if(currInput.length == activeArray[enlarged].answer.length){
             if(checkWord(currInput)){
-                $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
-                resetGame();
                 endGame(enlarged);
             } else {
                 wrongAnswer();
-                $('#anagramAnswer').html("<h1>" + "Try Again" + "</h1>");
                 activeArray[enlarged].input = [];
                 activeArray[enlarged].data = [];
                 resetGame();
@@ -80,12 +77,11 @@ function loadAnagram(){
     var i = 0;
     $('.letterChoice').each(function(){
         $(this).css("opacity", 1.0);
-        if($(this).text() == "") {
-            $(this).css("pointer-events", "none");
-        }
+        $(this).text("");
+        $(this).css("pointer-events", "none");
         if(i < scrambled.length){
             $(this).html("<h1>" + scrambled[i++] + "</h1>");
-        $(this).css("pointer-events", "auto");
+            $(this).css("pointer-events", "auto");
         }
     });
 
@@ -115,7 +111,12 @@ function getWordFromDictionary(size){
     return word;
 }
 
-/* Creates a new Anagram game */
+/* Creates a new Anagram game.  The length of the word generated is
+ * based on the time on the clock.  the length is increased by one
+  * letter every minute the game is active, up to 6 characters.
+  * the difficulty(rarity) of the word is increased from 1 to 10
+  * based on how many seconds have gone by.  this difficulty scales
+  * to the length of the word by bsically resetting every minute.  */
 function generateAnagram(){
     var gameInfo = {
         type: "anagramGame",
