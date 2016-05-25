@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    /*creates and instantiates a game of simon says*/
     $('.simonSection').click(function() {
         var choiceID = $(this).attr('id');
         var currModule = activeArray[enlarged];
@@ -18,6 +19,7 @@ $(document).ready(function() {
     });
 });
 
+/* this functions generates a simon says game*/
 function generateSimon() {
     var gameInfo = {
         type: "simonGame",
@@ -38,6 +40,8 @@ function generateSimon() {
     return gameInfo;
 }
 
+/* loads a simon sequence for a game if it doesn't exist 
+inthe active array */
 function loadSimon() {
     if(!activeArray[enlarged].data) {
         playSequence();
@@ -63,75 +67,3 @@ function chooseBox(choice) {
         $(".simonSection").css("opacity", "1");
     }, 300);
 }
-
-
-/*
-// Handle game logic if a part has been clicked.
-function simonClick(inputArray, index, steps) {
-    if (!(chosenArray[index] == inputArray[index])) {
-        wrongAnswer();
-        n = 0;
-        resetSimon();
-        setTimeout(function() {
-            playSequence(steps);
-            inputSteps = new Array();
-            takeInput(steps);
-        }, 750);
-        return;
-    } else {
-        if (steps == (index + 1)) {
-            endGame(enlarged);
-            n = 0;
-            resetSimon();
-            return;
-        }
-    }
-}
-
-// Apply click effects to Simon Says game sections.
-function takeInput(chosenSteps, steps, delay) {
-    var inputSteps = new Array();
-    var i = 0;
-    $("#simonSection1").click(function() {
-        inputSteps[i] = 1;
-        chooseBox(1);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
-        i++;
-    });
-    $("#simonSection2").click(function() {
-        inputSteps[i] = 2;
-        chooseBox(2);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
-        i++;
-    });
-    $("#simonSection3").click(function() {
-        inputSteps[i] = 3;
-        chooseBox(3);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
-        i++;
-    });
-    $("#simonSection4").click(function() {
-        inputSteps[i] = 4;
-        chooseBox(4);
-        simonClick(chosenSteps, inputSteps, i, steps, delay);
-        i++;
-    });
-}
-
-// Play the sequence in chosenSteps.
-function playSequence(chosenSteps, steps, delay) {
-    var interval = setInterval(function() {
-        chooseBox(chosenSteps[n]);
-        n++;
-        if (n > steps) {
-            clearInterval(interval);
-        }
-    }, delay);
-}
-
-// Start Simon says game.
-function startSimonSays(steps, delay) {
-    playSequence(chosenSteps, steps, delay);
-    takeInput(chosenSteps, steps, delay);
-}
-*/

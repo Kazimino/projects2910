@@ -1,4 +1,5 @@
 <?php
+/*this is for uploading the dictionary */
 include("../leaderboard/db_connect.php");
 
 $query = "SELECT * FROM Dictionary LIMIT 1;";

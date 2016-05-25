@@ -28,6 +28,8 @@ $(document).ready(function() {
         }
 
     });
+    
+    /*changes the box the users has already clicked on */
     $('#anagramInput').click(function(){
         $(this).html("<h1>" + $(this).text().slice(0, -1) + "</h1>");
         var lastPressed = activeArray[enlarged].data.pop();
@@ -55,6 +57,7 @@ function checkWord(validate){
     return valid == 1;
 }
 
+/* resests the game */
 function resetGame() {
     $('#anagramInput').html("<h1></h1>");
     setTimeout(function(){
