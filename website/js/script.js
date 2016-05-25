@@ -6,13 +6,14 @@ var DIFF_INCREASE = 600;
 var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
+var TIME_GOAL = 3;
 var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
 
 var difficulty = 1;
 
 $(document).ready(function() {
     resizeMain();
-     
+
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var menu = $(this);
@@ -20,7 +21,7 @@ $(document).ready(function() {
         menu.data('alt-src', menu.attr('src'));
         menu.attr('src', newSource);
     });
-    
+
     /* hover for overlay buttons */
     $('.egbtns').hover(function() {
         var menu = $(this);
@@ -28,14 +29,14 @@ $(document).ready(function() {
         menu.data('alt-src', menu.attr('src'));
         menu.attr('src', newSource);
     });
-    
+
     /*this function is for enlarging a module for in game play */
     $('.icon').click(function() {
         enlargeGame($(this).data("pos"));
     });
-    
-    /*clickable mini heat guages allows us to switch 
-    to that game that is associate with the heat guage clicked*/
+
+    /*clickable mini heat guages allows us to switch
+     to that game that is associate with the heat guage clicked*/
     $('#mini .module').click(function() {
         var pos = $(this).data("pos")
         if(pos != 0) {
@@ -43,11 +44,11 @@ $(document).ready(function() {
             enlargeGame(pos);
         }
     });
-    
+
     /*backwards function */
     $('#backbutton').click(function() {
         hideCurrGame();
-    });    
+    });
 
     /* Scaling the divs when windows resize */
     $(window).resize(function(e) {
@@ -55,7 +56,7 @@ $(document).ready(function() {
     });
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
-    
+
     /* score submission */
     $('#scoreSubmit').click(function() {
         validateSubmit();
@@ -76,11 +77,11 @@ $(document).ready(function() {
             mainMenu();
         }
     });
-    
-    /*ajax function loading more scores in the leaderboard 
-    screen*/
+
+    /*ajax function loading more scores in the leaderboard
+     screen*/
     $('#loadMore').click(function() {
-        ajaxGetScores(); 
+        ajaxGetScores();
     });
 });
 
@@ -98,6 +99,12 @@ var activeMini = 0;
 var clock;
 var timer;
 var heatMeter;
+
+/* achievement variables */
+var hotStreak = 0;
+var boardClear = false;
+var timeGoalMet = false;
+
 
 /* module object */
 function module(type, answer, data) {
@@ -145,7 +152,7 @@ function hideCurrGame() {
 /* functions enlarges a game to play mode */
 function enlargeGame(pos) {
     enlarged = pos;
-    
+
     /* back button is shown when a module is clicked and enlarged */
     $('#backbutton').fadeIn(250);
     if (enlarged.type = "simonGame") {
@@ -155,9 +162,9 @@ function enlargeGame(pos) {
     /*fades the minigauge in when module is expanded*/
     $('#mini').fadeIn(250);
     loadGame(enlarged);
-    
-    /* hides main game board and enlarges and animates 
-    focus module - also shows the ingame board. */
+
+    /* hides main game board and enlarges and animates
+     focus module - also shows the ingame board. */
     $('main > .module').hide(250);
     $('#inGame').show(250);
     activeMini = 0;
@@ -182,19 +189,23 @@ function timerStart(){
             min++;
         }
     }
-    
+
     if(totalTime % GAME_SPAWN_TIME == 0) {
         spawnRandomGame();
     }
-    
+
     if(difficulty < MAX_DIFFICULTY && totalTime % DIFF_INCREASE == 0) {
         difficulty++;
     }
-    
+
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
-    
+
     if(totalHeat >= MAX_HEAT){
         clearInterval(clock);
+    }
+
+    if(min >= TIME_GOAL){
+        timeGoalMet = true;
     }
 }
 
@@ -212,7 +223,7 @@ function spawnRandomGame() {
 
 
 /* generates a module and calls a game.
-for anagram, what is returned is an array with the first index
+ for anagram, what is returned is an array with the first index
  being an array of words of the same length in the dictionary, and the second
  index being the scrambled letters to use.*/
 
@@ -273,17 +284,23 @@ function endGame(pos) {
     if(enlarged != "") {
         hideCurrGame();
     }
+    hotStreak += 1;
     delete activeArray[pos];
+
+    if(activeArray.length == 0 && min >= 3){
+        boardClear = true;
+    }
 }
 
 /* called when an answer is incorrect */
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
-    
+    hotStreak = 0;
+
     if(activeArray[enlarged].heat > 100) {
         activeArray[enlarged].heat = 100;
-    } 
-   $('#inGame').effect("shake", {times:4, distance:5}, 250);
+    }
+    $('#inGame').effect("shake", {times:4, distance:5}, 250);
     /* whatever sound / images for later */
 }
 
@@ -311,11 +328,11 @@ function heatGenerate(){
         $fill.css("background-color", 'hsl(' + (120 - (activeArray[key].heat / 5 * 6)) + ', 100%, 50%)');
         totalHeat += activeArray[key].heat;
     }
-    
+
     if(totalHeat > 0) {
         totalHeat = totalHeat < COOLANT_LEVEL ? 0 : totalHeat - COOLANT_LEVEL;
     }
-    
+
     if(totalHeat >= MAX_HEAT){
         totalHeat = MAX_HEAT;
         loseGame();
@@ -323,12 +340,12 @@ function heatGenerate(){
     var meterColour;
     meterColour = 'hsl(' + (120 - ((totalHeat/MAX_HEAT) * 120)) + ', 100%, 50%)';
     heatMeter.setAttribute("style", "background-position: " + totalHeat/MAX_HEAT * -100 + "% 0; " +
-                           "background-image: linear-gradient(to right, transparent, transparent 50%, " + meterColour + 
-                           " 50%, " + meterColour + " 100%)");    
+        "background-image: linear-gradient(to right, transparent, transparent 50%, " + meterColour +
+        " 50%, " + meterColour + " 100%)");
 }
 
 /* At this current moment, all this does is fade from Menu to Game.
-   used for onclick on PlayButton.*/
+ used for onclick on PlayButton.*/
 function playGame() {
     showFrame();
     $("main > .module").fadeIn(500, function() {
