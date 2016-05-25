@@ -58,8 +58,48 @@ header {
     cursor: pointer;
 }
 
-nav {
-    display: none;
+.dropMenu {
+    list-style: none;
+    width: 375px;
+    background-color: #1e1e1e;
+    position: absolute;
+    z-index: 9002;
+    text-align: center;
+    font-size: 3vh;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+}
+
+.dropMenu li {
+    width: 80%;
+    padding: 4vh 10%;
+    border-top: 1px solid #fff;
+}
+
+.dropMenu li:first-child {
+    border: none;
+}
+
+.dropMenu input {
+    display: block;
+    margin: 0 auto 1vh;
+    background-color: #0f0f0f;
+    border: none;
+    padding: 2vh;
+    border-radius: 15px;
+    color: #fff;
+}
+
+#loginSubmit, #registerSubmit {
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 2.5vh;
+    color: #000;
+}
+
+#loginForm, #registerForm {
+    height: 0;
 }
 
 /* Main Frame */

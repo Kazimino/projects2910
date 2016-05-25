@@ -1,4 +1,5 @@
-<ul class="menu">
+<div id="dropTab"></div>
+<ul class="dropMenu">
     <?php if(isset($_SESSION["userid"])) {
         echo "<a href=\"my-account\"><li>My Account</li></a>";
         echo "<li id=\"logout\">Logout</li>";
