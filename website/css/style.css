@@ -67,7 +67,6 @@ header {
     text-align: center;
     font-size: 3vh;
     border-radius: 5%;
-    overflow: hidden;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
     display: none;
 }
@@ -76,6 +75,7 @@ header {
     width: 80%;
     padding: 4vh 10%;
     border-top: 1px solid #fff;
+    overflow: hidden;
 }
 
 .dropMenu li:first-child {
@@ -100,7 +100,7 @@ header {
 }
 
 #loginForm, #registerForm {
-    display: none;
+    height: 0;
 }
 
 /* Main Frame */

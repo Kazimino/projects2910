@@ -458,3 +458,9 @@ function mainMenu() {
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
 }
+
+function login() {
+    $('#loginForm').animate({
+        height: 'auto'
+    });
+}
