@@ -36,7 +36,7 @@
         <!----------------content div for logo - header ------------->
         <header>
             <div class="content">
-                <nav></nav>
+                <nav><?php include("account/menu.php"); ?></nav>
                 <img src="images/reactor_logo.png" class="logo">
             </div>
         </header>
