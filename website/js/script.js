@@ -34,6 +34,8 @@ $(document).ready(function() {
         enlargeGame($(this).data("pos"));
     });
     
+    /*clickable mini heat guages allows us to switch 
+    to that game that is associate with the heat guage clicked*/
     $('#mini .module').click(function() {
         var pos = $(this).data("pos")
         if(pos != 0) {
@@ -58,11 +60,27 @@ $(document).ready(function() {
     $('#scoreSubmit').click(function() {
         validateSubmit();
     });
-    
+    /*submit button click fo leaderboard.*/
     $('#scoreName').keydown(function(e) {
         if(e.keyCode == 13) {
             validateSubmit();
         }
+    });
+
+    /*takes the user to the main menu if clicked*/
+    $('.logo').click(function(){
+        if(totalTime > 0) {
+            // if in game
+        } else {
+            $('.leaderBoard').hide();
+            mainMenu();
+        }
+    });
+    
+    /*ajax function loading more scores in the leaderboard 
+    screen*/
+    $('#loadMore').click(function() {
+        ajaxGetScores(); 
     });
 });
 
@@ -369,7 +387,8 @@ function ajaxGetScores() {
             offset: scoresLoaded,
         },
         success: function (response) {
-            $('#leaderList').html($('#leaderList').html() + response);
+            $('#leaderList').html(
+                (scoresLoaded > 0 ? $('#leaderList').html() : "") + response);
             scoresLoaded += 10;
         }
     });
@@ -385,7 +404,7 @@ function ajaxSubmitScore(playerName) {
             name: playerName,
         },
         success: function(response) {
-            $('.scoreSubmission').hide();
+            $('.scoreSubmission').html("<h3>Your Rank:<span>#" + response + "</span></h3>");
         }
     });
 }
@@ -427,6 +446,7 @@ function logoClick() {
 
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
+    resetAll();
     $('.overlay').fadeOut(250);
     if(enlarged == "") {
         $('main > .module').fadeOut(250);
@@ -437,5 +457,4 @@ function mainMenu() {
     $('header').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
-    resetAll()
 }

@@ -18,6 +18,7 @@ $(document).ready(function() {
     });
 });
 
+/* generates ascending numbers game */
 function generateAscNum() {
     var maxNumber, baseNumber, fracChance;
     var temp = [];
@@ -27,6 +28,7 @@ function generateAscNum() {
         data: []
     };
     
+    /* controls the difficulty level */
     switch(difficulty){
         case 1:
             maxNumber = 10;
@@ -69,12 +71,14 @@ function generateAscNum() {
     
     return gameInfo;
     
+    /* generates a fraction */
     function genFraction() {
         var a = Math.floor((Math.random() * maxNumber) + baseNumber);
         var b = Math.floor((Math.random() * maxNumber) + baseNumber);
         return (a + "/" + b);
     }
     
+    /* generates a whole number */
     function genWhole() {
         var val;
         var found
@@ -87,11 +91,13 @@ function generateAscNum() {
         return val;
     }
     
+    /* comparision function */
     function compareNumbers(a,b) {
         return eval(a.value) - eval(b.value);
     }
 }
 
+/* loads an ascending numbers game */
 function loadAscNum() {
     for (i = 1; i <= 4; i++) {
         if(activeArray[enlarged].input.length < i) {

@@ -55,6 +55,7 @@ header {
     display: block;
     position: relative;
     top:10%;
+    cursor: pointer;
 }
 
 /* Main Frame */
@@ -112,7 +113,7 @@ footer {
     margin-bottom: 2vh;
 }
 
-#timeLasted {
+h3 span {
     display: block;
     font-size: 8vw;
 }
@@ -359,6 +360,7 @@ main > .module:nth-child(7) {
     width: 100%;
     font-size: 170%;
     overflow-y: auto;
+    height: 95%;
 }
 
 #leaderList span {
@@ -379,6 +381,17 @@ main > .module:nth-child(7) {
     width: 35%;
 }
 
+#loadMore {
+    width: 100%;
+    height: 15%;
+    color: #fff;
+    background-color: #1e1e1e;
+    margin-top: 15px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 10vh;
+}
+
 /* Icons for hexagons */
 .icon {
     position: absolute;
@@ -388,29 +401,6 @@ main > .module:nth-child(7) {
     cursor: pointer;
 }
 
-/* Dummy box game CSS */
-#boxGame {
-    text-align: center;
-    height: 60%;
-    width: 30%;
-    position: absolute;
-    display: none;
-    left: 35%;
-    top: 20%;
-}
-.box {
-    background-color: red;
-    height: 100%;
-    width: 30%;
-    display: inline-block;
-    margin-right: 2%;
-}
-.box:nth-child(3) {
-    background-color: blue;
-}
-.box:nth-child(4) {
-    background-color: green;
-}
 
 /* Dummy number game CSS */
 #mathGame {

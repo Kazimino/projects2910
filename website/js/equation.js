@@ -78,11 +78,3 @@ function generateMath() {
     return gameInfo;
 }
 
-
-/* checks the answer to the math equation 
-mathAnswer is the answer to the question 
-pos is the position of the hex 
-$clicked is the text from the clicked button. */
-function checkMathAnswer(pos, $clicked) {
-    
-}
