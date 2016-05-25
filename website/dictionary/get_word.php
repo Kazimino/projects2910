@@ -3,13 +3,10 @@ include("../leaderboard/db_connect.php");
 
 $length = array_key_exists("length", $_GET) ? $_GET["length"] : "4";
 
-$max_rank = array(0,0,0
-		         ,751
-                 ,1702
-                 ,2293
-                 ,2766);
-
-$rand_word = rand(1, $max_rank[$length]);
+$query = "SELECT * FROM Dictionary WHERE length = $length";
+$result = $db_con->query($query);
+$max = $result->num_rows;
+$rand_word = rand(1, $max);
 
 $select = "SELECT word
             FROM Dictionary
