@@ -466,13 +466,16 @@ main > .module:nth-child(7) {
     margin: auto;
 }
 
-#anagramInput {
-    margin: auto;
-    color: white;
-    font-size: 6vh;
-    text-align: center;
+#midLetterRow {
     border-radius: 25px;
     border: 2px solid white;
+}
+#anagramInput{
+    margin: auto;
+    color: white;
+    font-size: 5vh;
+    text-align: center;
+    vertical-align: center;
 }
 
 .letterChoice {
