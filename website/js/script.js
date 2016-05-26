@@ -13,7 +13,7 @@ var difficulty = 1;
 $(document).ready(function() {
     resizeMain();
     bindMenu();
-    
+
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var menu = $(this);
@@ -37,7 +37,7 @@ $(document).ready(function() {
         menu.data('alt-src', menu.attr('src'));
         menu.attr('src', newSource);
     });
-        
+
     $('#mutebtn').hover(function() {
         var menu = $(this);
         var newSource = menu.data('alt-src');
