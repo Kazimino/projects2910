@@ -55,6 +55,7 @@ $(document).ready(function() {
         
     });
     
+    /* click function for unmute button */
     $('#mutebtn').click(function() {
         $(this).css({display: 'none'});
         unmuteSFX();
@@ -380,6 +381,7 @@ function retry() {
     playGame();
 }
 
+/*resets the game*/
 function resetAll() {
     totalHeat = 0;
     activeMini = 0;
@@ -410,9 +412,10 @@ function showFrame() {
 
 /* called when the heat bar reaches max heat */
 function loseGame() {
+    stopBGM();
     $("#timeLasted").html(min + ":" + (sec < 10 ? "0" + sec : sec) + ":" + dsec);
     $(".overlay").fadeIn(500);
-    stopBGM();
+    
 }
 
 /*ajax call to get scores from the database */

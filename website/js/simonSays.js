@@ -64,8 +64,20 @@ function playSequence() {
 
 // Display a box as being part of the sequence or clicked.
 function chooseBox(choice) {
+    $clicked = ('#' + choice);
     $('#' + choice).css("opacity", "0.2");
     setTimeout(function() {
         $(".simonSection").css("opacity", "1");
     }, 300);
+    
+    if($clicked == '#simonSection1') {
+        playYellow();
+    } else if($clicked == '#simonSection2') {
+        playGreen();
+    } else if($clicked == '#simonSection3') {
+        playRed();
+    } else if($clicked == '#simonSection4') {
+        playBlue();
+    }
+    
 }
