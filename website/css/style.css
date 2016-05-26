@@ -180,8 +180,8 @@ main > .module {
 /*styles in game hex start here*/
 #inGame{
   width: 88%;
-    height: 75%;
-    position: relative;
+  height: 75%;
+  position: relative;
   display: none;
   margin: 0 auto;
 }
