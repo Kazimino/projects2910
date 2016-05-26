@@ -13,8 +13,8 @@ var difficulty = 1;
 
 $(document).ready(function() {
     resizeMain();
-    
-    
+    bindMenu();
+
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
         var menu = $(this);
@@ -38,8 +38,7 @@ $(document).ready(function() {
         menu.data('alt-src', menu.attr('src'));
         menu.attr('src', newSource);
     });
-    
-    
+
     $('#mutebtn').hover(function() {
         var menu = $(this);
         var newSource = menu.data('alt-src');
@@ -94,8 +93,9 @@ $(document).ready(function() {
     
     /* score submission */
     $('#scoreSubmit').click(function() {
-        validateSubmit();
+        ajaxSubmitScore();
     });
+    
     /*submit button click fo leaderboard.*/
     $('#scoreName').keydown(function(e) {
         if(e.keyCode == 13) {
@@ -385,7 +385,7 @@ function heatGenerate(){
    used for onclick on PlayButton.*/
 function playGame() {
     showFrame();
-    $("main > .module").fadeIn(500, function() {
+    $("main > .module, footer").fadeIn(500, function() {
         $(this).css("display", "block");
     });
     clock = setInterval(timerStart, 100);
@@ -407,6 +407,7 @@ function resetAll() {
     min = 0;
     sec = 0;
     dsec = 0;
+    totalTime = 0;
     difficulty = 1;
     for(var key in activeArray) {
         endGame(key);
@@ -417,15 +418,19 @@ function resetAll() {
 var scoresLoaded = 0;
 function loadLeaderBoard() {
     scoresLoaded = 0;
-    $(".menu").hide();
-    $('header, .leaderBoard').fadeIn(500);
+    showFrame();
+    $('.leaderBoard').fadeIn(500);
     ajaxGetScores();
 }
 
 function showFrame() {
     $(".menu").hide();
-    $("header, footer").fadeIn(500, function() {
-        $(this).css("display", "block");
+    $("header").animate({
+        'background-color': '#1e1e1e',
+        'box-shadow': '0px 3px 6px rgba(0,0,0,0.6)'
+    });
+    $(".logo").animate({
+        'opacity': '1'
     });
 }
 
@@ -433,15 +438,15 @@ function showFrame() {
 function loseGame() {
     stopBGM();
     $("#timeLasted").html(min + ":" + (sec < 10 ? "0" + sec : sec) + ":" + dsec);
-    $(".overlay").fadeIn(500);
-    
+    $(".overlay").fadeIn(500);   
+    ajaxSubmitScore();
 }
 
 /*ajax call to get scores from the database */
 function ajaxGetScores() {
     $.ajax({
         type: 'GET',
-        url: '../leaderboard/get_records.php',
+        url: 'leaderboard/get_records.php',
         data: {
             offset: scoresLoaded,
         },
@@ -454,13 +459,12 @@ function ajaxGetScores() {
 }
 
 /*ajax call to submit scores */
-function ajaxSubmitScore(playerName) {
+function ajaxSubmitScore() {
     $.ajax({
         type: 'POST',
-        url: '/leaderboard/submit_score.php',
+        url: 'leaderboard/submit_score.php',
         data: {
             score: min * 600 + sec * 10 + dsec,
-            name: playerName,
         },
         success: function(response) {
             $('.scoreSubmission').html("<h3>Your Rank:<span>#" + response + "</span></h3>");
@@ -481,13 +485,19 @@ function validateSubmit() {
 }
 
 /* validate name submission for leaderboard*/
-function nameValidate(name) {
+function nameValidate(name, password) {
     var errMsg = "";
     if(!RegExp(/^.{3,15}$/).test(name)) {
         errMsg += "Name must be between 3 - 15 characters<br>";
     }
-    if(!RegExp(/^[a-z0-9_]*$/i).test(name)) {
-        errMsg += "Name can only contain alphanumeric characters or '_'";
+    if(!RegExp(/^[a-z0-9_']*$/i).test(name)) {
+        errMsg += "Name can only contain alphanumeric characters and _ or \'<br>";
+    }
+    if(!RegExp(/^[a-zA-Z0-9!@#$%^&*]*$/).test(password)) {
+        errMsg += "Password can only contain alphanumberic characters or !@#$%^&*<br>";
+    }
+    if(!RegExp(/^.{8,20}$/).test(password)) {
+        errMsg += "Password must be between 8 - 20 characters";
     }
     return errMsg;
 }
@@ -513,7 +523,13 @@ function mainMenu() {
         $('#ingame').fadeOut(250);
         $('#mini').fadeOut(250);
     }
-    $('header').fadeOut(250);
+    $('header').animate({
+        'background-color': 'transparent',
+        'box-shadow': '0px 3px 6px rgba(0,0,0,0)'
+    });
+    $('.logo').animate({
+        'opacity': '0'
+    });
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
 }
@@ -530,3 +546,139 @@ function cleanSweepAction(){
 function ironManAction(){
     ironMan = true;
 }
+
+function loginDrop() {
+    $form = $('#loginForm');
+    if($form.height() > 0) {
+        $form.animate({
+            'max-height': '0',
+            'padding-top': '0',
+            'padding-bottom': '0'
+        });
+    } else {
+        $form.animate({
+            'max-height': '500px',
+	    padding: '4vh 10%'
+        });
+    }
+}
+
+function registerDrop() {
+    $form = $('#registerForm');
+    if($form.height() > 0) {
+        $form.animate({
+            'max-height': '0',
+            'padding-top': '0',
+            'padding-bottom': '0'
+        });
+    } else {
+        $form.animate({
+            'max-height': '500px',
+            padding: '4vh 10%'
+        });
+    }
+}
+
+function loginSubmit() {
+    var usr = $('#loginName').val();
+    var pw = $('#loginPassword').val();
+    ajaxLogin(usr, pw);
+}
+
+function registerSubmit() {
+    var usr = $('#registerName').val();
+    var pw = $('#registerPassword').val();
+    var err = nameValidate(usr, pw);
+    if(err == "") {
+        ajaxRegister(usr, pw);
+    } else {
+        $('#registerName, #registerPassword').css('background-color', '#ff4141');
+        $('#registerForm .nameError').html(err);
+    }
+}
+
+function ajaxLogin(user, pass) {
+    $.ajax({
+        type: 'POST',
+        url: 'account/login.php',
+        data: {
+            name: user,
+            password: pass,
+        },
+        success: function(response) {
+            console.log(response);
+            if(response == 'valid') {
+                $('nav').load('account/menu.php');
+                bindMenu();
+            } else {
+                $('#loginName, #loginPassword').css('background-color', '#ff4141');
+                $('#loginForm .nameError').html('This username and password combination does not exist');
+            }
+        }
+    });
+}
+
+function ajaxRegister(user, pass) {
+    $.ajax({
+        type: 'POST',
+        url: 'account/register.php',
+        data: {
+            name: user,
+            password: pass,
+        },
+        success: function(response) {
+            console.log(response);
+            if(response == 'valid') {
+                $('nav').load('account/menu.php');
+                bindMenu();
+            } else {
+                $('#registerName, #registerPassword').css('background-color', '#ff4141');
+                $('#registerForm .nameError').html('This username has already been taken');
+            }
+        }
+    });
+}
+
+function bindMenu() {
+    $('nav').on('click', '#dropTab', function() {
+        $menu = $('.dropMenu');
+        if($menu.height() > 0) {
+            $('.dropMenu').animate({
+                'max-height': '0'
+            });
+        } else {
+            $('.dropMenu').animate({
+               'max-height': '1000px'
+            });
+        }
+    });
+    $('nav').on('click', '#myAccount', function() {
+    });
+    $('nav').on('click', '#logout', function() {
+        $.get('account/logout.php');
+        $('nav').load('account/menu.php');
+    });
+    $('nav').on('click', '#login', function() {
+        loginDrop();
+    });
+    $('nav').on('click', '#register', function() {
+        registerDrop();
+    });
+    $('nav').on('click', '#loginSubmit', function() {
+        loginSubmit();
+    });
+    $('nav').on('click', '#registerSubmit', function() {
+        registerSubmit();
+    });
+    $('nav').on('keydown', '#loginName, #loginPassword', function(e) {
+        if(e.keyCode == 13) {
+            loginSubmit();
+        }
+    });
+    $('nav').on('keydown', '#registerName, #registerPassword', function(e) {
+        if(e.keyCode == 13) {
+            registerSubmit();
+        }
+    });
+}
+
