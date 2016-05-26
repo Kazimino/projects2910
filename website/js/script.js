@@ -6,6 +6,7 @@ var DIFF_INCREASE = 600;
 var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
+var TIME_GOAL = 3;
 var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
 
 var difficulty = 1;
@@ -121,6 +122,11 @@ $(document).ready(function() {
 
 var enlarged = "";
 
+// achievement variables
+var onFire = 0;
+var ironMan = false;
+var cleanSweep = false;
+
 // heat gauge and timer variables
 var min = 0;
 var sec = 0;
@@ -231,6 +237,10 @@ function timerStart(){
     if(totalHeat >= MAX_HEAT){
         clearInterval(clock);
     }
+
+    if(min == TIME_GOAL){
+        ironManAction();
+    }
 }
 
 /* spawns a random module */
@@ -309,17 +319,26 @@ function endGame(pos) {
         hideCurrGame();
     }
     delete activeArray[pos];
+    onFire += 1;
+    if(onFire == 5){
+        onFireAction();
+    }
+    if(activeArray.length == 0){
+        cleanSweepAction();
+    }
 }
 
 /* called when an answer is incorrect */
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
+    onFire = 0;
     
     if(activeArray[enlarged].heat > 100) {
         activeArray[enlarged].heat = 100;
     } 
    $('#inGame').effect("shake", {times:4, distance:5}, 250);
     /* whatever sound / images for later */
+
 }
 
 
@@ -497,4 +516,17 @@ function mainMenu() {
     $('header').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
+}
+
+/* functions to activate achievements */
+function onFireAction(){
+    
+}
+
+function cleanSweepAction(){
+    cleanSweep = true;
+}
+
+function ironManAction(){
+    ironMan = true;
 }

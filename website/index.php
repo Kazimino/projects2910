@@ -322,6 +322,8 @@
                 <ul id="leaderList"></ul>
                 <div id="loadMore">Load More Scores</div>
             </div>
+            <!--------------- achievements ---------------------------->
+
         </main>
                 
         <footer>
