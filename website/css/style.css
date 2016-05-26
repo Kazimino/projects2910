@@ -58,6 +58,50 @@ header {
     cursor: pointer;
 }
 
+.dropMenu {
+    list-style: none;
+    width: 375px;
+    background-color: #1e1e1e;
+    position: absolute;
+    z-index: 9002;
+    text-align: center;
+    font-size: 3vh;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+}
+
+.dropMenu li {
+    width: 80%;
+    padding: 4vh 10%;
+    border-top: 1px solid #fff;
+}
+
+.dropMenu li:first-child {
+    border: none;
+}
+
+.dropMenu input {
+    display: block;
+    margin: 0 auto 1vh;
+    background-color: #0f0f0f;
+    border: none;
+    padding: 2vh;
+    border-radius: 15px;
+    color: #fff;
+}
+
+#loginSubmit, #registerSubmit {
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 2.5vh;
+    color: #000;
+}
+
+#loginForm, #registerForm {
+    display: none;
+}
+
 /* Main Frame */
 
 main {
@@ -463,6 +507,18 @@ main > .module:nth-child(7) {
     margin: auto;
 }
 
+#midLetterRow {
+    border-radius: 25px;
+    border: 2px solid white;
+}
+#anagramInput{
+    margin: auto;
+    color: white;
+    font-size: 5vh;
+    text-align: center;
+    vertical-align: center;
+}
+
 .letterChoice {
     height: 80%;
     width: 25%;
@@ -535,7 +591,6 @@ main > .module:nth-child(7) {
 }
 
 .numberOption span {
-    color: ;
     display: inline-block;
     margin-top: 25%;
 }
@@ -567,6 +622,26 @@ main > .module:nth-child(7) {
     height: 100%;
     display: none;
 }
+
+/*css for sound/mute button */
+#soundbtn {
+    width: 50px;
+    position: absolute;
+    top: 25%;
+    right:6% ;
+    cursor: pointer;
+    display:block;
+}
+
+#mutebtn {
+    width: 50px;
+    position: absolute;
+    top: 25%;
+    right:6% ;
+    cursor: pointer;
+    display:none;
+}
+
 
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {

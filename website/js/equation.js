@@ -11,11 +11,11 @@ $(document).ready(function(){
     $('.mathOption').click(function() {
         var $clicked = $(this).text().trim();
         if($clicked == activeArray[enlarged].answer) {
+            playCorrect();
             endGame(enlarged);
         } else {
-            //need a function to show that answer was
             wrongAnswer();
-            //wrong and they need to keep trying 
+            playIncorrect();
         }
     });
 });
@@ -47,9 +47,9 @@ function generateMath() {
     var answer = null;
 
     /*check needed to stop operator increment*/
-    if(difficulty < 4) {
+   // if(difficulty < 4) {
         operator = getRandomOperator(difficulty);
-    }
+   // }
 
     /*switch to get the answer for the RHS of the equation*/
     switch(operator) {
@@ -74,15 +74,7 @@ function generateMath() {
     }
 
     gameInfo.data = numOne + " _ " + numTwo  + " = " 
-                   + (Math.round(answer * 100) / 100);    
+                   + (Math.round(answer * 1000) / 1000);    
     return gameInfo;
 }
 
-
-/* checks the answer to the math equation 
-mathAnswer is the answer to the question 
-pos is the position of the hex 
-$clicked is the text from the clicked button. */
-function checkMathAnswer(pos, $clicked) {
-    
-}

@@ -30,17 +30,19 @@
         <script src="js/equation.js"></script>
         <script src="js/ascendingNumber.js"></script>
         <script src="js/simonSays.js"></script>
+        <script src="js/sound.js"></script>
         <title>Reactor</title>
     </head>
     <body>
-        
+        <!----------------content div for logo - header ------------->
         <header>
             <div class="content">
-                <nav></nav>
+                <nav><?php include("account/menu.php"); ?></nav>
                 <img src="images/reactor_logo.png" class="logo">
             </div>
         </header>
-        
+<!----------the main tag supports the game itself holds many different 
+    - hexagon modules  --------------->
         <main>
             <div class="module" id="top">		
                 <div class="hexagon">
@@ -227,7 +229,7 @@
                     </div>
                 </div>
             </div>
-    <!-----In game hexagon, starts off hidden on page ------>
+    <!-----In game hexagon, starts off hidden on page contains each game ------>
             <div id="inGame">		
                 <div class="hexagon">
                     <div class="hexagon-in1">
@@ -237,6 +239,7 @@
                             <div class="hexagon inner">
                                 <div class="hexagon-in1">
                                     <div class="hexagon-in2">
+                    <!------math game html divs start here ----------->
                                         <div id="mathGame">
                                             <h1 id="prob"></h1>
                                             <div class="mathOption"><h1>+</h1></div>
@@ -244,6 +247,7 @@
                                             <div class="mathOption"><h1>/</h1></div>
                                             <div class="mathOption"><h1>*</h1></div>
                                         </div>
+                    <!--------------anagram game starts here ------------------>
                                         <div id="anagramGame">
                                             <div class="letterRow" id="topLetterRow">
                                                 <div class="letterChoice" id="letterChoice0"></div>
@@ -252,7 +256,6 @@
                                             </div>
                                             <div class="letterRow" id="midLetterRow">
                                                 <div id="anagramInput"></div>
-                                                <div id="anagramAnswer"></div>
                                             </div>
                                             <div class="letterRow" id="botLetterRow">
                                                 <div class="letterChoice" id="letterChoice3"></div>
@@ -260,6 +263,7 @@
                                                 <div class="letterChoice" id="letterChoice5"></div>
                                             </div>
                                          </div>
+                <!-------------------------simon says game starts here ------------------------>
                                         <div id="simonGame">
                                             <div class="section">
                                                 <div class="simonSection" id="simonSection1">
@@ -274,6 +278,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                <!---------------------ascending numbers stuffs ------------------------>
                                         <div id="ascendingNumber">
                                             <div class="numberRow">
                                                 <div class="numberOption" id="numberSection1">
@@ -299,6 +304,9 @@
                     </div>
                 </div>
             </div>
+<!----------------- Audio files for stuffs here ------------------->
+            <audio id="sound"></audio>
+            <audio id="bgm"></audio>
 
     <!-------------In game hexagon ends here -------------->
             <div class="menu">
@@ -308,7 +316,7 @@
                 <img src="images/leaderboardbtn.png" data-alt-src="images/leaderboardbtnCL.png" class="menuItem" id="btnSize" onclick="loadLeaderBoard()">
                 <img src="images/CompanyLogo.png" class="menuItem">
             </div> 
-            
+            <!---------------leaderboard starts here ----------------->
             <div class="leaderBoard">
                 <h1>Leaderboard</h1>
                 <ul id="leaderList"></ul>
@@ -335,6 +343,8 @@
                 <div id="timerBox">
                 </div>
                 <div id="heatMeter"></div>
+                <img src="images/soundUC.png" data-alt-src="images/soundC.png" id="soundbtn" />
+                <img src="images/muteUC.png" data-alt-src="images/muteC.png" id="mutebtn" />
             </div>
         </footer>
         
