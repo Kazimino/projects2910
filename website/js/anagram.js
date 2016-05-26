@@ -17,8 +17,12 @@ $(document).ready(function() {
 
         if(currInput.length == activeArray[enlarged].answer.length){
             if(checkWord(currInput)){
+                $('#anagramAnswer').html("<h1>" + "You Win!" + "</h1>");
+                playCorrect();
+                resetGame();
                 endGame(enlarged);
             } else {
+                playIncorrect();
                 wrongAnswer();
                 activeArray[enlarged].input = [];
                 activeArray[enlarged].data = [];
