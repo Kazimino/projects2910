@@ -621,6 +621,58 @@ main > .module:nth-child(7) {
     width: 100%;
     height: 100%;
     display: none;
+    background-size: 100% 100%;
+}
+.tutorialNav {
+    width: 5%;
+    height: 10%;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    background-size: 100% 100%;
+}
+#frontArrow {
+    background-image: url("../images/frontarrow.png");
+    left: 95%;
+}
+#backArrow {
+    background-image: url("../images/arrow.png");
+}
+#tutorial1 {
+    background-image: url("../images/IngameM1.png");
+}
+#tutorial2 {
+    background-image: url("../images/IngameM3.png");
+}
+#tutorial3 {
+    background-image: url("../images/IngameM5.png");
+}
+#tutorial4 {
+    background-image: url("../images/IngameM7.png");
+}
+#tutorial5 {
+    background-image: url("../images/IngameM9.png");
+}
+#tutorial6 {
+    background-image: url("../images/IngameM11.png");
+}
+#tutorial7 {
+    background-image: url("../images/IngameM13.png");
+}
+#tutorial8 {
+    background-image: url("../images/Simon.png");
+}
+#tutorial9 {
+    background-image: url("../images/Operator.png");
+}
+#tutorial10 {
+    background-image: url("../images/Ascending.png");
+}
+#tutorial11 {
+    background-image: url("../images/Anagram.png");
+}
+#tutorial12 {
+    background-image: url("../images/TutorialEnd.png");
 }
 
 /*css for sound/mute button */
@@ -628,18 +680,18 @@ main > .module:nth-child(7) {
     width: 50px;
     position: absolute;
     top: 25%;
-    right:6% ;
+    right: 6%;
     cursor: pointer;
-    display:block;
+    display: block;
 }
 
 #mutebtn {
     width: 50px;
     position: absolute;
     top: 25%;
-    right:6% ;
+    right: 6%;
     cursor: pointer;
-    display:none;
+    display: none;
 }
 
 
@@ -655,5 +707,49 @@ main > .module:nth-child(7) {
     }
     .tutorial {
         
+    }
+    .tutorialNav {
+        width: 15%;
+        height: 15%;
+        top: 45%;
+    }
+    #frontArrow {
+        left: 85%;
+    }
+    #tutorial1 {
+        background-image: url("../images/IngameM2.png");
+    }
+    #tutorial2 {
+        background-image: url("../images/IngameM4.png");
+    }
+    #tutorial3 {
+        background-image: url("../images/IngameM6.png");
+    }
+    #tutorial4 {
+        background-image: url("../images/IngameM8.png");
+    }
+    #tutorial5 {
+        background-image: url("../images/IngameM10.png");
+    }
+    #tutorial6 {
+        background-image: url("../images/IngameM12.png");
+    }
+    #tutorial7 {
+        background-image: url("../images/IngameM14.png");
+    }
+    #tutorial8 {
+        background-image: url("../images/SimonM.png");
+    }
+    #tutorial9 {
+        background-image: url("../images/OperatorM.png");
+    }
+    #tutorial10 {
+        background-image: url("../images/AscendingM.png");
+    }
+    #tutorial11 {
+        background-image: url("../images/AnagramM.png");
+    }
+    #tutorial12 {
+        background-image: url("../images/TutorialEndM.png");
     }
 }

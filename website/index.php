@@ -324,18 +324,21 @@
             </div>
         </main>
         
-        <div class="tutorial" onclick="runTutorial()">
-            <img class="tutorialImg" id="tutorial1" src="images/IngameM1.png" data-alt-src="images/IngameM2.png">
-            <img class="tutorialImg" id="tutorial2" src="images/IngameM3.png" data-alt-src="images/IngameM4.png">
-            <img class="tutorialImg" id="tutorial3" src="images/IngameM5.png" data-alt-src="images/IngameM6.png">
-            <img class="tutorialImg" id="tutorial4" src="images/IngameM7.png" data-alt-src="images/IngameM8.png">
-            <img class="tutorialImg" id="tutorial5" src="images/IngameM9.png" data-alt-src="images/IngameM10.png">
-            <img class="tutorialImg" id="tutorial6" src="images/IngameM11.png" data-alt-src="images/IngameM12.png">
-            <img class="tutorialImg" id="tutorial7" src="images/IngameM13.png" data-alt-src="images/IngameM14.png">
-            <img class="tutorialImg" id="tutorial8" src="images/Simon.png" data-alt-src="images/SimonM.png">
-            <img class="tutorialImg" id="tutorial9" src="images/Operator.png" data-alt-src="images/OperatorM.png">
-            <img class="tutorialImg" id="tutorial10" src="images/Ascending.png" data-alt-src="images/AscendingM.png">
-            <img class="tutorialImg" id="tutorial11" src="images/Anagram.png" data-alt-src="images/AnagramM.png">
+        <div class="tutorial">
+            <div class="tutorialNav" id="backArrow" onclick="backTutorial()"></div>
+            <div class="tutorialNav" id="frontArrow" onclick="forwardTutorial()"></div>
+            <div class="tutorialImg" id="tutorial1"></div>
+            <div class="tutorialImg" id="tutorial2"></div>
+            <div class="tutorialImg" id="tutorial3"></div>
+            <div class="tutorialImg" id="tutorial4"></div>
+            <div class="tutorialImg" id="tutorial5"></div>
+            <div class="tutorialImg" id="tutorial6"></div>
+            <div class="tutorialImg" id="tutorial7"></div>
+            <div class="tutorialImg" id="tutorial8"></div>
+            <div class="tutorialImg" id="tutorial9"></div>
+            <div class="tutorialImg" id="tutorial10"></div>
+            <div class="tutorialImg" id="tutorial11"></div>
+            <div class="tutorialImg" id="tutorial12"></div>
         </div>
                 
         <footer>

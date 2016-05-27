@@ -7,7 +7,7 @@ var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
 var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
-var SLIDE_SIZE = 11;
+var SLIDE_SIZE = 12;
 var difficulty = 1;
 var slide = 1;
 
@@ -502,39 +502,42 @@ function mainMenu() {
 /* Tutorial JS Methods */
 function playTutorial() {
     $('.menu').hide();
-    var cWidth = document.documentElement.clientWidth;
-    if (cWidth < 480) {
-        for (var n = 1; n <= SLIDE_SIZE; n++) {
-            var tut = $('#tutorial' + n);
-            var newSource = tut.data('alt-src');
-            tut.data('alt-src', tut.attr('src'));
-            tut.attr('src', newSource);
-        }
-    }
+    $('main').hide();
     
+    $('#tutorial1').show();
     $('.tutorial').fadeIn(500, function() {
-        $(this).css('display', 'block');
-    });
-    $('#tutorial1').fadeIn(500, function() {
         $(this).css('display', 'block');
     });
 }
 
-function runTutorial() {
+function forwardTutorial() {
     if (slide == SLIDE_SIZE) {
         slide = 1;
         $('.tutorial').hide();
         $('.tutorialImg').hide();
+        $('main').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
         $('.menu').fadeIn(1000, function() {
             $(this).css('display', 'block');
         });
         return;
     }
-    
-    $('#tutorial' + slide++).fadeOut(500, function() {
-        $(this).css('display', 'none');
-    });
-    $('#tutorial' + slide).fadeIn(1500, function() {
-        $(this).css('display', 'block');
-    });
+    $('#tutorial' + slide++).hide();
+    $('#tutorial' + slide).show();
+}
+function backTutorial() {
+    if (slide == 1) {
+        $('.tutorial').hide();
+        $('.tutorialImg').hide();
+        $('main').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
+        $('.menu').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
+        return;
+    }
+    $('#tutorial' + slide--).hide();
+    $('#tutorial' + slide).show();
 }
