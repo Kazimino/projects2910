@@ -570,8 +570,12 @@ function backTutorial() {
 function onFireAction(){
     $.ajax({
         type: 'POST',
-        url: 
-    })
+        url: '../achievements/set_achievement.php',
+        data: { achievement: 1},
+        success: function(response) {
+            valid = response;
+        }
+    });
 }
 
 function cleanSweepAction(){

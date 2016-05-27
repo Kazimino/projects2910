@@ -11,8 +11,8 @@ $result = $db_con->query($select)
     or die("Error " . mysqli_error($db_con));
 
 while($row = $result->fetch_assoc()) {
-        array_push($achievements, $row["achID"]);
-        }
+    array_push($achievements, $row["achID"]);
+}
 ?>
 
 <div class="profileInfo">
