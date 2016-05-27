@@ -14,9 +14,9 @@ html {
 }
 
 body {
-	width: 100%;
+    width: 100%;
     height: 100%;
-	position: relative;
+    position: relative;
     background-image: url("../images/carbon_bg.gif");
     background-size: 4px;
 }
@@ -42,11 +42,10 @@ body {
 header {
     height: 10%;
     width: 100%;
-    background-color: #1e1e1e;
+    background-color: transparent;
     position: absolute;
     top: 0;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.6);
-    display: none;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0);
 }
 
 .logo {
@@ -56,6 +55,7 @@ header {
     position: relative;
     top:10%;
     cursor: pointer;
+    opacity: 0;
 }
 
 .dropMenu {
@@ -66,15 +66,17 @@ header {
     z-index: 9002;
     text-align: center;
     font-size: 3vh;
-    border-radius: 5%;
-    overflow: hidden;
+    border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+    overflow: hidden;
+    max-height: 0;
 }
 
 .dropMenu li {
     width: 80%;
     padding: 4vh 10%;
     border-top: 1px solid #fff;
+    overflow: hidden;
 }
 
 .dropMenu li:first-child {
@@ -91,6 +93,25 @@ header {
     color: #fff;
 }
 
+#dropTab {
+    height: 6vh;
+    width: 7vh;
+    background-image: url('../images/hamburger-menu.png');
+    background-size: 80% 80%;
+    background-position: center;
+    z-index: 9003;
+    background-color: #1e1e1e;
+    padding: 1vw;
+    position: absolute;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#login, #register {
+    cursor: pointer;
+}
+
 #loginSubmit, #registerSubmit {
     background-color: #fff;
     font-weight: bold;
@@ -99,7 +120,9 @@ header {
 }
 
 #loginForm, #registerForm {
-    display: none;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 /* Main Frame */
@@ -162,8 +185,9 @@ h3 span {
     font-size: 8vw;
 }
 
-#nameError {
+.nameError {
     display: block;
+    font-size: 2.5vh;
 }
 
 /* Hexagon */
@@ -180,8 +204,8 @@ main > .module {
 /*styles in game hex start here*/
 #inGame{
   width: 88%;
-    height: 75%;
-    position: relative;
+  height: 75%;
+  position: relative;
   display: none;
   margin: 0 auto;
 }
@@ -517,7 +541,7 @@ main > .module:nth-child(7) {
 #anagramInput{
     margin: auto;
     color: white;
-    font-size: 5vh;
+    font-size: 3vh;
     text-align: center;
     vertical-align: center;
 }
@@ -634,6 +658,54 @@ main > .module:nth-child(7) {
     display:none;
 }
 
+.profile{
+    height: 100%;
+}
+.profileInfo{
+    height: 25%;
+}
+
+.achieveImg{
+    height: 100%;
+    width: 100%;
+}
+
+.achievements {
+    vertical-align: center;
+}
+
+.achievementPanel{
+    margin: auto;
+    padding: 6%;
+    width: 20%;
+    height: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#onFire .caption {
+    visibility:hidden;
+}
+
+#onFire:hover .caption {
+    visibility:visible;
+}
+
+#ironMan .caption {
+    visibility:hidden;
+}
+
+#ironMan:hover .caption {
+    visibility:visible;
+}
+
+#cleanSweep .caption {
+    visibility:hidden;
+}
+
+#cleanSweep:hover .caption {
+    visibility:visible;
+}
 
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
@@ -645,5 +717,9 @@ main > .module:nth-child(7) {
     #leaderList {
         font-size: 5vw;
     }
-
+    
+    .dropMenu {
+        width: 100%;
+        border-radius: 0;
+    }
 }

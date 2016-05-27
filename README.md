@@ -59,7 +59,7 @@ looping functions to run the game.
 
 
 The Structure 
-=========
+=============
 
 Our expert matthew has gone through the code
 and organized it in to a useful sort of framework. 
@@ -120,22 +120,135 @@ button so users can see more scores.
 Users will also be alerted to the ranking they got 
 after they finish their game. 
 
+UPDATE: fixed the regex for leaderboards to include 
+other characters, we also just integrated this to the
+log in system. This way users don't have to worry 
+about entering their score, they automatically 
+have their scores entered into the leaderboard 
+database.
 
-Future 
-=====
+Achievements - Sprint 3 
+-----------------------
+
+The achievements were a bit of a challenge. We opted
+with implementing a login system over using session 
+variables.  We thought it may be easier than
+dealing with session variables.  Matt had 
+some challenges implementing the login system
+however, he was able to complete this and we added the
+login feature to a drop down hamburger style 
+menu system. 
+
+Users that login will have their scores automatically
+registered to the leaderboard under their name. Guests,
+however will automatically be registered as guest on
+the leaderboard.  
+
+We have 3 achievements: Iron man, which is awarded
+after a users survives for 3 minutes; Clean Sweep, is 
+awarded when the user has a clear main board with no 
+mini-game modules active after 3 minutes; On Fire, which 
+is awarded when the user completes 10 mini-games in a 
+row with no errors, however, for presentation purposes
+we have set that achievement to 5 mini-games completed
+with no errors. 
+
+We created badges to award as well as little banners 
+for display.  We created an account/profile page and 
+in that page we will have a change password function, 
+and display the achievements earned and information
+about those achievements. 
+
+We used the following sources for some of the icon 
+creation for the achievements: 
+
+http://icons.mysitemyway.com/
+http://hawksmont.com
+https://www.iconfinder.com/
+http://www.endlessicons.com/
+
+Unit Testing - Sprint 3
+-----------------------
+
+We have implemented some Javascript Unit Testing. 
+We used QUnit, which is a javascript unit testing 
+framework made by the makers of jQuery, and since
+we are using jQuery i thought this was a good idea
+to use as well. 
+
+I selected two functions and wrote multiple tests for 
+each of these functions.  Some of the stuff in our 
+page is hard to test.  What i discovered was that 
+generally things inside the $(document).ready() function
+cannot be tested or is difficult to test.  I also 
+learned that we need to put more stuff outside 
+of the ready() function. 
+
+I have JUnit tested in the past a bit and i was used to 
+that but using this framework was a little more 
+challenging mainly because I don't know javascript
+that well. 
+
+Sound - Sprint 3 
+----------------
+
+We created our own background music(BGM) using 
+Soundation Studio.  The SFX were also create on 
+this website as it is a great sound board 
+with a lot of sounds and flexibility as well 
+as a large amount of controls available to you
+for customization.  
+
+Implementing the sounds was not very hard. 
+We also created a mute sound button with which
+you can mute the sound.  This proved to be a bit 
+of a headache however, i was about to complete this task
+in a short few hours.  
+
+Tutorial - Sprint 3
+-------------------
+
+Another thing we added during sprint 3 
+was a tutorial.  We had already planned this but 
+we also recieved feedback through our feedback form
+that a tutorial is needed for some people.  Many people
+are familiar with games these days and do not 
+need the extra help but there are others out there
+that do need that extra help.  
+
+We created a slide show sort of tutorial where you 
+will be shown slides with the premise of the game 
+explained and certain elements of the game board will be 
+shown to you and explained as we walk through how the 
+game works. 
+
+The tutorial is very simple and we would have liked 
+to spend more time on it but with the short week, time 
+got very short and we still have some important things
+to implement.  
 
 
-We still have to add sounds and a tutorial. We 
-are also considering adding powerups like 
-a heat bar freeze, an increased coolant powerup, 
-and a free module "pass".  We're not sure how to 
-award these, this is just an idea because we are 
-so far ahead at this point. 
-You could call this scope creep however, being 
-ahead, we don't feel it's going to be detremental to 
-the project to add something. 
+Anagram Dictionary - Sprint 3
+-----------------------------
 
+One of the things we did this week that was kind 
+of unexpected and last minute was rework the anagram
+dictionary.  Before, we had a relatively small 
+dictionary but it was not so great, had a lot of poor 
+words and was just generally frustrating.  
 
+We found another word list that was over 100,000
+words long so we wrote a script and had ourselves, and 
+some of our friends help us out by filtering the word 
+list one by one.  Of course before we did that we pulled 
+out words that didn't fit with our length and other such
+factors, however, we needed to also pull out proper 
+nouns and such. 
+
+This was a big pain and took a good amount of time, but 
+we are happy ith the results as the anagram game works 
+a lot better because of it and we get less/no 
+silly words.  
 
 
 

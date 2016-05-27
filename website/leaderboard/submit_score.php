@@ -1,8 +1,8 @@
 <?php
 include("db_connect.php");
-
+session_start();
 $score = array_key_exists("score", $_POST) ? $_POST["score"] : 0;
-$name = array_key_exists("name", $_POST) ? $_POST["name"] : "Anonymous";
+$name = array_key_exists("userid", $_SESSION) ? $_SESSION["userid"] : "Guest";
 $time = date("Y-m-d H:i:s");
 
 $query = "INSERT INTO Leaderboard (playerName, time, entered)
