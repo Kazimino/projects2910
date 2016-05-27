@@ -12,7 +12,7 @@ $(document).ready(function() {
                 /*shows the hidden buttons*/
                 $(".numberOption").css("visibility", "visible");
             }
-            currModule.input += "1";
+            currModule.input += choiceID[choiceID.length-1];
         } else {
             wrongAnswer();
             playIncorrect();
@@ -29,7 +29,7 @@ function generateAscNum() {
         answer: [],
         data: []
     };
-    
+
     /* controls the difficulty level */
     switch(difficulty){
         case 1:
@@ -53,7 +53,7 @@ function generateAscNum() {
             fracChance = 0.25;
             break;
     }
-    
+
     for(var i = 0; i < 4; i++) {
         var num = {
             pos: 0,
@@ -63,23 +63,23 @@ function generateAscNum() {
         num.pos = i + 1;
         temp[i] = num;
     }
-    
+
     gameInfo.data = temp.slice();
     temp.sort(compareNumbers);
-    
+
     for(var i = 0; i < 4; i++) {
         gameInfo.answer[i] = temp[i].pos;
     }
-    
+
     return gameInfo;
-    
+
     /* generates a fraction */
     function genFraction() {
         var a = Math.floor((Math.random() * maxNumber) + baseNumber);
         var b = Math.floor((Math.random() * maxNumber) + baseNumber);
         return (a + "/" + b);
     }
-    
+
     /* generates a whole number */
     function genWhole() {
         var val;
@@ -92,7 +92,7 @@ function generateAscNum() {
         } while(found);
         return val;
     }
-    
+
     /* comparision function */
     function compareNumbers(a,b) {
         return eval(a.value) - eval(b.value);
@@ -101,11 +101,12 @@ function generateAscNum() {
 
 /* loads an ascending numbers game */
 function loadAscNum() {
+    var inputArray = activeArray[enlarged].input.split("");
     for (i = 1; i <= 4; i++) {
-        if(activeArray[enlarged].input.length < i) {
-            $('#numberSection' + (i)).html(activeArray[enlarged].data[i - 1].value);
-        } else {
-            $('#numberSection' + (i)).css('visibility', 'hidden');
-        }
+        $('#numberSection' + (i)).html(activeArray[enlarged].data[i - 1].value);
+        $('#numberSection' + (i)).css('visibility', 'visible');
     }
+    $.each(inputArray, function(index, value){
+        $('#numberSection' + value).css('visibility', 'hidden');
+    });
 }
