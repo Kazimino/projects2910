@@ -94,12 +94,7 @@ $(document).ready(function() {
     
     /*takes the user to the main menu if clicked*/
     $('.logo').click(function(){
-        if(totalTime > 0) {
-            // if in game
-        } else {
-            $('.leaderBoard').hide();
-            mainMenu();
-        }
+        mainMenu();
     });
     
     /*ajax function loading more scores in the leaderboard 
@@ -502,13 +497,8 @@ function logoClick() {
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
     resetAll();
+    $('main > div').fadeOut(250);
     $('.overlay').fadeOut(250);
-    if(enlarged == "") {
-        $('main > .module').fadeOut(250);
-    } else {
-        $('#ingame').fadeOut(250);
-        $('#mini').fadeOut(250);
-    }
     $('header').animate({
         'background-color': 'transparent',
         'box-shadow': '0px 3px 6px rgba(0,0,0,0)'
@@ -694,7 +684,9 @@ function bindMenu() {
     $('nav').on('click', '#myAccount', function() {
         $('.profile').load('account/profile.php');
         clearInterval(clock);
-        mainMenu();
+        $('main > div').hide();
+        $('.overlay').hide();
+        $('footer').hide();
         showFrame();
         $('.profile').fadeIn(500);
     });
