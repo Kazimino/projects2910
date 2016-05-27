@@ -36,10 +36,19 @@
     <body>
         <!----------------content div for logo - header ------------->
         <header>
+        <div class="headerArea">
+
             <div class="content">
                 <nav><?php include("account/menu.php"); ?></nav>
                 <img src="images/reactor_logo.png" class="logo">
             </div>
+            <div class="achievePopup">
+                <div class="popupImg">
+                </div>
+                <div class="popupText">
+                </div>
+            </div>
+        </div>
         </header>
 <!----------the main tag supports the game itself holds many different 
     - hexagon modules  --------------->

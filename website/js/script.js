@@ -107,9 +107,11 @@ $(document).ready(function() {
 var enlarged = "";
 
 // achievement variables
-var onFire = 0;
+var streak = 0;
+var onFire = false;
 var ironMan = false;
 var cleanSweep = false;
+var unlocked = [0, 0, 0];
 
 // heat gauge and timer variables
 var min = 0;
@@ -218,7 +220,7 @@ function timerStart(){
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
 
 
-    if(min == TIME_GOAL){
+    if(min == TIME_GOAL && unlocked[1] == 0){
         ironManAction();
     }
 }
@@ -295,15 +297,15 @@ function loadGame(pos) {
 function endGame(pos) {
     $('#' + pos + " .gauge-fill").height(0);
     $('#' + pos + ' .icon').css("display", "none");
+    streak += 1;
     if(enlarged != "") {
         hideCurrGame();
     }
     delete activeArray[pos];
-    onFire += 1;
-    if(onFire == 5){
+    if(streak == 5 && onFire == false){
         onFireAction();
     }
-    if(activeArray.length == 0){
+    if(activeArray.length == 0 && cleanSweep == false){
         cleanSweepAction();
     }
 }
@@ -311,7 +313,7 @@ function endGame(pos) {
 /* called when an answer is incorrect */
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
-    onFire = 0;
+    streak = 0;
     
     if(activeArray[enlarged].heat > 100) {
         activeArray[enlarged].heat = 100;
@@ -558,6 +560,8 @@ function backTutorial() {
 
 /* functions to activate achievements */
 function onFireAction(){
+    onFire = true;
+    unlocked[0] = 1;
     $.ajax({
         type: 'POST',
         url: '../achievements/set_achievement.php',
@@ -566,15 +570,44 @@ function onFireAction(){
             valid = response;
         }
     });
-}
-
-function cleanSweepAction(){
-    cleanSweep = true;
+    $('achievePopup').css('visibility', 'visible');
+    $('.popupImg').html("<img src=\"achievements/images/on_fire.png\">");
+    $('.popupText').html("<h1>On Fire Achievement Unlocked!</h1>");
 }
 
 function ironManAction(){
     ironMan = true;
+    unlocked[1] = 1;
+    $.ajax({
+        type: 'POST',
+        url: '../achievements/set_achievement.php',
+        data: { achievement: 2},
+        success: function(response) {
+            valid = response;
+        }
+    });
+    $('achievePopup').css('visibility', 'visible');
+    $('.popupImg').html("<img src=\"achievements/images/iron_man.png\">");
+    $('.popupText').html("<h1>Iron Man Achievement Unlocked!</h1>");
 }
+
+function cleanSweepAction(){
+    cleanSweep = true;
+    unlocked[2] = 1;
+    $.ajax({
+        type: 'POST',
+        url: '../achievements/set_achievement.php',
+        data: { achievement: 3},
+        success: function(response) {
+            valid = response;
+        }
+    });
+    $('achievePopup').css('visibility', 'visible');
+    $('.popupImg').html("<img src=\"achievements/images/clean_sweep.png\">");
+    $('.popupText').html("<h1>Clean Sweep Achievement Unlocked!</h1>");
+}
+
+
 
 function loginDrop() {
     $form = $('#loginForm');
@@ -660,12 +693,36 @@ function ajaxRegister(user, pass) {
             if(response == 'valid') {
                 $('nav').load('account/menu.php');
                 bindMenu();
+                getAchievements();
             } else {
                 $('#registerName, #registerPassword').css('background-color', '#ff4141');
                 $('#registerForm .nameError').html('This username has already been taken');
             }
         }
     });
+}
+
+function getAchievements(){
+    var input;
+    $.ajax({
+        type: 'GET',
+        url: '../achievements/get_achievements.php',
+        success: function(response) {
+            input = response;
+        }
+    });
+    var achieveArray = input.split("");
+    $.each(achieveArray, function(index, value){
+        unlocked[value-1] = 1;
+        if(value == 1){
+            onFire = true;
+        } else if(value == 2){
+            ironMan = true;
+        } else if(value == 3){
+            cleanSweep = true;
+        }
+    })
+    
 }
 
 function bindMenu() {

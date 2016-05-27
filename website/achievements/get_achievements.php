@@ -7,9 +7,18 @@ $userid = $_SESSION["userid"];
 
 $input = "SELECT *
             FROM UserAchievement
-            WHERE name = \"$userid\";";
+            WHERE name = \"$userid\"
+            ORDER BY achID ASC;";
 
-$db_con->query($input)
+$result = $db_con->query($input)
     or die("Error: " . mysqli_error($db_con));
+
+$achievements = "";
+
+while($row = $result->fetch_assoc()) {
+    $achievements .= $row["achID"];
+}
+
+echo $achievements;
 
 ?>

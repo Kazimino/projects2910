@@ -20,14 +20,43 @@ body {
     background-image: url("../images/carbon_bg.gif");
     background-size: 4px;
 }
+.headerArea {
+    width: 100%;
+    height: 100%;
 
+}
 .content {
     width: 100%;
     height: 100%;
     max-width: 1024px;
     margin: 0 auto;
+    position: absolute;
+    z-index: 1;
 }
 
+.achievePopup {
+     width: 100%;
+     height: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+     position: absolute;
+     display: inline-block;
+     z-index: 0;
+ }
+.popupImg{
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.popupPic {
+    height: 100%;
+    width: 100%;
+}
+.popupText{
+    width: 60%;
+    height: 100%;
+}
 .overlay {
     width: 100%;
     height: 100%;
