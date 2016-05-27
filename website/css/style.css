@@ -34,11 +34,10 @@ body {
     z-index: 9001;
     background-color: rgba(0,0,0,0.9);
     position: relative;
-    display:none;
+    display: none;
 }
 
 /* Header */
-
 header {
     height: 10%;
     width: 100%;
@@ -126,7 +125,6 @@ header {
 }
 
 /* Main Frame */
-
 main {
 	width: 100%;
     max-width: 1024px;
@@ -136,7 +134,6 @@ main {
 }
 
 /* Footer */
-
 footer {
     height: 15%;
     width: 100%;
@@ -180,7 +177,7 @@ footer {
     margin-bottom: 2vh;
 }
 
-h3 span {
+#timeLasted h3 span {
     display: block;
     font-size: 8vw;
 }
@@ -315,7 +312,6 @@ main > .module:nth-child(7) {
 }
 
 /*minigauges*/
-
 #mini {
     display: none;
     position: absolute;
@@ -354,7 +350,6 @@ main > .module:nth-child(7) {
     bottom: 0;
 }
 
-
 #timerBox{
     vertical-align: top;
     margin: auto;
@@ -366,7 +361,6 @@ main > .module:nth-child(7) {
     border-radius: 25px;
     border: 2px solid white;
 }
-
 
 #heatMeter {
     margin: auto;
@@ -383,7 +377,6 @@ main > .module:nth-child(7) {
     background-position: 0 0;
     transition: background-position 100ms linear;
 }
-
 
 /* Menu CSS */
 .menulogo {
@@ -541,7 +534,7 @@ main > .module:nth-child(7) {
 #anagramInput{
     margin: auto;
     color: white;
-    font-size: 5vh;
+    font-size: 3vh;
     text-align: center;
     vertical-align: center;
 }
@@ -589,11 +582,11 @@ main > .module:nth-child(7) {
     background-color: blue;
 }
 
-
 /* ascending numbers */
 #ascendingNumber {
     display: none;
 }
+
 .numberRow {
     display: block;
     width: 40%;
@@ -636,7 +629,70 @@ main > .module:nth-child(7) {
 
 #numberSection4 {
     background-color: blue;
-    
+}
+
+/* Tutorial CSS */
+.tutorial {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.tutorialImg {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-size: 100% 100%;
+}
+.tutorialNav {
+    width: 5%;
+    height: 10%;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    background-size: 100% 100%;
+}
+#frontArrow {
+    background-image: url("../images/frontarrow.png");
+    left: 95%;
+}
+#backArrow {
+    background-image: url("../images/arrow.png");
+}
+#tutorial1 {
+    background-image: url("../images/IngameM1.png");
+}
+#tutorial2 {
+    background-image: url("../images/IngameM3.png");
+}
+#tutorial3 {
+    background-image: url("../images/IngameM5.png");
+}
+#tutorial4 {
+    background-image: url("../images/IngameM7.png");
+}
+#tutorial5 {
+    background-image: url("../images/IngameM9.png");
+}
+#tutorial6 {
+    background-image: url("../images/IngameM11.png");
+}
+#tutorial7 {
+    background-image: url("../images/IngameM13.png");
+}
+#tutorial8 {
+    background-image: url("../images/Simon.png");
+}
+#tutorial9 {
+    background-image: url("../images/Operator.png");
+}
+#tutorial10 {
+    background-image: url("../images/Ascending.png");
+}
+#tutorial11 {
+    background-image: url("../images/Anagram.png");
+}
+#tutorial12 {
+    background-image: url("../images/TutorialEnd.png");
 }
 
 /*css for sound/mute button */
@@ -644,20 +700,68 @@ main > .module:nth-child(7) {
     width: 50px;
     position: absolute;
     top: 25%;
-    right:6% ;
+    right: 6%;
     cursor: pointer;
-    display:block;
+    display: block;
 }
 
 #mutebtn {
     width: 50px;
     position: absolute;
     top: 25%;
-    right:6% ;
+    right: 6%;
     cursor: pointer;
-    display:none;
+    display: none;
 }
 
+.profile{
+    height: 100%;
+}
+.profileInfo{
+    height: 25%;
+}
+
+.achieveImg{
+    height: 100%;
+    width: 100%;
+}
+
+.achievements {
+    vertical-align: center;
+}
+
+.achievementPanel{
+    margin: auto;
+    padding: 6%;
+    width: 20%;
+    height: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#onFire .caption {
+    visibility:hidden;
+}
+
+#onFire:hover .caption {
+    visibility:visible;
+}
+
+#ironMan .caption {
+    visibility:hidden;
+}
+
+#ironMan:hover .caption {
+    visibility:visible;
+}
+
+#cleanSweep .caption {
+    visibility:hidden;
+}
+
+#cleanSweep:hover .caption {
+    visibility:visible;
+}
 
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
@@ -668,6 +772,51 @@ main > .module:nth-child(7) {
 @media only screen and (max-width: 480px) {
     #leaderList {
         font-size: 5vw;
+    }
+    
+    .tutorialNav {
+        width: 15%;
+        height: 15%;
+        top: 43.5%;
+    }
+    #frontArrow {
+        left: 85%;
+    }
+    #tutorial1 {
+        background-image: url("../images/IngameM2.png");
+    }
+    #tutorial2 {
+        background-image: url("../images/IngameM4.png");
+    }
+    #tutorial3 {
+        background-image: url("../images/IngameM6.png");
+    }
+    #tutorial4 {
+        background-image: url("../images/IngameM8.png");
+    }
+    #tutorial5 {
+        background-image: url("../images/IngameM10.png");
+    }
+    #tutorial6 {
+        background-image: url("../images/IngameM12.png");
+    }
+    #tutorial7 {
+        background-image: url("../images/IngameM14.png");
+    }
+    #tutorial8 {
+        background-image: url("../images/SimonM.png");
+    }
+    #tutorial9 {
+        background-image: url("../images/OperatorM.png");
+    }
+    #tutorial10 {
+        background-image: url("../images/AscendingM.png");
+    }
+    #tutorial11 {
+        background-image: url("../images/AnagramM.png");
+    }
+    #tutorial12 {
+        background-image: url("../images/TutorialEndM.png");
     }
     
     .dropMenu {
