@@ -524,6 +524,7 @@ function mainMenu() {
 function playTutorial() {
     $('.menu').hide();
     $('main').hide();
+    $('.content nav').hide();
     
     $('#tutorial1').show();
     $('.tutorial').fadeIn(500, function() {
@@ -542,6 +543,7 @@ function forwardTutorial() {
         $('.menu').fadeIn(1000, function() {
             $(this).css('display', 'block');
         });
+        $('.content nav').show();
         return;
     }
     $('#tutorial' + slide++).hide();
@@ -557,6 +559,7 @@ function backTutorial() {
         $('.menu').fadeIn(1000, function() {
             $(this).css('display', 'block');
         });
+        $('.content nav').show();
         return;
     }
     $('#tutorial' + slide--).hide();
