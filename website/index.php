@@ -323,7 +323,8 @@
                 <div id="loadMore">Load More Scores</div>
             </div>
             <!--------------- achievements ---------------------------->
-
+            <div class="profile">
+            </div>
         </main>
                 
         <footer>

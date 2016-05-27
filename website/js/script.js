@@ -91,18 +91,6 @@ $(document).ready(function() {
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
     
-    /* score submission */
-    $('#scoreSubmit').click(function() {
-        ajaxSubmitScore();
-    });
-    
-    /*submit button click fo leaderboard.*/
-    $('#scoreName').keydown(function(e) {
-        if(e.keyCode == 13) {
-            validateSubmit();
-        }
-    });
-
     /*takes the user to the main menu if clicked*/
     $('.logo').click(function(){
         if(totalTime > 0) {
@@ -233,10 +221,7 @@ function timerStart(){
     }
     
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
-    
-    if(totalHeat >= MAX_HEAT){
-        clearInterval(clock);
-    }
+
 
     if(min == TIME_GOAL){
         ironManAction();
@@ -436,6 +421,7 @@ function showFrame() {
 
 /* called when the heat bar reaches max heat */
 function loseGame() {
+    clearInterval(clock);
     stopBGM();
     $("#timeLasted").html(min + ":" + (sec < 10 ? "0" + sec : sec) + ":" + dsec);
     $(".overlay").fadeIn(500);   
@@ -653,6 +639,11 @@ function bindMenu() {
         }
     });
     $('nav').on('click', '#myAccount', function() {
+        $('.profile').load('account/profile.php');
+        clearInterval(clock);
+        mainMenu();
+        showFrame();
+        $('.profile').fadeIn(500);
     });
     $('nav').on('click', '#logout', function() {
         $.get('account/logout.php');
