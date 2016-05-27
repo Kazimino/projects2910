@@ -312,7 +312,7 @@
             <div class="menu">
                 <img src="images/reactor_logo.png" class="menulogo" onclick="logoClick()">
                 <img src="images/PlayButton2.png" data-alt-src ="images/PlayButtonPressed.png" class="menuItem" onclick="playGame()">
-                <img src="images/TutorialButton2.png" data-alt-src="images/TutorialButtonPressed.png" class="menuItem">
+                <img src="images/TutorialButton2.png" data-alt-src="images/TutorialButtonPressed.png" class="menuItem" onclick="playTutorial()">
                 <img src="images/leaderboardbtn.png" data-alt-src="images/leaderboardbtnCL.png" class="menuItem" id="btnSize" onclick="loadLeaderBoard()">
                 <img src="images/CompanyLogo.png" class="menuItem">
             </div> 
@@ -326,6 +326,23 @@
             <div class="profile">
             </div>
         </main>
+        
+        <div class="tutorial">
+            <div class="tutorialNav" id="backArrow" onclick="backTutorial()"></div>
+            <div class="tutorialNav" id="frontArrow" onclick="forwardTutorial()"></div>
+            <div class="tutorialImg" id="tutorial1"></div>
+            <div class="tutorialImg" id="tutorial2"></div>
+            <div class="tutorialImg" id="tutorial3"></div>
+            <div class="tutorialImg" id="tutorial4"></div>
+            <div class="tutorialImg" id="tutorial5"></div>
+            <div class="tutorialImg" id="tutorial6"></div>
+            <div class="tutorialImg" id="tutorial7"></div>
+            <div class="tutorialImg" id="tutorial8"></div>
+            <div class="tutorialImg" id="tutorial9"></div>
+            <div class="tutorialImg" id="tutorial10"></div>
+            <div class="tutorialImg" id="tutorial11"></div>
+            <div class="tutorialImg" id="tutorial12"></div>
+        </div>
                 
         <footer>
             <div class="content">
@@ -336,16 +353,20 @@
                 <img src="images/muteUC.png" data-alt-src="images/muteC.png" id="mutebtn" />
             </div>
         </footer>
+        
 <!-------------- END GAME OVERLAY BROS ------------->
         <div class="overlay">
             <div class="endGame">
                 <h1>Meltdown!</h1>
                 <h3>You Lasted: <span id="timeLasted"></span></h3>
+                
                 <div class="scoreSubmission"></div>
+                
                 <div id="overlayBtn">
                     <img src="images/mainmenubtnC.png" data-alt-src="images/mainmenubtn.png" class="egbtns" onclick="mainMenu()"/>
                     <img src="images/tryAgainUC.png" data-alt-src="images/tryAgainC.png" class="egbtns" onclick="retry()"/>
                 </div>
+                
             </div>
         </div>
     </body>

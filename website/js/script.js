@@ -8,8 +8,9 @@ var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
 var TIME_GOAL = 3;
 var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
-
+var SLIDE_SIZE = 12;
 var difficulty = 1;
+var slide = 1;
 
 $(document).ready(function() {
     resizeMain();
@@ -136,7 +137,6 @@ function module(type, answer, data) {
     this.answer = answer;
     this.data = data;
 }
-
 
 // padding function for leading zeroes on timer
 /* pads the timer. */
@@ -518,6 +518,52 @@ function mainMenu() {
     });
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
+}
+
+/* Tutorial JS Methods */
+function playTutorial() {
+    $('.menu').hide();
+    $('main').hide();
+    $('.content nav').hide();
+    
+    $('#tutorial1').show();
+    $('.tutorial').fadeIn(500, function() {
+        $(this).css('display', 'block');
+    });
+}
+
+function forwardTutorial() {
+    if (slide == SLIDE_SIZE) {
+        slide = 1;
+        $('.tutorial').hide();
+        $('.tutorialImg').hide();
+        $('main').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
+        $('.menu').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
+        $('.content nav').show();
+        return;
+    }
+    $('#tutorial' + slide++).hide();
+    $('#tutorial' + slide).show();
+}
+function backTutorial() {
+    if (slide == 1) {
+        $('.tutorial').hide();
+        $('.tutorialImg').hide();
+        $('main').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
+        $('.menu').fadeIn(1000, function() {
+            $(this).css('display', 'block');
+        });
+        $('.content nav').show();
+        return;
+    }
+    $('#tutorial' + slide--).hide();
+    $('#tutorial' + slide).show();   
 }
 
 /* functions to activate achievements */
