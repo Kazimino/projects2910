@@ -208,7 +208,7 @@ footer {
 
 #timeLasted h3 span {
     display: block;
-    font-size: 8vw;
+    font-size: 6vw;
 }
 
 .nameError {
@@ -495,6 +495,7 @@ main > .module:nth-child(7) {
 /* Dummy number game CSS */
 #mathGame {
     text-align: center;
+    font-size: 1vw;
     width: 35%;
     height: 30%;
     position: absolute;
@@ -505,8 +506,6 @@ main > .module:nth-child(7) {
 
 .mathOption {
     height: 90%;
-    width: 30%;
-    margin-left: 3%;
     margin-top: 5%;
     position: relative;
     display: inline-block;
@@ -515,6 +514,8 @@ main > .module:nth-child(7) {
     color: white;
     border-radius: 10%;
     cursor: pointer;
+    margin-left: 5%;
+    width: 15%;
 }
 
 .mathOption h1 {
@@ -522,8 +523,7 @@ main > .module:nth-child(7) {
 }
 
 .mathOption {
-    margin-left: 5%;
-    width: 15%;
+   
 }
 
 .mathOption h1 {
@@ -563,9 +563,9 @@ main > .module:nth-child(7) {
 #anagramInput{
     margin: auto;
     color: white;
-    font-size: 3vh;
+    font-size: 4vh;
     text-align: center;
-    vertical-align: center;
+    vertical-align: middle;
 }
 
 .letterChoice {
@@ -666,12 +666,18 @@ main > .module:nth-child(7) {
     height: 100%;
     display: none;
 }
+
 .tutorialImg {
     width: 100%;
     height: 100%;
     display: none;
     background-size: 100% 100%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: cover;
 }
+
+
 .tutorialNav {
     width: 5%;
     height: 10%;
@@ -680,10 +686,12 @@ main > .module:nth-child(7) {
     cursor: pointer;
     background-size: 100% 100%;
 }
+
 #frontArrow {
     background-image: url("../images/frontarrow.png");
     left: 95%;
 }
+
 #backArrow {
     background-image: url("../images/arrow.png");
 }
@@ -794,7 +802,73 @@ main > .module:nth-child(7) {
 
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
+     
+}
+
+
+@media only screen and (max-width: 768px) {
+    #mathGame {
+        font-size: 3.5vw;
+    }
     
+    #anagramInput {
+        font-size:3.5vw;
+    }
+    
+    .tutorialNav {
+        width: 15%;
+        height: 15%;
+        top: 43.5%;
+    }
+    
+    .tutorialImg {
+        width: 80%;
+        height: 100%;
+        display: none;
+        margin: auto;
+        background-repeat: no-repeat;
+        background-position: cover;
+    }
+    
+    #frontArrow {
+        left: 85%;
+    }
+    #tutorial1 {
+        background-image: url("../images/IngameM2.png");
+    }
+    #tutorial2 {
+        background-image: url("../images/IngameM4.png");
+    }
+    #tutorial3 {
+        background-image: url("../images/IngameM6.png");
+    }
+    #tutorial4 {
+        background-image: url("../images/IngameM8.png");
+    }
+    #tutorial5 {
+        background-image: url("../images/IngameM10.png");
+    }
+    #tutorial6 {
+        background-image: url("../images/IngameM12.png");
+    }
+    #tutorial7 {
+        background-image: url("../images/IngameM14.png");
+    }
+    #tutorial8 {
+        background-image: url("../images/SimonM.png");
+    }
+    #tutorial9 {
+        background-image: url("../images/OperatorM.png");
+    }
+    #tutorial10 {
+        background-image: url("../images/AscendingM.png");
+    }
+    #tutorial11 {
+        background-image: url("../images/AnagramM.png");
+    }
+    #tutorial12 {
+        background-image: url("../images/TutorialEndM.png");
+    }
 }
 
 /* mobile only */
@@ -808,6 +882,16 @@ main > .module:nth-child(7) {
         height: 15%;
         top: 43.5%;
     }
+    
+    .tutorialImg {
+        width: 100%;
+        height: 100%;
+        display: none;
+        margin: auto;
+        background-repeat: no-repeat;
+        background-position: cover;
+    }
+    
     #frontArrow {
         left: 85%;
     }
@@ -851,5 +935,13 @@ main > .module:nth-child(7) {
     .dropMenu {
         width: 100%;
         border-radius: 0;
+    }
+
+    #mathGame {
+        font-size: 3vw;
+    }
+    
+    #anagramInput {
+        font-size:3vw;
     }
 }

@@ -498,6 +498,7 @@ function logoClick() {
 
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
+    clearInterval(clock);
     resetAll();
     $('main > div').fadeOut(250);
     $('.overlay').fadeOut(250);
@@ -523,7 +524,7 @@ function playTutorial() {
         $(this).css('display', 'block');
     });
 }
-
+/*function for moving forwards in the tutorial on arrow click*/
 function forwardTutorial() {
     if (slide == SLIDE_SIZE) {
         slide = 1;
@@ -541,6 +542,8 @@ function forwardTutorial() {
     $('#tutorial' + slide++).hide();
     $('#tutorial' + slide).show();
 }
+
+/*function for moving backwards in the tutorial on arrow click*/
 function backTutorial() {
     if (slide == 1) {
         $('.tutorial').hide();
@@ -591,6 +594,7 @@ function ironManAction(){
     $('.popupText').html("<h1>Iron Man Achievement Unlocked!</h1>");
 }
 
+/*function for clean sweep achieve*/
 function cleanSweepAction(){
     cleanSweep = true;
     unlocked[2] = 1;
@@ -609,6 +613,7 @@ function cleanSweepAction(){
 
 
 
+/* login drop down menu */
 function loginDrop() {
     $form = $('#loginForm');
     if($form.height() > 0) {
@@ -625,6 +630,7 @@ function loginDrop() {
     }
 }
 
+/*register dropdown menu part*/
 function registerDrop() {
     $form = $('#registerForm');
     if($form.height() > 0) {
@@ -641,12 +647,14 @@ function registerDrop() {
     }
 }
 
+/* login submit function */
 function loginSubmit() {
     var usr = $('#loginName').val();
     var pw = $('#loginPassword').val();
     ajaxLogin(usr, pw);
 }
 
+/*register submit button */
 function registerSubmit() {
     var usr = $('#registerName').val();
     var pw = $('#registerPassword').val();
@@ -659,6 +667,7 @@ function registerSubmit() {
     }
 }
 
+/*ajax call for logging in */
 function ajaxLogin(user, pass) {
     $.ajax({
         type: 'POST',
@@ -680,6 +689,7 @@ function ajaxLogin(user, pass) {
     });
 }
 
+/*ajax function for registering*/
 function ajaxRegister(user, pass) {
     $.ajax({
         type: 'POST',
@@ -725,7 +735,12 @@ function getAchievements(){
     
 }
 
+/*dropdown menu function*/
+
 function bindMenu() {
+    $('nav').on('click', '#home', function() {
+        mainMenu();
+    });
     $('nav').on('click', '#dropTab', function() {
         $menu = $('.dropMenu');
         if($menu.height() > 0) {

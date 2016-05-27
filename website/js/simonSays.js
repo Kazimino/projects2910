@@ -18,6 +18,7 @@ $(document).ready(function() {
     });
 });
 
+/*generates simon Says game*/
 function generateSimon() {
     var gameInfo = {
         type: "simonGame",
@@ -38,6 +39,7 @@ function generateSimon() {
     return gameInfo;
 }
 
+/*Loads simon says game*/
 function loadSimon() {
     if(!activeArray[enlarged].data) {
         playSequence();

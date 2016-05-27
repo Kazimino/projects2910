@@ -189,6 +189,9 @@ that but using this framework was a little more
 challenging mainly because I don't know javascript
 that well. 
 
+In order to see the test just run the JSTest.html 
+page. 
+
 Sound - Sprint 3 
 ----------------
 

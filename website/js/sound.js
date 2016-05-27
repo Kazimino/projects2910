@@ -49,6 +49,7 @@ function muteBGM() {
     myAudio.pause();
 }
 
+/*stops the bgm*/
 function stopBGM() {
     myAudio.pause();
     myAudio.currentTime = 0;
