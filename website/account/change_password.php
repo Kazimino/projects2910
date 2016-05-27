@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../leaderboard/db_connect');
+include('../leaderboard/db_connect.php');
 
 if($_POST["password"] && $_SESSION["userid"]) {
     $name = $_SESSION["userid"];

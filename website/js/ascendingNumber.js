@@ -9,10 +9,8 @@ $(document).ready(function() {
             if(currModule.input.length == currModule.answer.length - 1 ) {
                 playCorrect();
                 endGame(enlarged);
-                /*shows the hidden buttons*/
-                $(".numberOption").css("visibility", "visible");
             }
-            currModule.input += choiceID[choiceID.length-1];
+            currModule.input += currModule.answer[currModule.input.length];
         } else {
             wrongAnswer();
             playIncorrect();
@@ -102,11 +100,11 @@ function generateAscNum() {
 /* loads an ascending numbers game */
 function loadAscNum() {
     var inputArray = activeArray[enlarged].input.split("");
-    for (i = 1; i <= 4; i++) {
-        $('#numberSection' + (i)).html(activeArray[enlarged].data[i - 1].value);
-        $('#numberSection' + (i)).css('visibility', 'visible');
+    for (var i = 1; i <= 4; i++) {
+        $('#numberSection' + i).html(activeArray[enlarged].data[i - 1].value);
+        $('#numberSection' + i).css('visibility', 'visible');
     }
-    $.each(inputArray, function(index, value){
-        $('#numberSection' + value).css('visibility', 'hidden');
-    });
+    for(var value in inputArray){
+        $('#numberSection' + inputArray[value]).css('visibility', 'hidden');
+    }
 }

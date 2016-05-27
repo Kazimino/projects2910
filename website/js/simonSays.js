@@ -64,4 +64,18 @@ function chooseBox(choice) {
     setTimeout(function() {
         $(".simonSection").css("opacity", "1");
     }, 300);
+    switch(choice) {
+        case "simonSection1":
+            playYellow();
+            break;
+        case "simonSection2":
+            playGreen();
+            break;
+        case "simonSection3":
+            playRed();
+            break;
+        case "simonSection4":
+            playBlue();
+            break;
+    }
 }

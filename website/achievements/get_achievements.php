@@ -13,12 +13,13 @@ $input = "SELECT *
 $result = $db_con->query($input)
     or die("Error: " . mysqli_error($db_con));
 
-$achievements = "";
+$achievements = array();
 
 while($row = $result->fetch_assoc()) {
-    $achievements .= $row["achID"];
+    $achievements[] = array(
+        "achID" => $row["achID"]
+    );
 }
 
-echo $achievements;
-
+echo json_encode($achievements);
 ?>

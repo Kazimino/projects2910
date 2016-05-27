@@ -28,9 +28,7 @@ function playIncorrect() {
 }
 
 /* plays the background music */
-function playBackgroundMusic() {
-    var fileName = "../sound/Reactor_BG";
-        
+function playBackgroundMusic() {        
     myAudio.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
@@ -109,3 +107,11 @@ function playRed() {
 
 
 /* simon says sounds end here */
+
+function playAchievement() {
+    var fileName = "sound/Reactor_Achievement";
+    
+    if(mute == false) {
+        document.getElementById("sound").innerHTML='<audio autoplay="autoplay"><source src="' + fileName + '.mp3" type="audio/mpeg" />';    
+    }
+}

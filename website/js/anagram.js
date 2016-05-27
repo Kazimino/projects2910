@@ -39,7 +39,7 @@ $(document).ready(function() {
         var lastPressed = activeArray[enlarged].data.pop();
         $("#letterChoice" + lastPressed).css("opacity", 1.0);
         $("#letterChoice" + lastPressed).css("pointer-events", "auto");
-    })
+    });
 
 });
 /* this function takes in a word and checks if it exists in the dictionary.

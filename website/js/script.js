@@ -6,14 +6,15 @@ var DIFF_INCREASE = 0;
 var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
-var TIME_GOAL = 3;
+var IRON_MAN_TIME = 3;
+var ON_FIRE_STREAK = 5;
+var CLEAN_SWEEP_TIME = 3;
 var SLIDE_SIZE = 12;
-var difficulty = 1;
-var slide = 1;
 
 $(document).ready(function() {
     resizeMain();
     bindMenu();
+    getAchievements();
 
     /* Hover effect for menu buttons. */
     $('.menuItem').hover(function() {
@@ -123,20 +124,20 @@ $(document).ready(function() {
 
 var enlarged = "";
 
+var slide = 1;
+
 // achievement variables
 var streak = 0;
-var onFire = false;
-var ironMan = false;
-var cleanSweep = false;
-var unlocked = [0, 0, 0];
+var unlocked = [];
 
-// heat gauge and timer variables
+// time, heat and other environment variables
 var min = 0;
 var sec = 0;
 var dsec = 0;
 var totalHeat = 0;
 var activeArray = [];
 var activeMini = 0;
+var difficulty = 1;
 
 var clock;
 var timer;
@@ -215,20 +216,22 @@ function timerStart(){
     if(dsec == 10) {
         dsec = 0;
         sec++;
-        if(sec % GAME_SPAWN_TIME == 0) { spawnRandomGame();}
+        if(sec % GAME_SPAWN_TIME == 0) { 
+            spawnRandomGame();
+        }
         if(sec == 60) {
             sec = 0;
             min++;
-            if(difficulty < MAX_DIFFICULTY) {difficulty++;}
+            if(difficulty < MAX_DIFFICULTY) {
+                difficulty++;
+            }
+            if(min == IRON_MAN_TIME && !("ironMan" in unlocked)){
+                ajaxUnlockAchievement(2);
+            }
         }
     }
             
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
-
-
-    if(min == TIME_GOAL && unlocked[1] == 0){
-        ironManAction();
-    }
 }
 
 /* spawns a random module */
@@ -301,19 +304,23 @@ function loadGame(pos) {
 
 /*called at the end of a mini game */
 function endGame(pos) {
+    streak++;
+    if(streak == ON_FIRE_STREAK && !("onFire" in unlocked)){
+        ajaxUnlockAchievement(1);
+    }
+    if(min >= CLEAN_SWEEP_TIME && activeArray.length == 0 && !("cleanSweep" in unlocked)){
+        ajaxUnlockAchievement(2);
+    }
+    removeGame(pos);
+}
+
+function removeGame(pos) {
     $('#' + pos + " .gauge-fill").height(0);
     $('#' + pos + ' .icon').css("display", "none");
-    streak += 1;
     if(enlarged != "") {
         hideCurrGame();
     }
     delete activeArray[pos];
-    if(streak == 5 && onFire == false){
-        onFireAction();
-    }
-    if(activeArray.length == 0 && cleanSweep == false){
-        cleanSweepAction();
-    }
 }
 
 /* called when an answer is incorrect */
@@ -372,6 +379,7 @@ function heatGenerate(){
 /* At this current moment, all this does is fade from Menu to Game.
    used for onclick on PlayButton.*/
 function playGame() {
+    resetAll();
     showFrame();
     $("main > .module, footer").fadeIn(500, function() {
         $(this).css("display", "block");
@@ -384,21 +392,21 @@ function playGame() {
 /* called when person clicks retry. */
 function retry() {
     $('.overlay').fadeOut(250);
-    resetAll();
     playGame();
 }
 
 /*resets the game*/
 function resetAll() {
+    for(var key in activeArray) {
+        removeGame(key);
+    }
     totalHeat = 0;
     activeMini = 0;
     min = 0;
     sec = 0;
     dsec = 0;
     difficulty = 1;
-    for(var key in activeArray) {
-        endGame(key);
-    }
+    streak = 0;
 }
 
 /*loads scores for leaderboard */
@@ -497,7 +505,7 @@ function logoClick() {
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
     clearInterval(clock);
-    resetAll();
+    stopBGM();
     $('main > div').fadeOut(250);
     $('.overlay').fadeOut(250);
     $('header').animate({
@@ -507,6 +515,7 @@ function mainMenu() {
     $('.logo').animate({
         'opacity': '0'
     });
+    $('#backButton').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
 }
@@ -559,57 +568,27 @@ function backTutorial() {
     $('#tutorial' + slide).show();   
 }
 
-/* functions to activate achievements */
-function onFireAction(){
-    onFire = true;
-    unlocked[0] = 1;
+function ajaxUnlockAchievement(achieveID) {
     $.ajax({
         type: 'POST',
-        url: '../achievements/set_achievement.php',
-        data: { achievement: 1},
+        url: 'achievements/set_achievement.php',
+        data: { achievement: achieveID},
         success: function(response) {
-            valid = response;
+            var achieve = JSON.parse(response);
+            $('.popupImg').attr("src", "achievements/images/" + achieve.imageFile + ".png");
+            $('.popupText').html("<h3>Achievement Unlocked:<br>" + achieve.achName + "</h3>");
+            $('.achievePopup').animate({
+                top: '0'
+            });
+            playAchievement();
+            setTimeout(function(){
+                $('.achievePopup').animate({
+                    top: '-11vh'
+                });
+            }, 5000);
         }
     });
-    $('achievePopup').css('visibility', 'visible');
-    $('.popupImg').html("<img src=\"achievements/images/on_fire.png\">");
-    $('.popupText').html("<h1>On Fire Achievement Unlocked!</h1>");
 }
-
-function ironManAction(){
-    ironMan = true;
-    unlocked[1] = 1;
-    $.ajax({
-        type: 'POST',
-        url: '../achievements/set_achievement.php',
-        data: { achievement: 2},
-        success: function(response) {
-            valid = response;
-        }
-    });
-    $('achievePopup').css('visibility', 'visible');
-    $('.popupImg').html("<img src=\"achievements/images/iron_man.png\">");
-    $('.popupText').html("<h1>Iron Man Achievement Unlocked!</h1>");
-}
-
-/*function for clean sweep achieve*/
-function cleanSweepAction(){
-    cleanSweep = true;
-    unlocked[2] = 1;
-    $.ajax({
-        type: 'POST',
-        url: '../achievements/set_achievement.php',
-        data: { achievement: 3},
-        success: function(response) {
-            valid = response;
-        }
-    });
-    $('achievePopup').css('visibility', 'visible');
-    $('.popupImg').html("<img src=\"achievements/images/clean_sweep.png\">");
-    $('.popupText').html("<h1>Clean Sweep Achievement Unlocked!</h1>");
-}
-
-
 
 /* login drop down menu */
 function loginDrop() {
@@ -677,6 +656,7 @@ function ajaxLogin(user, pass) {
         success: function(response) {
             if(response == 'valid') {
                 $('nav').load('account/menu.php');
+                getAchievements();
             } else {
                 $('#loginName, #loginPassword').css('background-color', '#ff4141');
                 $('#loginForm .nameError').html('This username and password combination does not exist');
@@ -720,25 +700,27 @@ function ajaxChangePassword(pass) {
 }
 
 function getAchievements(){
-    var input;
+    unlocked = [];
     $.ajax({
         type: 'GET',
-        url: '../achievements/get_achievements.php',
+        url: 'achievements/get_achievements.php',
         success: function(response) {
-            input = response;
+            var achievements = JSON.parse(response);
+            $.each(achievements, function(key, value){
+                switch(value.achID) {
+                    case 1:
+                        unlocked["onFire"] = 1;
+                        break;
+                    case 2:
+                        unlocked["ironMan"] = 1;
+                        break;
+                    case 3:
+                        unlocked["cleanSweep"] = 1;
+                        break;
+                }
+            });
         }
     });
-    var achieveArray = input.split("");
-    $.each(achieveArray, function(index, value){
-        unlocked[value-1] = 1;
-        if(value == 1){
-            onFire = true;
-        } else if(value == 2){
-            ironMan = true;
-        } else if(value == 3){
-            cleanSweep = true;
-        }
-    })
 }
 
 /*dropdown menu function*/
@@ -771,6 +753,7 @@ function bindMenu() {
     $('nav').on('click', '#logout', function() {
         $.get('account/logout.php');
         $('nav').load('account/menu.php');
+        unlocked = [];
     });
     $('nav').on('click', '#login', function() {
         loginDrop();

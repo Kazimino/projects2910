@@ -30,33 +30,10 @@ body {
     height: 100%;
     max-width: 1024px;
     margin: 0 auto;
-    position: absolute;
+    position: relative;
     z-index: 1;
 }
 
-.achievePopup {
-     width: 100%;
-     height: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
-     position: absolute;
-     display: inline-block;
-     z-index: 0;
- }
-.popupImg{
-    width: 30%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.popupPic {
-    height: 100%;
-    width: 100%;
-}
-.popupText{
-    width: 60%;
-    height: 100%;
-}
 .overlay {
     width: 100%;
     height: 100%;
@@ -136,7 +113,7 @@ header {
     cursor: pointer;
 }
 
-#login, #register {
+#login, #register, #home, #logout, #myAccount {
     cursor: pointer;
 }
 
@@ -151,6 +128,30 @@ header {
     max-height: 0;
     padding-top: 0;
     padding-bottom: 0;
+}
+
+.achievePopup {
+    width: 75%;
+    position: absolute;
+    z-index: 0;
+    top: -11vh;
+    height: 10vh;
+    z-index: 9005;
+    background-color: #0f0f0f;
+    left: 12.5%;
+    box-shadow: 0px 0px 1vh #fff;
+    border-radius: 2vh;
+}
+
+.popupImg {
+    height: 100%;
+    margin-left: 10%;
+}
+
+.popupText {
+    display: inline-block;
+    vertical-align: top;
+    margin: 2.5vh;
 }
 
 /* Main Frame */
@@ -666,7 +667,7 @@ main > .module:nth-child(7) {
     height: 100%;
     display: none;
 }
-
+    
 .tutorialImg {
     width: 100%;
     height: 100%;
@@ -757,6 +758,14 @@ main > .module:nth-child(7) {
     height: 100%;
 }
 
+.profile h1 {
+    margin-bottom: 4vh;
+}
+
+.profile h3 {
+    margin-bottom: 2vh;
+}
+
 .changePwd input {
     border: none;
     border-radius: 5px;
@@ -773,7 +782,7 @@ main > .module:nth-child(7) {
 }
 
 .achievementPanel {
-    margin: auto;
+    margin: 2vh auto 0;
     padding: 6%;
     width: 20%;
     height: 20%;
