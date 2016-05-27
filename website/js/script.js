@@ -678,7 +678,8 @@ function bindMenu() {
         $('.profile').load('account/profile.php');
         clearInterval(clock);
         mainMenu();
-        setTimeout(250, showFrame);
+        $('.menu').hide();
+        showFrame());
         $('.profile').fadeIn(500);
     });
     $('nav').on('click', '#logout', function() {
