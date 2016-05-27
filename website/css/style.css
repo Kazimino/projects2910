@@ -534,7 +534,7 @@ main > .module:nth-child(7) {
 #anagramInput{
     margin: auto;
     color: white;
-    font-size: 5vh;
+    font-size: 3vh;
     text-align: center;
     vertical-align: center;
 }
@@ -714,6 +714,54 @@ main > .module:nth-child(7) {
     display: none;
 }
 
+.profile{
+    height: 100%;
+}
+.profileInfo{
+    height: 25%;
+}
+
+.achieveImg{
+    height: 100%;
+    width: 100%;
+}
+
+.achievements {
+    vertical-align: center;
+}
+
+.achievementPanel{
+    margin: auto;
+    padding: 6%;
+    width: 20%;
+    height: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#onFire .caption {
+    visibility:hidden;
+}
+
+#onFire:hover .caption {
+    visibility:visible;
+}
+
+#ironMan .caption {
+    visibility:hidden;
+}
+
+#ironMan:hover .caption {
+    visibility:visible;
+}
+
+#cleanSweep .caption {
+    visibility:hidden;
+}
+
+#cleanSweep:hover .caption {
+    visibility:visible;
+}
 
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
