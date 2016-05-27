@@ -356,11 +356,8 @@
             <div class="endGame">
                 <h1>Meltdown!</h1>
                 <h3>You Lasted: <span id="timeLasted"></span></h3>
-                <div class="scoreSubmission">
-                    <span class="namePrompt">Enter your name:</span>
-                    <input id="scoreName" type="text"><input id="scoreSubmit" value="Submit" type="button">
-                    <span id="nameError"></span>
-                </div>
+                
+                <div class="scoreSubmission"></div>
                 
                 <div id="overlayBtn">
                     <img src="images/mainmenubtnC.png" data-alt-src="images/mainmenubtn.png" class="egbtns" onclick="mainMenu()"/>
