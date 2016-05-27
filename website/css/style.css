@@ -637,12 +637,18 @@ main > .module:nth-child(7) {
     height: 100%;
     display: none;
 }
+
 .tutorialImg {
     width: 100%;
     height: 100%;
     display: none;
     background-size: 100% 100%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: cover;
 }
+
+
 .tutorialNav {
     width: 5%;
     height: 10%;
@@ -651,10 +657,12 @@ main > .module:nth-child(7) {
     cursor: pointer;
     background-size: 100% 100%;
 }
+
 #frontArrow {
     background-image: url("../images/frontarrow.png");
     left: 95%;
 }
+
 #backArrow {
     background-image: url("../images/arrow.png");
 }
@@ -765,7 +773,7 @@ main > .module:nth-child(7) {
 
 /* tablet / mobile */
 @media only screen and (max-width: 1024px) {
-    
+     
 }
 
 
@@ -776,6 +784,61 @@ main > .module:nth-child(7) {
     
     #anagramInput {
         font-size:3.5vw;
+    }
+    
+    .tutorialNav {
+        width: 15%;
+        height: 15%;
+        top: 43.5%;
+    }
+    
+    .tutorialImg {
+        width: 80%;
+        height: 100%;
+        display: none;
+        margin: auto;
+        background-repeat: no-repeat;
+        background-position: cover;
+    }
+    
+    #frontArrow {
+        left: 85%;
+    }
+    #tutorial1 {
+        background-image: url("../images/IngameM2.png");
+    }
+    #tutorial2 {
+        background-image: url("../images/IngameM4.png");
+    }
+    #tutorial3 {
+        background-image: url("../images/IngameM6.png");
+    }
+    #tutorial4 {
+        background-image: url("../images/IngameM8.png");
+    }
+    #tutorial5 {
+        background-image: url("../images/IngameM10.png");
+    }
+    #tutorial6 {
+        background-image: url("../images/IngameM12.png");
+    }
+    #tutorial7 {
+        background-image: url("../images/IngameM14.png");
+    }
+    #tutorial8 {
+        background-image: url("../images/SimonM.png");
+    }
+    #tutorial9 {
+        background-image: url("../images/OperatorM.png");
+    }
+    #tutorial10 {
+        background-image: url("../images/AscendingM.png");
+    }
+    #tutorial11 {
+        background-image: url("../images/AnagramM.png");
+    }
+    #tutorial12 {
+        background-image: url("../images/TutorialEndM.png");
     }
 }
 
@@ -790,6 +853,16 @@ main > .module:nth-child(7) {
         height: 15%;
         top: 43.5%;
     }
+    
+    .tutorialImg {
+        width: 100%;
+        height: 100%;
+        display: none;
+        margin: auto;
+        background-repeat: no-repeat;
+        background-position: cover;
+    }
+    
     #frontArrow {
         left: 85%;
     }

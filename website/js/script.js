@@ -522,7 +522,7 @@ function playTutorial() {
         $(this).css('display', 'block');
     });
 }
-
+/*function for moving forwards in the tutorial on arrow click*/
 function forwardTutorial() {
     if (slide == SLIDE_SIZE) {
         slide = 1;
@@ -540,6 +540,8 @@ function forwardTutorial() {
     $('#tutorial' + slide++).hide();
     $('#tutorial' + slide).show();
 }
+
+/*function for moving backwards in the tutorial on arrow click*/
 function backTutorial() {
     if (slide == 1) {
         $('.tutorial').hide();
@@ -562,14 +564,17 @@ function onFireAction(){
     
 }
 
+/*function for clean sweep achieve*/
 function cleanSweepAction(){
     cleanSweep = true;
 }
 
+/*function for ironman achieve*/
 function ironManAction(){
     ironMan = true;
 }
 
+/* login drop down menu */
 function loginDrop() {
     $form = $('#loginForm');
     if($form.height() > 0) {
@@ -586,6 +591,7 @@ function loginDrop() {
     }
 }
 
+/*register dropdown menu part*/
 function registerDrop() {
     $form = $('#registerForm');
     if($form.height() > 0) {
@@ -602,12 +608,14 @@ function registerDrop() {
     }
 }
 
+/* login submit function */
 function loginSubmit() {
     var usr = $('#loginName').val();
     var pw = $('#loginPassword').val();
     ajaxLogin(usr, pw);
 }
 
+/*register submit button */
 function registerSubmit() {
     var usr = $('#registerName').val();
     var pw = $('#registerPassword').val();
@@ -620,6 +628,7 @@ function registerSubmit() {
     }
 }
 
+/*ajax call for logging in */
 function ajaxLogin(user, pass) {
     $.ajax({
         type: 'POST',
@@ -641,6 +650,7 @@ function ajaxLogin(user, pass) {
     });
 }
 
+/*ajax function for registering*/
 function ajaxRegister(user, pass) {
     $.ajax({
         type: 'POST',
@@ -662,6 +672,7 @@ function ajaxRegister(user, pass) {
     });
 }
 
+/*dropdown menu function*/
 function bindMenu() {
     $('nav').on('click', '#home', function() {
         mainMenu();
