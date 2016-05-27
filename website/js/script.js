@@ -89,6 +89,8 @@ $(document).ready(function() {
     $(window).resize(function(e) {
         resizeMain();
     });
+    
+    /* references to timer and heat bar elements */
     timer = document.getElementById('timerBox');
     heatMeter = document.getElementById('heatMeter');
     
@@ -103,6 +105,7 @@ $(document).ready(function() {
         ajaxGetScores(); 
     });
     
+    /* change password binds for profile page */
     $('.profile').on('click','#changeSubmit',function() {
         var pwd = $('#changePass').val();
         var cPwd = $('#changePassConfirm').val();
@@ -122,10 +125,6 @@ $(document).ready(function() {
     });
 });
 
-var enlarged = "";
-
-var slide = 1;
-
 // achievement variables
 var streak = 0;
 var unlocked = [];
@@ -138,12 +137,14 @@ var totalHeat = 0;
 var activeArray = [];
 var activeMini = 0;
 var difficulty = 1;
+var enlarged = "";
+var slide = 1;
 
 var clock;
 var timer;
 var heatMeter;
 
-/* module object */
+/* module object to store data for each individual game */
 function module(type, answer, data) {
     this.heat = 0;
     this.type = type;
@@ -153,7 +154,6 @@ function module(type, answer, data) {
 }
 
 // padding function for leading zeroes on timer
-/* pads the timer. */
 function pad(time){
     if(time  < 10){
         return "0" + time;
@@ -161,7 +161,7 @@ function pad(time){
     return time;
 }
 
-/* resizes the main board */
+/* resizes the main board to be a square that stays consistent across all devices*/
 function resizeMain() {
     var $main = $('main');
     $main.width($main.height());
@@ -169,7 +169,7 @@ function resizeMain() {
     $main.css("left", $(window).width() / 2 - $main.height() / 2);
 }
 
-/* hides the current in game screen */
+/* hides the current zoomed-in game and display the main board again */
 function hideCurrGame() {
     var currGameType = activeArray[enlarged].type;
     enlarged = "";
@@ -185,7 +185,7 @@ function hideCurrGame() {
     $('#mini .module').data("pos", 0);
 }
 
-/* functions enlarges a game to play mode */
+/* zooms in on the specified game and hides the main board */
 function enlargeGame(pos) {
     enlarged = pos;
     
@@ -209,8 +209,8 @@ function enlargeGame(pos) {
     }
 }
 
-// timer function.  Also increases the number of active heat gauges by 1 every 10 seconds
-function timerStart(){
+/* actions to run every tick of the main timer */
+function timerActions(){
     heatGenerate();
     dsec++;
     if(dsec == 10) {
@@ -234,7 +234,7 @@ function timerStart(){
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
 }
 
-/* spawns a random module */
+/* spawns a random game module */
 function spawnRandomGame() {
     if(activeArray.length < 7) {
         var gameLocation;
@@ -247,10 +247,7 @@ function spawnRandomGame() {
 }
 
 
-/* generates a module and calls a game.
-for anagram, what is returned is an array with the first index
- being an array of words of the same length in the dictionary, and the second
- index being the scrambled letters to use.*/
+/* generates an instance of a game module and pushes it to the array of active games */
 
 function spawnModule(pos) {
     var gameInfo;
@@ -282,7 +279,7 @@ function spawnModule(pos) {
     }
 }
 
-/*loads a mini game */
+/* loads the game data of the specified module into the zoomed-in game screen */
 function loadGame(pos) {
     var gameType = activeArray[pos].type;
     $("#" + gameType).fadeIn(250);
@@ -302,7 +299,7 @@ function loadGame(pos) {
     }
 }
 
-/*called at the end of a mini game */
+/* Actions executed when a game is completed */
 function endGame(pos) {
     streak++;
     if(streak == ON_FIRE_STREAK && !("onFire" in unlocked)){
@@ -314,6 +311,7 @@ function endGame(pos) {
     removeGame(pos);
 }
 
+/* Clears a game from the board and the array of active games */
 function removeGame(pos) {
     $('#' + pos + " .gauge-fill").height(0);
     $('#' + pos + ' .icon').css("display", "none");
@@ -323,7 +321,7 @@ function removeGame(pos) {
     delete activeArray[pos];
 }
 
-/* called when an answer is incorrect */
+/* Adds a penalty to the currently active game */
 function wrongAnswer() {
     activeArray[enlarged].heat += HEAT_PENALTY;
     streak = 0;
@@ -331,15 +329,13 @@ function wrongAnswer() {
     if(activeArray[enlarged].heat > 100) {
         activeArray[enlarged].heat = 100;
     } 
+    
    $('#inGame').effect("shake", {times:4, distance:5}, 250);
-    /* whatever sound / images for later */
-
 }
 
 
 
-// heat gauge heat increase function.  increases heat by 5 every second and adds heat
-// from gauges to main heat bar.
+/* Generates heat on each active module and adds them to the main heat bar */
 function heatGenerate(){
     for(var key in activeArray) {
         if(activeArray[key].heat < 100) {
@@ -376,26 +372,25 @@ function heatGenerate(){
                            " 50%, " + meterColour + " 100%)");    
 }
 
-/* At this current moment, all this does is fade from Menu to Game.
-   used for onclick on PlayButton.*/
+/*  Transitions to the game board and starts the game */
 function playGame() {
     resetAll();
     showFrame();
     $("main > .module, footer").fadeIn(500, function() {
         $(this).css("display", "block");
     });
-    clock = setInterval(timerStart, 100);
+    clock = setInterval(timerActions, 100);
     spawnRandomGame();
     playBackgroundMusic();
 }
 
-/* called when person clicks retry. */
+/* Closes the end game overlay and starts the game again */
 function retry() {
     $('.overlay').fadeOut(250);
     playGame();
 }
 
-/*resets the game*/
+/* Resets environment variables and clears the active games array */
 function resetAll() {
     for(var key in activeArray) {
         removeGame(key);
@@ -409,7 +404,7 @@ function resetAll() {
     streak = 0;
 }
 
-/*loads scores for leaderboard */
+/* Transitions page to the leaderboard and loads initial 10 scores */
 var scoresLoaded = 0;
 function loadLeaderBoard() {
     scoresLoaded = 0;
@@ -418,6 +413,7 @@ function loadLeaderBoard() {
     ajaxGetScores();
 }
 
+/* Hides the menu and shows the header & logo */
 function showFrame() {
     $(".menu").hide();
     $("header").animate({
@@ -429,7 +425,7 @@ function showFrame() {
     });
 }
 
-/* called when the heat bar reaches max heat */
+/* Actions to call when you lose the game (stopping the clock, music and submitting your score) */
 function loseGame() {
     clearInterval(clock);
     stopBGM();
@@ -438,7 +434,7 @@ function loseGame() {
     ajaxSubmitScore();
 }
 
-/*ajax call to get scores from the database */
+/* Retrieves leaderboard records from the MySQL database and appends them to the leaderboard list */
 function ajaxGetScores() {
     $.ajax({
         type: 'GET',
@@ -454,7 +450,7 @@ function ajaxGetScores() {
     });
 }
 
-/*ajax call to submit scores */
+/* Inserts a new leaderboard record into the MySQL database */
 function ajaxSubmitScore() {
     $.ajax({
         type: 'POST',
@@ -468,7 +464,8 @@ function ajaxSubmitScore() {
     });
 }
 
-/* validate name submission for leaderboard*/
+/* Runs the given name through the username validation regular expressions;
+Returns any relevant error messages */
 function nameValidate(name) {
     var errMsg = "";
     if(!RegExp(/^.{3,15}$/).test(name)) {
@@ -480,6 +477,8 @@ function nameValidate(name) {
     return errMsg;
 }
 
+/* Runs the given password through the password validation regular expressions;
+Returns any relevant error messages */
 function passValidate(password) {
     var errMsg = "";
     if(!RegExp(/^[a-zA-Z0-9!@#$%^&*]*$/).test(password)) {
@@ -492,9 +491,8 @@ function passValidate(password) {
 }
 
 var logoCount = 0;
-/*easter egg*/
+/* Easter egg function to swap icons to Chris and Peanut Butter Cups */
 function logoClick() {
-    /*Replaces icons with Easter egg images*/
     if(++logoCount == 5) {
         $('.icon').attr("src", "images/Easter/reeses.png");
         $('#center .icon').attr("src", "images/Easter/chris.png");
@@ -502,7 +500,7 @@ function logoClick() {
     }
 }
 
-/*function that loads the main menu from the overlay screen*/
+/* Transitions to the main menu page */
 function mainMenu() {
     clearInterval(clock);
     stopBGM();
@@ -515,12 +513,12 @@ function mainMenu() {
     $('.logo').animate({
         'opacity': '0'
     });
-    $('#backButton').fadeOut(250);
+    $('#backbutton').fadeOut(250);
     $('footer').fadeOut(250);
     $('.menu').fadeIn(250);
 }
 
-/* Tutorial JS Methods */
+/* Starts the tutorial */
 function playTutorial() {
     $('.menu').hide();
     $('main').hide();
@@ -531,7 +529,8 @@ function playTutorial() {
         $(this).css('display', 'block');
     });
 }
-/*function for moving forwards in the tutorial on arrow click*/
+
+/* function for moving forwards in the tutorial on arrow click */
 function forwardTutorial() {
     if (slide == SLIDE_SIZE) {
         slide = 1;
@@ -550,7 +549,7 @@ function forwardTutorial() {
     $('#tutorial' + slide).show();
 }
 
-/*function for moving backwards in the tutorial on arrow click*/
+/* function for moving backwards in the tutorial on arrow click */
 function backTutorial() {
     if (slide == 1) {
         $('.tutorial').hide();
@@ -568,6 +567,8 @@ function backTutorial() {
     $('#tutorial' + slide).show();   
 }
 
+/* Unlocks the achievement with the achievement ID given;
+Upon successful insertion in the database, the achievement popup slides down */
 function ajaxUnlockAchievement(achieveID) {
     $.ajax({
         type: 'POST',
@@ -590,7 +591,7 @@ function ajaxUnlockAchievement(achieveID) {
     });
 }
 
-/* login drop down menu */
+/* Expands the login form */
 function loginDrop() {
     $form = $('#loginForm');
     if($form.height() > 0) {
@@ -602,12 +603,12 @@ function loginDrop() {
     } else {
         $form.animate({
             'max-height': '500px',
-	    padding: '4vh 10%'
+	       'padding': '4vh 10%'
         });
     }
 }
 
-/*register dropdown menu part*/
+/* Expands the register form */
 function registerDrop() {
     $form = $('#registerForm');
     if($form.height() > 0) {
@@ -624,14 +625,14 @@ function registerDrop() {
     }
 }
 
-/* login submit function */
+/* Submits the login values to the ajax script */
 function loginSubmit() {
     var usr = $('#loginName').val();
     var pw = $('#loginPassword').val();
     ajaxLogin(usr, pw);
 }
 
-/*register submit button */
+/* Validates the name and password then passes them to the register script */
 function registerSubmit() {
     var usr = $('#registerName').val();
     var pw = $('#registerPassword').val();
@@ -644,7 +645,7 @@ function registerSubmit() {
     }
 }
 
-/*ajax call for logging in */
+/* Submits username and password to the login script and gets unlocked achievements */
 function ajaxLogin(user, pass) {
     $.ajax({
         type: 'POST',
@@ -665,7 +666,7 @@ function ajaxLogin(user, pass) {
     });
 }
 
-/*ajax function for registering*/
+/* Submits username and password to the register script and gets unlocked achievements */
 function ajaxRegister(user, pass) {
     $.ajax({
         type: 'POST',
@@ -686,6 +687,7 @@ function ajaxRegister(user, pass) {
     });
 }
 
+/* Submits password to the change password form */
 function ajaxChangePassword(pass) {
     $.ajax({
         type: 'POST',
@@ -699,6 +701,7 @@ function ajaxChangePassword(pass) {
     });
 }
 
+/* Populates the unlocked achievements array with all achievements the current user has unlocked already */
 function getAchievements(){
     unlocked = [];
     $.ajax({
@@ -723,8 +726,7 @@ function getAchievements(){
     });
 }
 
-/*dropdown menu function*/
-
+/* Adds contextual click binds to the dropdown menu */
 function bindMenu() {
     $('nav').on('click', '#home', function() {
         mainMenu();

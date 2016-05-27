@@ -1,5 +1,5 @@
 <?php
-/* grabs / finds a matching word to the user input */
+/* Checks if the sent word exists in the dictionary database */
 include("../leaderboard/db_connect.php");
 
 $word = array_key_exists("word", $_GET) ? $_GET["word"] : "";

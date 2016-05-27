@@ -3,6 +3,7 @@
     <li id="home">Main Menu</li>
     <?php
      session_start();
+    // loads either login & registration form or account page & logout button depending on if a user is logged in
      if(isset($_SESSION["userid"])) {
         echo "<li>Logged in as:<br>".$_SESSION["userid"]."</li>";
         echo "<li id=\"myAccount\">My Account</li>";

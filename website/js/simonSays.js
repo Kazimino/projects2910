@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    /* Checks if the selected section is the next answer in the sequence */
     $('.simonSection').click(function() {
         var choiceID = $(this).attr('id');
         var currModule = activeArray[enlarged];
@@ -46,7 +47,7 @@ function loadSimon() {
     }
 }
 
-// Play the sequence in chosenSteps.
+// Play the answer sequence
 function playSequence() {
     var i = 0;
     var interval = setInterval(function() {
@@ -58,7 +59,7 @@ function playSequence() {
     activeArray[enlarged].data = true;
 }
 
-// Display a box as being part of the sequence or clicked.
+// Light up and play noise of the selected section
 function chooseBox(choice) {
     $('#' + choice).css("opacity", "0.2");
     setTimeout(function() {

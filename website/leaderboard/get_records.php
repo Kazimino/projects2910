@@ -1,4 +1,5 @@
 <?php
+/* Gets a set of 10 leaderboard records */
 include("db_connect.php");
 
 $offset = array_key_exists("offset", $_GET) ? $_GET["offset"] : 1;

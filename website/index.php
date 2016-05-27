@@ -358,7 +358,7 @@
             </div>
         </footer>
         
-<!-------------- END GAME OVERLAY BROS ------------->
+<!-------------- END GAME OVERLAY ------------->
         <div class="overlay">
             <div class="endGame">
                 <h1>Meltdown!</h1>
@@ -372,10 +372,5 @@
                 </div>
             </div>
         </div>
-        <!--<div class="tutorial">
-            <div class="tutText"></div>
-            <img id="tutBack" src="images/arrow.png">
-            <img id="tutForward" src="images/frontarrow.png">
-        </div>-->
     </body>
 </html>

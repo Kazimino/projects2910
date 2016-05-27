@@ -1,4 +1,5 @@
 <?php
+/* Submits a score to the database and then returns what rank you are */
 include("db_connect.php");
 session_start();
 $score = array_key_exists("score", $_POST) ? $_POST["score"] : 0;

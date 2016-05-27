@@ -1,5 +1,5 @@
-/*takes in user input, compares with the store array*/
 $(document).ready(function() {
+    /* Checks if the button clicked corresponds to the respective answer value */
     $('.numberOption').click(function() {
         var choiceID = $(this).attr('id');
         var currModule = activeArray[enlarged];
@@ -28,7 +28,7 @@ function generateAscNum() {
         data: []
     };
 
-    /* controls the difficulty level */
+    /* sets generation values based on the difficulty level */
     switch(difficulty){
         case 1:
             maxNumber = 10;
@@ -71,14 +71,14 @@ function generateAscNum() {
 
     return gameInfo;
 
-    /* generates a fraction */
+    /* function to generate a fraction */
     function genFraction() {
         var a = Math.floor((Math.random() * maxNumber) + baseNumber);
         var b = Math.floor((Math.random() * maxNumber) + baseNumber);
         return (a + "/" + b);
     }
 
-    /* generates a whole number */
+    /* function to generate a whole number */
     function genWhole() {
         var val;
         var found
@@ -91,7 +91,7 @@ function generateAscNum() {
         return val;
     }
 
-    /* comparision function */
+    /* comparision function used to sort the array of numbers */
     function compareNumbers(a,b) {
         return eval(a.value) - eval(b.value);
     }

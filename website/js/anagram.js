@@ -1,10 +1,10 @@
-/* this code enters the user's input every time a button is pressed.
-it checks whether the input matches the scrambled word's length.  if
-the input length matches, it then makes a call to the database to check
-if the input is a valid word. If the word is valid, the game is closed.
- If the word is invalid, an error message is displayed and the game is
- reset. */
 $(document).ready(function() {
+    /* this code enters the user's input every time a button is pressed.
+    it checks whether the input matches the scrambled word's length.  if
+    the input length matches, it then makes a call to the database to check
+    if the input is a valid word. If the word is valid, the game is closed.
+     If the word is invalid, an error message is displayed and the game is
+     reset. */
     $('.letterChoice').click(function() {
         $(this).css("pointer-events", "none");
         var choiceID = $(this).attr('id');
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     });
     
-    /*changes the box the users has already clicked on */
+    /* Removes the last entered letter from anagram input field */
     $('#anagramInput').click(function(){
         $(this).html("<h1>" + $(this).text().slice(0, -1) + "</h1>");
         var lastPressed = activeArray[enlarged].data.pop();
@@ -42,9 +42,9 @@ $(document).ready(function() {
     });
 
 });
+
 /* this function takes in a word and checks if it exists in the dictionary.
-Returns true if a match is found and false if there are no matches.
- */
+Returns true if a match is found and false if there are no matches. */
 function checkWord(validate){
     var valid = false;
     
