@@ -1,13 +1,12 @@
 /* Constants */
 var MAX_HEAT = 50000;
 var HEAT_PER_TICK  = 0.5;
-var GAME_SPAWN_TIME = 50;
-var DIFF_INCREASE = 600;
+var GAME_SPAWN_TIME = 5;
+var DIFF_INCREASE = 0;
 var MAX_DIFFICULTY = 4;
 var COOLANT_LEVEL = 10;
 var HEAT_PENALTY = 25;
 var TIME_GOAL = 3;
-var NAME_VALIDATION = new RegExp("/^[a-z0-9_]{3,10}$/i");
 var SLIDE_SIZE = 12;
 var difficulty = 1;
 var slide = 1;
@@ -73,7 +72,7 @@ $(document).ready(function() {
     /*clickable mini heat guages allows us to switch 
     to that game that is associate with the heat guage clicked*/
     $('#mini .module').click(function() {
-        var pos = $(this).data("pos")
+        var pos = $(this).data("pos");
         if(pos != 0) {
             hideCurrGame();
             enlargeGame(pos);
@@ -102,6 +101,24 @@ $(document).ready(function() {
     $('#loadMore').click(function() {
         ajaxGetScores(); 
     });
+    
+    $('.profile').on('click','#changeSubmit',function() {
+        var pwd = $('#changePass').val();
+        var cPwd = $('#changePassConfirm').val();
+        
+        if(pwd == cPwd) {
+            var err = passValidate(pwd);
+            if(err == "") {
+                ajaxChangePassword(pwd);
+            } else {
+                $('.changePwd .nameError').html(err);
+                $('#changePass, #changePassConfirm').css("background-color", '#ff4141');
+            }
+        } else {
+            $('.changePwd .nameError').html("The passwords you've entered do not match");
+            $('#changePass, #changePassConfirm').css("background-color", '#ff4141');
+        }
+    });
 });
 
 var enlarged = "";
@@ -116,7 +133,6 @@ var min = 0;
 var sec = 0;
 var dsec = 0;
 var totalHeat = 0;
-var totalTime = 0;
 var activeArray = [];
 var activeMini = 0;
 
@@ -172,9 +188,6 @@ function enlargeGame(pos) {
     
     /* back button is shown when a module is clicked and enlarged */
     $('#backbutton').fadeIn(250);
-    if (enlarged.type = "simonGame") {
-        $("#replay").fadeIn(250);
-    }
 
     /*fades the minigauge in when module is expanded*/
     $('#mini').fadeIn(250);
@@ -197,24 +210,17 @@ function enlargeGame(pos) {
 function timerStart(){
     heatGenerate();
     dsec++;
-    totalTime++;
     if(dsec == 10) {
         dsec = 0;
         sec++;
+        if(sec % GAME_SPAWN_TIME == 0) { spawnRandomGame();}
         if(sec == 60) {
             sec = 0;
             min++;
+            if(difficulty < MAX_DIFFICULTY) {difficulty++;}
         }
     }
-    
-    if(totalTime % GAME_SPAWN_TIME == 0) {
-        spawnRandomGame();
-    }
-    
-    if(difficulty < MAX_DIFFICULTY && totalTime % DIFF_INCREASE == 0) {
-        difficulty++;
-    }
-    
+            
     timer.innerHTML = pad(min) + " : " + pad(sec) + " : " + dsec;
 
 
@@ -387,7 +393,6 @@ function resetAll() {
     min = 0;
     sec = 0;
     dsec = 0;
-    totalTime = 0;
     difficulty = 1;
     for(var key in activeArray) {
         endGame(key);
@@ -453,20 +458,8 @@ function ajaxSubmitScore() {
     });
 }
 
-/*validate score submission */
-function validateSubmit() {
-    var name = $('#scoreName').val();
-    var errMsg = nameValidate(name);
-    if(errMsg == "") {
-        ajaxSubmitScore(name);
-    } else {
-        $('#scoreName').css("background-color","#ff4141");
-        $('#nameError').html(errMsg);
-    }
-}
-
 /* validate name submission for leaderboard*/
-function nameValidate(name, password) {
+function nameValidate(name) {
     var errMsg = "";
     if(!RegExp(/^.{3,15}$/).test(name)) {
         errMsg += "Name must be between 3 - 15 characters<br>";
@@ -474,6 +467,11 @@ function nameValidate(name, password) {
     if(!RegExp(/^[a-z0-9_']*$/i).test(name)) {
         errMsg += "Name can only contain alphanumeric characters and _ or \'<br>";
     }
+    return errMsg;
+}
+
+function passValidate(password) {
+    var errMsg = "";
     if(!RegExp(/^[a-zA-Z0-9!@#$%^&*]*$/).test(password)) {
         errMsg += "Password can only contain alphanumberic characters or !@#$%^&*<br>";
     }
@@ -619,7 +617,7 @@ function loginSubmit() {
 function registerSubmit() {
     var usr = $('#registerName').val();
     var pw = $('#registerPassword').val();
-    var err = nameValidate(usr, pw);
+    var err = nameValidate(usr) + passValidate(pw);
     if(err == "") {
         ajaxRegister(usr, pw);
     } else {
@@ -635,13 +633,11 @@ function ajaxLogin(user, pass) {
         url: 'account/login.php',
         data: {
             name: user,
-            password: pass,
+            password: pass
         },
         success: function(response) {
-            console.log(response);
             if(response == 'valid') {
                 $('nav').load('account/menu.php');
-                bindMenu();
             } else {
                 $('#loginName, #loginPassword').css('background-color', '#ff4141');
                 $('#loginForm .nameError').html('This username and password combination does not exist');
@@ -660,14 +656,25 @@ function ajaxRegister(user, pass) {
             password: pass,
         },
         success: function(response) {
-            console.log(response);
             if(response == 'valid') {
                 $('nav').load('account/menu.php');
-                bindMenu();
             } else {
                 $('#registerName, #registerPassword').css('background-color', '#ff4141');
                 $('#registerForm .nameError').html('This username has already been taken');
             }
+        }
+    });
+}
+
+function ajaxChangePassword(pass) {
+    $.ajax({
+        type: 'POST',
+        url: 'account/change_password.php',
+        data: {
+            password: pass
+        },
+        success: function() {
+            $('.changePwd').html('Your password was changed');
         }
     });
 }

@@ -177,7 +177,7 @@ footer {
     margin-bottom: 2vh;
 }
 
-#timeLasted h3 span {
+#timeLasted, .scoreSubmission h3 span {
     display: block;
     font-size: 6vw;
 }
@@ -189,9 +189,9 @@ footer {
 
 /* Hexagon */
 .module {
-	width: 38.66%;
-	height: 33.33%;
-	position: absolute;
+    width: 38.66%;
+    height: 33.33%;
+    position: absolute;
 }
 
 main > .module {
@@ -200,27 +200,27 @@ main > .module {
 
 /*styles in game hex start here*/
 #inGame{
-  width: 88%;
-  height: 75%;
-  position: relative;
-  display: none;
-  margin: 0 auto;
+    width: 88%;
+    height: 75%;
+    position: relative;
+    display: none;
+    margin: 0 auto;
 }
 /*in game hex styles end here */
 
 .hexagon {
-	overflow: hidden;
-	visibility: hidden;
-	position: absolute;
-	width: 200%;
-	height: 100%;
+    overflow: hidden;
+    visibility: hidden;
+    position: absolute;
+    width: 200%;
+    height: 100%;
     left: -50%;
 
-	-webkit-transform: rotate(120deg);
-	-moz-transform: rotate(120deg);
-	-o-transform: rotate(120deg);
-	-ms-transform: rotate(120deg);
-	transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    -o-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
 }
 
 .hexagon.inner {
@@ -231,30 +231,30 @@ main > .module {
 }
 
 .hexagon-in1 {
-	overflow: hidden;
+    overflow: hidden;
     visibility: hidden;
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 
-	-webkit-transform: rotate(-60deg);
-	-moz-transform: rotate(-60deg);
-	-o-transform: rotate(-60deg);
-	-ms-transform: rotate(-60deg);
-	transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -o-transform: rotate(-60deg);
+    -ms-transform: rotate(-60deg);
+    transform: rotate(-60deg);
 }
 
 .hexagon-in2 {
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-	visibility: visible;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    visibility: visible;
     background-color: #0f0f0f;
 
-	-webkit-transform: rotate(-60deg);
-	-moz-transform: rotate(-60deg);
-	-o-transform: rotate(-60deg);
-	-ms-transform: rotate(-60deg);
-	transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -o-transform: rotate(-60deg);
+    -ms-transform: rotate(-60deg);
+    transform: rotate(-60deg);
 }
 
 .inner .hexagon-in2 {
@@ -722,23 +722,28 @@ main > .module:nth-child(7) {
     display: none;
 }
 
-.profile{
+/* Profile Page */
+
+.profile {
     height: 100%;
 }
-.profileInfo{
-    height: 25%;
+
+.changePwd input {
+    border: none;
+    border-radius: 5px;
+    padding: 1vh;
 }
 
-.achieveImg{
+.achieveImg {
     height: 100%;
     width: 100%;
 }
 
 .achievements {
-    vertical-align: center;
+    vertical-align: top;
 }
 
-.achievementPanel{
+.achievementPanel {
     margin: auto;
     padding: 6%;
     width: 20%;

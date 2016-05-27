@@ -16,11 +16,14 @@ while($row = $result->fetch_assoc()) {
 ?>
 
 <div class="profileInfo">
-    <h1>
-    <?php
-    echo $userid;
-    ?>
-    </h1>
+    <h1><?php echo $userid; ?></h1>
+    <h3>Change Password:</h3>
+    <div class="changePwd">
+        <input type="password" id="changePass" placeholder="New Password" maxlength="20">
+        <input type="password" id="changePassConfirm" placeholder="Confirm New Password" maxlength="20">
+        <input type="button" id="changeSubmit" value="Change Password">
+        <span class="nameError"></span>
+    </div>
 </div>
 <div class="achievements">
     <h1>Achievements</h1>
