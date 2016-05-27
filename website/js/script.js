@@ -677,8 +677,9 @@ function bindMenu() {
     $('nav').on('click', '#myAccount', function() {
         $('.profile').load('account/profile.php');
         clearInterval(clock);
-        mainMenu();
-        $('.menu').hide();
+        $('main > div').hide();
+        $('.overlay').hide();
+        $('footer').hide();
         showFrame();
         $('.profile').fadeIn(500);
     });
