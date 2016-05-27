@@ -179,7 +179,7 @@ footer {
 
 #timeLasted h3 span {
     display: block;
-    font-size: 8vw;
+    font-size: 6vw;
 }
 
 .nameError {
@@ -466,6 +466,7 @@ main > .module:nth-child(7) {
 /* Dummy number game CSS */
 #mathGame {
     text-align: center;
+    font-size: 1vw;
     width: 35%;
     height: 30%;
     position: absolute;
@@ -476,8 +477,6 @@ main > .module:nth-child(7) {
 
 .mathOption {
     height: 90%;
-    width: 30%;
-    margin-left: 3%;
     margin-top: 5%;
     position: relative;
     display: inline-block;
@@ -486,6 +485,8 @@ main > .module:nth-child(7) {
     color: white;
     border-radius: 10%;
     cursor: pointer;
+    margin-left: 5%;
+    width: 15%;
 }
 
 .mathOption h1 {
@@ -493,8 +494,7 @@ main > .module:nth-child(7) {
 }
 
 .mathOption {
-    margin-left: 5%;
-    width: 15%;
+   
 }
 
 .mathOption h1 {
@@ -534,9 +534,9 @@ main > .module:nth-child(7) {
 #anagramInput{
     margin: auto;
     color: white;
-    font-size: 3vh;
+    font-size: 4vh;
     text-align: center;
-    vertical-align: center;
+    vertical-align: middle;
 }
 
 .letterChoice {
@@ -768,6 +768,17 @@ main > .module:nth-child(7) {
     
 }
 
+
+@media only screen and (max-width: 768px) {
+    #mathGame {
+        font-size: 3.5vw;
+    }
+    
+    #anagramInput {
+        font-size:3.5vw;
+    }
+}
+
 /* mobile only */
 @media only screen and (max-width: 480px) {
     #leaderList {
@@ -822,5 +833,13 @@ main > .module:nth-child(7) {
     .dropMenu {
         width: 100%;
         border-radius: 0;
+    }
+
+    #mathGame {
+        font-size: 3vw;
+    }
+    
+    #anagramInput {
+        font-size:3vw;
     }
 }
