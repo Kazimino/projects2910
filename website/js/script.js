@@ -679,7 +679,7 @@ function bindMenu() {
         clearInterval(clock);
         mainMenu();
         $('.menu').hide();
-        showFrame());
+        showFrame();
         $('.profile').fadeIn(500);
     });
     $('nav').on('click', '#logout', function() {
