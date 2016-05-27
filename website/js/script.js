@@ -522,7 +522,10 @@ function mainMenu() {
 
 /* functions to activate achievements */
 function onFireAction(){
-    
+    $.ajax({
+        type: 'POST',
+        url: 
+    })
 }
 
 function cleanSweepAction(){
