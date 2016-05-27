@@ -496,6 +496,7 @@ function logoClick() {
 
 /*function that loads the main menu from the overlay screen*/
 function mainMenu() {
+    clearInterval(clock);
     resetAll();
     $('main > div').fadeOut(250);
     $('.overlay').fadeOut(250);
@@ -662,6 +663,9 @@ function ajaxRegister(user, pass) {
 }
 
 function bindMenu() {
+    $('nav').on('click', '#home', function() {
+        mainMenu();
+    });
     $('nav').on('click', '#dropTab', function() {
         $menu = $('.dropMenu');
         if($menu.height() > 0) {
