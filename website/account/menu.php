@@ -1,9 +1,10 @@
 <div id="dropTab"></div>
 <ul class="dropMenu">
+    <li id="home">Main Menu</li>
     <?php
      session_start();
      if(isset($_SESSION["userid"])) {
-        echo "<li>Logged in as: ".$_SESSION["userid"]."</li>";
+        echo "<li>Logged in as:<br>".$_SESSION["userid"]."</li>";
         echo "<li id=\"myAccount\">My Account</li>";
         echo "<li id=\"logout\">Logout</li>";
     } else {
